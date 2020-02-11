@@ -5,7 +5,7 @@ import App from "./components/app/app.jsx";
 const aparts = [
   {
     img: `img/apartment-01.jpg`,
-    price: `120`,
+    price: 120,
     rating: 4,
     description: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
@@ -15,7 +15,7 @@ const aparts = [
 
   {
     img: `img/room.jpg`,
-    price: `80`,
+    price: 80,
     rating: 4,
     description: `Wood and stone place`,
     type: `Private room`,
@@ -25,7 +25,7 @@ const aparts = [
 
   {
     img: `img/apartment-02.jpg`,
-    price: `132`,
+    price: 132,
     rating: 4,
     description: `Canal View Prinsengracht`,
     type: `Apartment`,
@@ -35,7 +35,7 @@ const aparts = [
 
   {
     img: `img/apartment-03.jpg`,
-    price: `180`,
+    price: 180,
     rating: 5,
     description: `Nice, cozy, warm big bed apartment`,
     type: `Apartment`,
@@ -45,7 +45,7 @@ const aparts = [
 
   {
     img: `img/room.jpg`,
-    price: `80`,
+    price: 80,
     rating: 4,
     description: `Wood and stone place`,
     type: `Private room`,

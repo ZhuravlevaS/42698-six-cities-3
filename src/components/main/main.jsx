@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "./card.jsx";
+import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {aparts} = props;
 
   return (
@@ -104,7 +104,6 @@ const Main = (props) => {
                 <div className="cities__places-list places__list tabs__content">
 
                   {
-                    // eslint-disable-next-line react/prop-types
                     aparts.map((apart) => <Card key={apart.id} data={apart}/>)
                   }
 
@@ -119,6 +118,21 @@ const Main = (props) => {
       </div>
     </div>
   );
+};
+
+
+Main.propTypes = {
+  aparts: PropTypes.arrayOf(PropTypes.exact(
+      {
+        img: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        isMarked: PropTypes.bool.isRequired,
+        id: PropTypes.number.isRequired
+      })
+  )
 };
 
 export default Main;
