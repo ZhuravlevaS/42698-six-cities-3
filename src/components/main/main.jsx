@@ -1,9 +1,13 @@
 import React from "react";
-import Card from "./card.jsx";
+import Card from "../card/card.jsx";
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
   const {aparts} = props;
+
+  const titleClick = () => {
+    return true;
+  };
 
   return (
     <div>
@@ -104,7 +108,7 @@ const Main = (props) => {
                 <div className="cities__places-list places__list tabs__content">
 
                   {
-                    aparts.map((apart) => <Card key={apart.id} data={apart}/>)
+                    aparts.map((apart) => <Card key={apart.id} apart={apart} titleClick={titleClick}/>)
                   }
 
                 </div>

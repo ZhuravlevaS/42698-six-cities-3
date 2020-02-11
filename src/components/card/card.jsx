@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const Card = (props) => {
-  const {img, price, rating, description, type, isMarked} = props.data;
+  const {img, price, rating, description, type, isMarked} = props.apart;
+  const {titleClick} = props;
 
   return (
     <article className="cities__place-card place-card">
@@ -33,7 +34,7 @@ const Card = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2 className="place-card__name" onClick={titleClick}>
           <a href="#">{description}</a>
         </h2>
         <p className="place-card__type">{type}</p>
@@ -43,7 +44,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  data: PropTypes.exact({
+  apart: PropTypes.exact({
     img: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
@@ -51,7 +52,8 @@ Card.propTypes = {
     type: PropTypes.string.isRequired,
     isMarked: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired
-  })
+  }),
+  titleClick: PropTypes.func
 };
 
 export default Card;
