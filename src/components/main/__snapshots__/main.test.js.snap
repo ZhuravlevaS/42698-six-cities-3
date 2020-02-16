@@ -263,17 +263,12 @@ exports[`<Main/> render 1`] = `
             </form>
             <div
               className="cities__places-list places__list tabs__content"
+              onMouseOut={[Function]}
             >
               <article
                 className="cities__place-card place-card"
+                onMouseOver={[Function]}
               >
-                <div
-                  className="place-card__mark"
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
@@ -352,7 +347,6 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="#"
@@ -369,14 +363,8 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOver={[Function]}
               >
-                <div
-                  className="place-card__mark"
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
@@ -455,7 +443,6 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="#"
@@ -472,14 +459,8 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOver={[Function]}
               >
-                <div
-                  className="place-card__mark"
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
@@ -558,7 +539,6 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="#"

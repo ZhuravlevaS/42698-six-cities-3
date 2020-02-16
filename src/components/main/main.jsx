@@ -1,14 +1,9 @@
-import React from "react";
-import Card from "../card/card.jsx";
+import React from 'react';
 import PropTypes from 'prop-types';
+import CardList from '../card-list/card-list.jsx';
 
 const Main = (props) => {
   const {aparts} = props;
-
-  const titleClick = () => {
-    return true;
-  };
-
   return (
     <div>
       <div style={{display: `none`}}>
@@ -105,13 +100,7 @@ const Main = (props) => {
                   </select> */}
 
                 </form>
-                <div className="cities__places-list places__list tabs__content">
-
-                  {
-                    aparts.map((apart) => <Card key={apart.id} apart={apart} titleClick={titleClick}/>)
-                  }
-
-                </div>
+                <CardList aparts={aparts}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"></section>
@@ -124,7 +113,6 @@ const Main = (props) => {
   );
 };
 
-
 Main.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
@@ -134,6 +122,7 @@ Main.propTypes = {
         description: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         isMarked: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
         id: PropTypes.number.isRequired
       })
   )

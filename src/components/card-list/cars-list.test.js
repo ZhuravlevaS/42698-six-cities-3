@@ -1,12 +1,12 @@
 import React from 'react';
-import App from './app.jsx';
+import CardList from './card-list.jsx';
 import renderer from 'react-test-renderer';
 
 const aparts = [
   {
     img: `img/apartment-01.jpg`,
     price: 320,
-    rating: 2,
+    rating: 0,
     description: `Beautiful & luxurious`,
     type: `House`,
     isMarked: false,
@@ -16,7 +16,7 @@ const aparts = [
 
   {
     img: `img/room.jpg`,
-    price: 180,
+    price: 200,
     rating: 5,
     description: `Wood and stone place`,
     type: `Private room`,
@@ -27,8 +27,8 @@ const aparts = [
 
   {
     img: `img/apartment-02.jpg`,
-    price: 152,
-    rating: 3,
+    price: 152333,
+    rating: 2,
     description: `Canal View`,
     type: `Apartment`,
     isMarked: true,
@@ -37,9 +37,10 @@ const aparts = [
   },
 ];
 
-it(`<App/> render`, () => {
+it(`<Main/> render`, () => {
   const tree = renderer
-    .create(<App aparts={aparts} />)
+    .create(<CardList aparts={aparts} />)
     .toJSON();
+
   expect(tree).toMatchSnapshot();
 });

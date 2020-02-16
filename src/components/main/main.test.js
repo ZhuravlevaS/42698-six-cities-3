@@ -10,6 +10,7 @@ const aparts = [
     description: `Beautiful & luxurious`,
     type: `House`,
     isMarked: false,
+    isPremium: false,
     id: 1
   },
 
@@ -20,6 +21,7 @@ const aparts = [
     description: `Wood and stone place`,
     type: `Private room`,
     isMarked: true,
+    isPremium: false,
     id: 2
   },
 
@@ -30,6 +32,7 @@ const aparts = [
     description: `Canal View`,
     type: `Apartment`,
     isMarked: true,
+    isPremium: false,
     id: 3
   },
 ];
