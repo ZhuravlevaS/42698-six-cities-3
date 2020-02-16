@@ -9,7 +9,7 @@ class Card extends PureComponent {
   }
 
   handleMouseOver() {
-    this.props.onMouseOver(this.props.apart.id);
+    this.props.onMouseOver(this.props.apart);
   }
 
   render() {

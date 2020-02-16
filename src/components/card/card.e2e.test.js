@@ -8,10 +8,7 @@ Enzyme.configure({
 });
 
 it(`Card MouseOver`, () => {
-  const handlerMouseOver = jest.fn((id) => {
-    console.log(id);
-    return id;
-  });
+  const handlerMouseOver = jest.fn((apart) => apart);
 
   const apart = {
     img: `img/apartment-01.jpg`,
@@ -21,7 +18,7 @@ it(`Card MouseOver`, () => {
     type: `House`,
     isMarked: false,
     isPremium: true,
-    id: 1
+    id: 22
   };
 
   const card = shallow(
@@ -33,5 +30,7 @@ it(`Card MouseOver`, () => {
 
   let cardWrap = card.find(`.place-card`);
 
-  expect(cardWrap.simulate(`mouseover`, handlerMouseOver)).toEqual(1);
+  cardWrap.simulate(`mouseover`, handlerMouseOver);
+
+  expect(handlerMouseOver).toHaveBeenNthCalledWith(1, apart);
 });

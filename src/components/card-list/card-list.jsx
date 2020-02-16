@@ -14,13 +14,13 @@ class CardList extends PureComponent {
     this.handleCardMouseOut = this.handleCardMouseOut.bind(this);
   }
 
-  handleCardMouseOver(id) {
-    if (this.state.card === id) {
+  handleCardMouseOver(apart) {
+    if (this.state.card && this.state.card.id === apart.id) {
       return;
     }
 
     this.setState({
-      card: id
+      card: apart
     });
   }
 
