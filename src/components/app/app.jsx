@@ -19,6 +19,7 @@ App.propTypes = {
         description: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         isMarked: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
         id: PropTypes.number.isRequired
       })
   )

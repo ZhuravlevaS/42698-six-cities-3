@@ -9,6 +9,7 @@ const apart = {
   description: `Canal View pum`,
   type: `Apartment`,
   isMarked: true,
+  isPremium: true,
   id: 3
 };
 
