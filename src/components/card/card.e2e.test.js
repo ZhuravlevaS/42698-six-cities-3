@@ -9,12 +9,13 @@ Enzyme.configure({
 
 it(`Card MouseOver`, () => {
   const handlerMouseOver = jest.fn((apart) => apart);
+  const titleClick = jest.fn();
 
   const apart = {
     img: `img/apartment-01.jpg`,
     price: 320,
     rating: 2,
-    description: `Beautiful & luxurious`,
+    title: `Beautiful & luxurious`,
     type: `House`,
     isMarked: false,
     isPremium: true,
@@ -25,12 +26,16 @@ it(`Card MouseOver`, () => {
       <Card
         apart={apart}
         onMouseOver={handlerMouseOver}
+        onTitleClick={titleClick}
       />
   );
 
   let cardWrap = card.find(`.place-card`);
+  let title = card.find(`.place-card__name`);
 
+  title.props().onClick();
   cardWrap.simulate(`mouseover`, handlerMouseOver);
 
+  expect(titleClick.mock.calls.length).toBe(1);
   expect(handlerMouseOver).toHaveBeenNthCalledWith(1, apart);
 });

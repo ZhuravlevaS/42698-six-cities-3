@@ -20,7 +20,7 @@ class App extends PureComponent {
   render() {
     const {apart} = this.props;
 
-    return(
+    return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -31,9 +31,9 @@ class App extends PureComponent {
           </Route>
         </Switch>
       </BrowserRouter>
-    )
+    );
   }
-};
+}
 
 App.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
@@ -41,7 +41,7 @@ App.propTypes = {
         img: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         isMarked: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
@@ -50,16 +50,16 @@ App.propTypes = {
   ),
   apart: PropTypes.exact({
     imgs: PropTypes.arrayOf(PropTypes.exact(
-      {
-        url: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
-      })
+        {
+          url: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
     ),
     insides: PropTypes.arrayOf(PropTypes.exact(
-      {
-        name: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
-      })
+        {
+          name: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
     ),
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
@@ -69,7 +69,18 @@ App.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     bedrooms: PropTypes.number.isRequired,
     adults: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
+    host: PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      description: PropTypes.arrayOf(PropTypes.exact(
+          {
+            text: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired
+          })
+      ),
+    })
   }),
 };
 

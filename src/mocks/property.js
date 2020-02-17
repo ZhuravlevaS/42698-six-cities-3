@@ -19,13 +19,13 @@ export default {
     {
       url: `img/apartment-02.jpg`,
       id: 5
-    }, 
+    },
     {
       url: `img/apartment-01.jpg`,
       id: 6
     },
   ],
-  insides:[
+  insides: [
     {
       name: `Wi-Fi`,
       id: 1
@@ -51,8 +51,7 @@ export default {
       id: 6
     },
     {
-      name: `Dishwasher
-      `,
+      name: `Dishwasher`,
       id: 7
     },
     {
@@ -80,9 +79,24 @@ export default {
   rating: 4.9,
   title: `Beautiful & luxurious apartment at great location`,
   type: `Apartment`,
-  isMarked: false,
+  isMarked: true,
   isPremium: true,
   bedrooms: 2,
   adults: 3,
-  id: 1
+  id: 1,
+  host: {
+    name: `Angellna`,
+    avatar: `img/avatar-angelina.jpg`,
+    isPro: false,
+    description: [
+      {
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        id: 1
+      },
+      {
+        text: `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
+        id: 2
+      },
+    ]
+  }
 };

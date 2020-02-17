@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PropertyGallery from "../property-gallery/property-gallery.jsx"
+import PropertyGallery from "../property-gallery/property-gallery.jsx";
 
 
 const Property = (props) => {
-  const {imgs, price, rating, title, type, isMarked, isPremium, bedrooms, adults, insides} = props.apart;
+  const {imgs, price, rating, title, type, isMarked, isPremium, bedrooms, adults, insides, host} = props.apart;
   const ratingRound = Math.round(rating);
-  const ratingComa = rating.toString().replace(/\./g,',')
-  
-  return(
+  const ratingComa = rating.toString().replace(/\./g, `,`);
+
+  return (
     <React.Fragment>
       <div style={{display: `none`}}>
         <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewBox="0 0 7 4"><path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"></path></symbol><symbol id="icon-bookmark" viewBox="0 0 17 18"><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"></path></symbol><symbol id="icon-star" viewBox="0 0 13 12"><path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"></path></symbol></svg>
@@ -54,7 +54,7 @@ const Property = (props) => {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className={`property__bookmark-button button ${isMarked ? `property__bookmark-button--active` : ``}`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -63,7 +63,7 @@ const Property = (props) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}}/>
+                    <span style={{width: `${ratingRound * 20}%`}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{ratingComa}</span>
@@ -89,9 +89,10 @@ const Property = (props) => {
                     {
                       insides.map((inside) => {
                         const {name, id} = inside;
+
                         return <li className="property__inside-item" key={id}>
                           {name}
-                        </li>
+                        </li>;
                       })
                     }
                   </ul>
@@ -99,20 +100,21 @@ const Property = (props) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                    <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
+                      <img className="property__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
-                      Angelina
+                      {host.name}
                     </span>
                   </div>
                   <div className="property__description">
-                    <p className="property__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                      An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                    </p>
+                    {
+                      host.description.map((text) => {
+                        return <p className="property__text" key={text.id}>
+                          {text.text}
+                        </p>;
+                      })
+                    }
                   </div>
                 </div>
                 <section className="property__reviews reviews">
@@ -313,17 +315,28 @@ Property.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     adults: PropTypes.number.isRequired,
     imgs: PropTypes.arrayOf(PropTypes.exact(
-      {
-        url: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
-      })
+        {
+          url: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
     ),
     insides: PropTypes.arrayOf(PropTypes.exact(
-      {
-        name: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
-      })
+        {
+          name: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
     ),
+    host: PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      description: PropTypes.arrayOf(PropTypes.exact(
+          {
+            text: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired
+          })
+      ),
+    })
   }),
 };
 

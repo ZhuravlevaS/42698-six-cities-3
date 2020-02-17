@@ -119,7 +119,7 @@ Main.propTypes = {
         img: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         isMarked: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,

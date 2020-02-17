@@ -32,7 +32,6 @@ class CardList extends PureComponent {
   }
 
   handleTitleClick() {
-    console.log("hi")
     return true;
   }
 
@@ -42,7 +41,7 @@ class CardList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content" onMouseOut={this.handleCardMouseOut}>
         {
-          aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={this.handleCardMouseOver} onTitleClick={handleTitleClick} />)
+          aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={this.handleCardMouseOver} onTitleClick={this.handleTitleClick} />)
         }
       </div>
     );
@@ -55,7 +54,7 @@ CardList.propTypes = {
         img: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         isMarked: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,

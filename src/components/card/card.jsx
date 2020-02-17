@@ -13,8 +13,8 @@ class Card extends PureComponent {
   }
 
   render() {
-    const {img, price, rating, description, type, isMarked, isPremium} = this.props.apart;
-    const {onTitleClick} = props;
+    const {img, price, rating, title, type, isMarked, isPremium} = this.props.apart;
+    const {onTitleClick} = this.props;
     const ratingRound = Math.round(rating);
 
     return (
@@ -49,7 +49,7 @@ class Card extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name" onClick={onTitleClick}>
-            <a href="#">{description}</a>
+            <a href="#">{title}</a>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -63,13 +63,14 @@ Card.propTypes = {
     img: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     isMarked: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired
   }),
-  onMouseOver: PropTypes.func
+  onMouseOver: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Card;
