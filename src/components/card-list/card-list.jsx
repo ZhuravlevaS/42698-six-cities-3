@@ -12,6 +12,7 @@ class CardList extends PureComponent {
     };
     this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
     this.handleCardMouseOut = this.handleCardMouseOut.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
   handleCardMouseOver(apart) {
@@ -30,6 +31,10 @@ class CardList extends PureComponent {
     });
   }
 
+  handleTitleClick() {
+    console.log("hi")
+    return true;
+  }
 
   render() {
     const {aparts} = this.props;
@@ -37,7 +42,7 @@ class CardList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content" onMouseOut={this.handleCardMouseOut}>
         {
-          aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={this.handleCardMouseOver} />)
+          aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={this.handleCardMouseOver} onTitleClick={handleTitleClick} />)
         }
       </div>
     );

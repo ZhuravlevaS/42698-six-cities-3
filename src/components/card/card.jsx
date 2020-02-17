@@ -14,6 +14,8 @@ class Card extends PureComponent {
 
   render() {
     const {img, price, rating, description, type, isMarked, isPremium} = this.props.apart;
+    const {onTitleClick} = props;
+    const ratingRound = Math.round(rating);
 
     return (
       <article className="cities__place-card place-card" onMouseOver={this.handleMouseOver}>
@@ -42,11 +44,11 @@ class Card extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: `${rating * 20}%`}}></span>
+              <span style={{width: `${ratingRound * 20}%`}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name">
+          <h2 className="place-card__name" onClick={onTitleClick}>
             <a href="#">{description}</a>
           </h2>
           <p className="place-card__type">{type}</p>
