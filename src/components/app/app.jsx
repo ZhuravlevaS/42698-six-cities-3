@@ -10,7 +10,7 @@ class App extends PureComponent {
 
     this.state = {
       property: {}
-    }
+    };
 
     this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
     this.handleCardMouseOut = this.handleCardMouseOut.bind(this);
@@ -42,9 +42,7 @@ class App extends PureComponent {
   }
 
   _renderOffer() {
-    if(this.state.property) {
-      return <Property apart={this.state.property} />
-    }
+    return <Property apart={this.props.apart} />;
   }
 
   render() {
@@ -54,7 +52,7 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderMain()}
           </Route>
-          <Route path={`/offer/${this.state.property.id}`}>
+          <Route path={`/dev-offer`}>
             {this._renderOffer()}
           </Route>
         </Switch>
@@ -67,75 +65,75 @@ App.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
         imgs: PropTypes.arrayOf(PropTypes.exact(
-          {
-            url: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired
-          })
-      ),
-      insides: PropTypes.arrayOf(PropTypes.exact(
-          {
-            name: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired
-          })
-      ),
-      img: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      isMarked: PropTypes.bool.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      adults: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-      host: PropTypes.exact({
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        isPro: PropTypes.bool.isRequired,
-        description: PropTypes.arrayOf(PropTypes.exact(
             {
-              text: PropTypes.string.isRequired,
+              url: PropTypes.string.isRequired,
               id: PropTypes.number.isRequired
             })
         ),
+        insides: PropTypes.arrayOf(PropTypes.exact(
+            {
+              name: PropTypes.string.isRequired,
+              id: PropTypes.number.isRequired
+            })
+        ),
+        img: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        isMarked: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        adults: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
+        host: PropTypes.exact({
+          name: PropTypes.string.isRequired,
+          avatar: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          description: PropTypes.arrayOf(PropTypes.exact(
+              {
+                text: PropTypes.string.isRequired,
+                id: PropTypes.number.isRequired
+              })
+          ),
+        })
       })
-    })
   ),
-  // apart: PropTypes.exact({
-  //   imgs: PropTypes.arrayOf(PropTypes.exact(
-  //       {
-  //         url: PropTypes.string.isRequired,
-  //         id: PropTypes.number.isRequired
-  //       })
-  //   ),
-  //   insides: PropTypes.arrayOf(PropTypes.exact(
-  //       {
-  //         name: PropTypes.string.isRequired,
-  //         id: PropTypes.number.isRequired
-  //       })
-  //   ),
-  //   img: PropTypes.string.isRequired,
-  //   price: PropTypes.number.isRequired,
-  //   rating: PropTypes.number.isRequired,
-  //   title: PropTypes.string.isRequired,
-  //   type: PropTypes.string.isRequired,
-  //   isMarked: PropTypes.bool.isRequired,
-  //   isPremium: PropTypes.bool.isRequired,
-  //   bedrooms: PropTypes.number.isRequired,
-  //   adults: PropTypes.number.isRequired,
-  //   id: PropTypes.number.isRequired,
-  //   host: PropTypes.exact({
-  //     name: PropTypes.string.isRequired,
-  //     avatar: PropTypes.string.isRequired,
-  //     isPro: PropTypes.bool.isRequired,
-  //     description: PropTypes.arrayOf(PropTypes.exact(
-  //         {
-  //           text: PropTypes.string.isRequired,
-  //           id: PropTypes.number.isRequired
-  //         })
-  //     ),
-  //   })
-  // }),
+  apart: PropTypes.exact({
+    imgs: PropTypes.arrayOf(PropTypes.exact(
+        {
+          url: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
+    ),
+    insides: PropTypes.arrayOf(PropTypes.exact(
+        {
+          name: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
+    ),
+    img: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isMarked: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    host: PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      description: PropTypes.arrayOf(PropTypes.exact(
+          {
+            text: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired
+          })
+      ),
+    })
+  }),
 };
 
 export default App;

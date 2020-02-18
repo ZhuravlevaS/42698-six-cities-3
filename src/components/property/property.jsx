@@ -5,7 +5,6 @@ import PropertyGallery from "../property-gallery/property-gallery.jsx";
 
 
 const Property = (props) => {
-  console.log(props)
   const {imgs, price, rating, title, type, isMarked, isPremium, bedrooms, adults, insides, host} = props.apart;
   const ratingRound = Math.round(rating);
   const ratingComa = rating.toString().replace(/\./g, `,`);
