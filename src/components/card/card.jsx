@@ -13,7 +13,9 @@ class Card extends PureComponent {
   }
 
   render() {
-    const {img, price, rating, description, type, isMarked, isPremium} = this.props.apart;
+    const {img, price, rating, title, type, isMarked, isPremium, id} = this.props.apart;
+    const {onTitleClick} = this.props;
+    const ratingRound = Math.round(rating);
 
     return (
       <article className="cities__place-card place-card" onMouseOver={this.handleMouseOver}>
@@ -42,12 +44,12 @@ class Card extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: `${rating * 20}%`}}></span>
+              <span style={{width: `${ratingRound * 20}%`}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name">
-            <a href="#">{description}</a>
+          <h2 className="place-card__name" onClick={onTitleClick}>
+            <a href={`/offer/${id}`}>{title}</a>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -58,16 +60,42 @@ class Card extends PureComponent {
 
 Card.propTypes = {
   apart: PropTypes.exact({
+    imgs: PropTypes.arrayOf(PropTypes.exact(
+        {
+          url: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
+    ),
+    insides: PropTypes.arrayOf(PropTypes.exact(
+        {
+          name: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired
+        })
+    ),
     img: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     isMarked: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    id: PropTypes.number.isRequired
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    host: PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      description: PropTypes.arrayOf(PropTypes.exact(
+          {
+            text: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired
+          })
+      ),
+    })
   }),
-  onMouseOver: PropTypes.func
+  onMouseOver: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Card;

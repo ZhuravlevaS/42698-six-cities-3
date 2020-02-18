@@ -1,8 +1,4 @@
-import React from 'react';
-import Card from './card.jsx';
-import renderer from 'react-test-renderer';
-
-const apart = {
+export default {
   imgs: [
     {
       url: `img/apartment-01.jpg`,
@@ -105,16 +101,3 @@ const apart = {
     ]
   }
 };
-
-const handlerMouseOver = jest.fn((item) => item);
-const titleClick = jest.fn();
-
-it(`<Card/> render`, () => {
-  const tree = renderer
-    .create(<Card apart={apart}
-      onMouseOver={handlerMouseOver}
-      onTitleClick={titleClick} />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
