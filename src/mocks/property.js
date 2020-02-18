@@ -75,6 +75,7 @@ export default {
       id: 12
     },
   ],
+  img: `img/apartment-01.jpg`,
   price: 180,
   rating: 4.9,
   title: `Beautiful & luxurious apartment at great location`,

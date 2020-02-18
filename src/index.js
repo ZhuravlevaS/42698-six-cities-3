@@ -5,6 +5,6 @@ import Aparts from "./mocks/offers.js";
 import PropertyObj from "./mocks/property.js";
 
 ReactDOM.render(
-    <App aparts={Aparts} apart= {PropertyObj}/>,
+    <App aparts={Aparts}/>,
     document.querySelector(`#root`)
 );
