@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from '../card-list/card-list.jsx';
+import Map from '../map/map.jsx';
 
 const Main = (props) => {
   const {aparts, onMouseOut, onMouseOver} = props;
+  const cityCords = [52.38333, 4.9];
+  const cords = aparts.map((apart) => apart.cords);
+
   return (
     <div>
       <div style={{display: `none`}}>
@@ -103,7 +107,9 @@ const Main = (props) => {
                 <CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map" style={{backgroundImage: `none`}}>
+                  <Map city={cityCords} cords={cords}/>
+                </section>
               </div>
             </div>
           </div>
@@ -138,6 +144,7 @@ Main.propTypes = {
         bedrooms: PropTypes.number.isRequired,
         adults: PropTypes.number.isRequired,
         id: PropTypes.number.isRequired,
+        cords: PropTypes.arrayOf(PropTypes.number),
         host: PropTypes.exact({
           name: PropTypes.string.isRequired,
           avatar: PropTypes.string.isRequired,

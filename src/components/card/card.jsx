@@ -82,6 +82,7 @@ Card.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     adults: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
+    cords: PropTypes.arrayOf(PropTypes.number),
     host: PropTypes.exact({
       name: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired,

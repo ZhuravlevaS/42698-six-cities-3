@@ -312,6 +312,7 @@ Property.propTypes = {
     isMarked: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
+    cords: PropTypes.arrayOf(PropTypes.number),
     img: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     adults: PropTypes.number.isRequired,

@@ -681,7 +681,22 @@ exports[`<Main/> render 1`] = `
           >
             <section
               className="cities__map map"
-            />
+              style={
+                Object {
+                  "backgroundImage": "none",
+                }
+              }
+            >
+              <div
+                id="map"
+                style={
+                  Object {
+                    "height": "calc(100vh - 185px)",
+                    "width": "100%",
+                  }
+                }
+              />
+            </section>
           </div>
         </div>
       </div>
