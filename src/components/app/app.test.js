@@ -90,6 +90,7 @@ const aparts = [
     bedrooms: 2,
     adults: 3,
     id: 1,
+    cords: [52.3809553943508, 4.939309666406198],
     host: {
       name: `Angellna`,
       avatar: `img/avatar-angelina.jpg`,

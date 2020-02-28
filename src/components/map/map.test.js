@@ -1,5 +1,5 @@
 import React from 'react';
-import CardList from './card-list.jsx';
+import Map from './map.jsx';
 import renderer from 'react-test-renderer';
 
 const aparts = [
@@ -424,12 +424,12 @@ const aparts = [
   }
 ];
 
-it(`<Main/> render`, () => {
-  const onMouseOver = jest.fn();
-  const onMouseOut = jest.fn();
+const cityCords = [52.38333, 4.9];
+const cords = aparts.map((apart) => apart.cords);
 
+it(`<Map/> render`, () => {
   const tree = renderer
-    .create(<CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>)
+    .create(<Map city={cityCords} cords={cords}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

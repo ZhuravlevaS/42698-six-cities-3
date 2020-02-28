@@ -85,6 +85,7 @@ export default {
   bedrooms: 2,
   adults: 3,
   id: 1,
+  cords: [52.369553943508, 4.85309666406198],
   host: {
     name: `Angellna`,
     avatar: `img/avatar-angelina.jpg`,

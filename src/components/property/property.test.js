@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './card.jsx';
+import Property from './property.jsx';
 import renderer from 'react-test-renderer';
 
 const apart = {
@@ -107,14 +107,9 @@ const apart = {
   }
 };
 
-const handlerMouseOver = jest.fn((item) => item);
-const titleClick = jest.fn();
-
-it(`<Card/> render`, () => {
+it(`<Property/> render`, () => {
   const tree = renderer
-    .create(<Card apart={apart}
-      onMouseOver={handlerMouseOver}
-      onTitleClick={titleClick} />)
+    .create(<Property apart={apart} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
