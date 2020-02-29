@@ -5,7 +5,7 @@ exports[`<Map/> render 1`] = `
   id="map"
   style={
     Object {
-      "height": "calc(100vh - 185px)",
+      "height": "100%",
       "width": "100%",
     }
   }
