@@ -104,7 +104,7 @@ const Main = (props) => {
                   </select> */}
 
                 </form>
-                <CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+                <CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`cities__places-list`, `cities__place-card`]}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map" style={{backgroundImage: `none`}}>

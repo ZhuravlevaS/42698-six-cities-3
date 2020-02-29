@@ -42,7 +42,7 @@ class App extends PureComponent {
   }
 
   _renderOffer() {
-    return <Property apart={this.props.apart} />;
+    return <Property apart={this.props.apart} onMouseOver={this.handleCardMouseOver} onMouseOut={this.handleCardMouseOut}/>;
   }
 
   render() {

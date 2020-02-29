@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import Aparts from "./mocks/offers.js";
-import PropertyObj from "./mocks/property.js";
+import aparts from "./mocks/offers.js";
+import propertyObj from "./mocks/property.js";
 
 ReactDOM.render(
-    <App aparts={Aparts} apart={PropertyObj}/>,
+    <App aparts={aparts} apart={propertyObj}/>,
     document.querySelector(`#root`)
 );

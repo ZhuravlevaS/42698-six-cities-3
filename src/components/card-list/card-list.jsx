@@ -1,31 +1,21 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
 
-class CardList extends PureComponent {
-
-  constructor(props) {
-    super(props);
-
-    this.handleTitleClick = this.handleTitleClick.bind(this);
-  }
-
-  handleTitleClick() {
+const CardList = (props) => {
+  const {aparts, onMouseOut, onMouseOver, typesClass} = props;
+  const _handleTitleClick = () => {
     return true;
-  }
+  };
 
-  render() {
-    const {aparts} = this.props;
-
-    return (
-      <div className="cities__places-list places__list tabs__content" onMouseOut={this.props.onMouseOut}>
-        {
-          aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={this.props.onMouseOver} onTitleClick={this.handleTitleClick} />)
-        }
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`${typesClass[0]} places__list tabs__content`} onMouseOut={onMouseOut}>
+      {
+        aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={onMouseOver} onTitleClick={_handleTitleClick} typesClass={typesClass}/>)
+      }
+    </div>
+  );
+};
 
 CardList.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
@@ -68,6 +58,7 @@ CardList.propTypes = {
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
+  typesClass: PropTypes.array.isRequired,
 };
 
 export default CardList;

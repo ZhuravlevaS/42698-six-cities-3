@@ -121,6 +121,7 @@ it(`Card MouseOver`, () => {
         apart={apart}
         onMouseOver={handlerMouseOver}
         onTitleClick={titleClick}
+        typesClass={[`near-places__list`, `near-places__card`]}
       />
   );
 

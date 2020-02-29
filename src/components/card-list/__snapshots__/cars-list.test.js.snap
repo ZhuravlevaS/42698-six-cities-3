@@ -2,11 +2,11 @@
 
 exports[`<Main/> render 1`] = `
 <div
-  className="cities__places-list places__list tabs__content"
+  className="near-places__list places__list tabs__content"
   onMouseOut={[MockFunction]}
 >
   <article
-    className="cities__place-card place-card"
+    className="near-places__card place-card"
     onMouseOver={[Function]}
   >
     <div
@@ -110,7 +110,7 @@ exports[`<Main/> render 1`] = `
     </div>
   </article>
   <article
-    className="cities__place-card place-card"
+    className="near-places__card place-card"
     onMouseOver={[Function]}
   >
     <div
@@ -214,7 +214,7 @@ exports[`<Main/> render 1`] = `
     </div>
   </article>
   <article
-    className="cities__place-card place-card"
+    className="near-places__card place-card"
     onMouseOver={[Function]}
   >
     <div
@@ -311,7 +311,7 @@ exports[`<Main/> render 1`] = `
     </div>
   </article>
   <article
-    className="cities__place-card place-card"
+    className="near-places__card place-card"
     onMouseOver={[Function]}
   >
     <div
