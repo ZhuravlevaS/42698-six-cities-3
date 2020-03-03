@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 
@@ -17,7 +19,6 @@ class App extends PureComponent {
   }
 
   handleCardMouseOver(prop) {
-
     if (this.state.property && this.state.property.id === prop.id) {
       return;
     }
@@ -34,15 +35,30 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {aparts} = this.props;
+    const {citiesData, onCityClick, city, saveCitiesData} = this.props;
+
+    const cityCords = citiesData ? citiesData[city].cords : [];
+    const aparts = citiesData ? citiesData[city].aparts : [];
 
     return (
-      <Main aparts={aparts} onMouseOver={this.handleCardMouseOver} onMouseOut={this.handleCardMouseOut}/>
+      <Main
+        aparts={aparts}
+        cityCords={cityCords}
+        city={city}
+        onCityClick={onCityClick}
+        onMouseOver={this.handleCardMouseOver}
+        onMouseOut={this.handleCardMouseOut}
+        saveCitiesData={saveCitiesData}
+      />
     );
   }
 
   _renderOffer() {
-    return <Property apart={this.props.apart} onMouseOver={this.handleCardMouseOver} onMouseOut={this.handleCardMouseOut}/>;
+    return <Property
+      apart={this.props.apart}
+      onMouseOver={this.handleCardMouseOver}
+      onMouseOut={this.handleCardMouseOut}
+    />;
   }
 
   render() {
@@ -136,6 +152,63 @@ App.propTypes = {
       ),
     })
   }),
+  onCityClick: PropTypes.func.isRequired,
+  saveCitiesData: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  citiesData: PropTypes.shape(
+      {
+        imgs: PropTypes.arrayOf(PropTypes.exact(
+            {
+              url: PropTypes.string,
+              id: PropTypes.number
+            })
+        ),
+        insides: PropTypes.arrayOf(PropTypes.exact(
+            {
+              name: PropTypes.string,
+              id: PropTypes.number
+            })
+        ),
+        img: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.number,
+        title: PropTypes.string,
+        type: PropTypes.string,
+        isMarked: PropTypes.bool,
+        isPremium: PropTypes.bool,
+        bedrooms: PropTypes.number,
+        adults: PropTypes.number,
+        id: PropTypes.number,
+        cords: PropTypes.arrayOf(PropTypes.number),
+        host: PropTypes.exact({
+          name: PropTypes.string,
+          avatar: PropTypes.string,
+          isPro: PropTypes.bool,
+          description: PropTypes.arrayOf(PropTypes.exact(
+              {
+                text: PropTypes.string,
+                id: PropTypes.number
+              })
+          ),
+        })
+      }),
 };
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(city) {
+    dispatch(ActionCreator.getCity(city));
+  },
+
+  saveCitiesData(dataCities) {
+    dispatch(ActionCreator.saveCitiesData(dataCities));
+  }
+});
+
+export {App};
+export default connect(
+    (state) => ({
+      city: state.city,
+      citiesData: state.citiesData
+    }),
+    mapDispatchToProps
+)(App);

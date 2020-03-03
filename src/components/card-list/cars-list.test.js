@@ -4,7 +4,7 @@ import offers from '../../mocks/offers.js';
 import renderer from 'react-test-renderer';
 
 
-it(`<Main/> render`, () => {
+it(`<CardList/> render`, () => {
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();
 

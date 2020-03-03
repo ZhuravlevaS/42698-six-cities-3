@@ -120,6 +120,7 @@ exports[`<Main/> render 1`] = `
               <a
                 className="locations__item-link tabs__item"
                 href="#"
+                onClick={[Function]}
               >
                 <span>
                   Paris
@@ -132,6 +133,7 @@ exports[`<Main/> render 1`] = `
               <a
                 className="locations__item-link tabs__item"
                 href="#"
+                onClick={[Function]}
               >
                 <span>
                   Cologne
@@ -144,6 +146,7 @@ exports[`<Main/> render 1`] = `
               <a
                 className="locations__item-link tabs__item"
                 href="#"
+                onClick={[Function]}
               >
                 <span>
                   Brussels
@@ -154,7 +157,9 @@ exports[`<Main/> render 1`] = `
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item tabs__item--active"
+                className="locations__item-link tabs__item"
+                href="#"
+                onClick={[Function]}
               >
                 <span>
                   Amsterdam
@@ -167,6 +172,7 @@ exports[`<Main/> render 1`] = `
               <a
                 className="locations__item-link tabs__item"
                 href="#"
+                onClick={[Function]}
               >
                 <span>
                   Hamburg
@@ -179,6 +185,7 @@ exports[`<Main/> render 1`] = `
               <a
                 className="locations__item-link tabs__item"
                 href="#"
+                onClick={[Function]}
               >
                 <span>
                   Dusseldorf
@@ -205,7 +212,9 @@ exports[`<Main/> render 1`] = `
             <b
               className="places__found"
             >
-              312 places to stay in Amsterdam
+              4
+               places to stay in 
+              Amsterdam
             </b>
             <form
               action="#"
