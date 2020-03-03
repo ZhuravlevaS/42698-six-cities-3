@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 
@@ -34,15 +36,26 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {aparts} = this.props;
+    const {aparts, cityCords, onCityClick, city} = this.props;
 
     return (
-      <Main aparts={aparts} onMouseOver={this.handleCardMouseOver} onMouseOut={this.handleCardMouseOut}/>
+      <Main
+        aparts={aparts}
+        cityCords={cityCords}
+        city={city}
+        onCityClick={onCityClick}
+        onMouseOver={this.handleCardMouseOver}
+        onMouseOut={this.handleCardMouseOut}
+      />
     );
   }
 
   _renderOffer() {
-    return <Property apart={this.props.apart} onMouseOver={this.handleCardMouseOver} onMouseOut={this.handleCardMouseOut}/>;
+    return <Property
+      apart={this.props.apart}
+      onMouseOver={this.handleCardMouseOver}
+      onMouseOut={this.handleCardMouseOut}
+    />;
   }
 
   render() {
@@ -136,6 +149,23 @@ App.propTypes = {
       ),
     })
   }),
+  onCityClick: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  cityCords: PropTypes.arrayOf(PropTypes.number),
 };
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(city) {
+    dispatch(ActionCreator.getCity(city));
+  }
+});
+
+export {App};
+export default connect(
+    (state) => ({
+      city: state.city,
+      aparts: state.properties,
+      cityCords: state.cityCords
+    }),
+    mapDispatchToProps
+)(App);
