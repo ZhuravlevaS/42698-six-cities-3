@@ -1,5 +1,4 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import aparts from "./mocks/offers.js";
 import data from "./mocks/dataCities.js";
 
 
@@ -146,7 +145,7 @@ describe(`Action creators work correctly`, () => {
                   ]
                 }
               },
-        
+
               {
                 imgs: [
                   {
@@ -251,7 +250,7 @@ describe(`Action creators work correctly`, () => {
                   ]
                 }
               },
-        
+
               {
                 imgs: [
                   {
@@ -356,7 +355,7 @@ describe(`Action creators work correctly`, () => {
                   ]
                 }
               },
-        
+
               {
                 imgs: [
                   {
@@ -570,7 +569,7 @@ describe(`Action creators work correctly`, () => {
                   ]
                 }
               },
-        
+
               {
                 imgs: [
                   {

@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
-import data from "../../mocks/dataCities.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -36,8 +35,8 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {citiesData, onCityClick, city} = this.props;
-
+    const {citiesData, onCityClick, city, saveCitiesData} = this.props;
+    debugger;
     const cityCords = citiesData ? citiesData[city].cords : [];
     const aparts = citiesData ? citiesData[city].aparts : [];
 
@@ -49,6 +48,7 @@ class App extends PureComponent {
         onCityClick={onCityClick}
         onMouseOver={this.handleCardMouseOver}
         onMouseOut={this.handleCardMouseOut}
+        saveCitiesData={saveCitiesData}
       />
     );
   }
@@ -59,10 +59,6 @@ class App extends PureComponent {
       onMouseOver={this.handleCardMouseOver}
       onMouseOut={this.handleCardMouseOut}
     />;
-  }
-
-  componentDidMount() {
-    this.props.saveCitiesData(data);
   }
 
   render() {
@@ -159,7 +155,7 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   saveCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
-  citiesData: PropTypes.exact(
+  citiesData: PropTypes.shape(
       {
         imgs: PropTypes.arrayOf(PropTypes.exact(
             {

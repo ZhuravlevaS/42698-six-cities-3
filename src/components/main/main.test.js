@@ -8,6 +8,7 @@ it(`<Main/> render`, () => {
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();
   const onCityClick = jest.fn();
+  const saveCitiesData = jest.fn();
   const cityCords = [52.38333, 4.9];
   const city = `Amsterdam`;
 
@@ -18,7 +19,8 @@ it(`<Main/> render`, () => {
       onMouseOut={onMouseOut}
       cityCords={cityCords}
       city={city}
-      onCityClick={onCityClick}/>
+      onCityClick={onCityClick}
+      saveCitiesData={saveCitiesData}/>
     )
     .toJSON();
 
