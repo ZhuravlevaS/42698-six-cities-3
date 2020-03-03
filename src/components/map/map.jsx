@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const DEFAULT_ZOOM = 12;
 const ICON = {
   iconUrl: `img/pin.svg`,
-  iconSize: [30, 40]
+  iconSizes: [30, 40]
 };
 
 class Map extends PureComponent {

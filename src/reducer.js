@@ -2,6 +2,8 @@ import {extend} from "./utils.js";
 import aparts from "./mocks/offers.js";
 import data from "./mocks/dataCities.js";
 
+const citiesData = data;
+
 const initialState = {
   city: `Amsterdam`,
   cityCords: [52.38333, 4.9],
@@ -13,8 +15,8 @@ const ActionCreator = {
     type: ActionType.GET_CITY,
     payload: {
       city,
-      cityCords: data[city].cords,
-      properties: data[city].aparts
+      cityCords: citiesData[city].cords,
+      properties: citiesData[city].aparts
     },
   }),
 };
