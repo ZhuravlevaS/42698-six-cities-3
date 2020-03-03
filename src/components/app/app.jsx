@@ -36,7 +36,7 @@ class App extends PureComponent {
 
   _renderMain() {
     const {citiesData, onCityClick, city, saveCitiesData} = this.props;
-    debugger;
+
     const cityCords = citiesData ? citiesData[city].cords : [];
     const aparts = citiesData ? citiesData[city].aparts : [];
 
@@ -159,35 +159,35 @@ App.propTypes = {
       {
         imgs: PropTypes.arrayOf(PropTypes.exact(
             {
-              url: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
+              url: PropTypes.string,
+              id: PropTypes.number
             })
         ),
         insides: PropTypes.arrayOf(PropTypes.exact(
             {
-              name: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
+              name: PropTypes.string,
+              id: PropTypes.number
             })
         ),
-        img: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isMarked: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        adults: PropTypes.number.isRequired,
-        id: PropTypes.number.isRequired,
+        img: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.number,
+        title: PropTypes.string,
+        type: PropTypes.string,
+        isMarked: PropTypes.bool,
+        isPremium: PropTypes.bool,
+        bedrooms: PropTypes.number,
+        adults: PropTypes.number,
+        id: PropTypes.number,
         cords: PropTypes.arrayOf(PropTypes.number),
         host: PropTypes.exact({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string,
+          avatar: PropTypes.string,
+          isPro: PropTypes.bool,
           description: PropTypes.arrayOf(PropTypes.exact(
               {
-                text: PropTypes.string.isRequired,
-                id: PropTypes.number.isRequired
+                text: PropTypes.string,
+                id: PropTypes.number
               })
           ),
         })
