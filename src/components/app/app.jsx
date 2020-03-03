@@ -10,7 +10,6 @@ import data from "../../mocks/dataCities.js";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.props.saveCitiesData(data);
 
     this.state = {
       property: {}
@@ -39,8 +38,8 @@ class App extends PureComponent {
   _renderMain() {
     const {citiesData, onCityClick, city} = this.props;
 
-    const cityCords = citiesData[city].cords;
-    const aparts = citiesData[city].aparts;
+    const cityCords = citiesData ? citiesData[city].cords : [];
+    const aparts = citiesData ? citiesData[city].aparts : [];
 
     return (
       <Main
@@ -60,6 +59,10 @@ class App extends PureComponent {
       onMouseOver={this.handleCardMouseOver}
       onMouseOut={this.handleCardMouseOut}
     />;
+  }
+
+  componentDidMount() {
+    this.props.saveCitiesData(data);
   }
 
   render() {
@@ -154,8 +157,45 @@ App.propTypes = {
     })
   }),
   onCityClick: PropTypes.func.isRequired,
+  saveCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
-  cityCords: PropTypes.arrayOf(PropTypes.number),
+  citiesData: PropTypes.exact(
+      {
+        imgs: PropTypes.arrayOf(PropTypes.exact(
+            {
+              url: PropTypes.string.isRequired,
+              id: PropTypes.number.isRequired
+            })
+        ),
+        insides: PropTypes.arrayOf(PropTypes.exact(
+            {
+              name: PropTypes.string.isRequired,
+              id: PropTypes.number.isRequired
+            })
+        ),
+        img: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        isMarked: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        adults: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
+        cords: PropTypes.arrayOf(PropTypes.number),
+        host: PropTypes.exact({
+          name: PropTypes.string.isRequired,
+          avatar: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          description: PropTypes.arrayOf(PropTypes.exact(
+              {
+                text: PropTypes.string.isRequired,
+                id: PropTypes.number.isRequired
+              })
+          ),
+        })
+      }),
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -163,8 +203,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.getCity(city));
   },
 
-  saveCitiesData(data) {
-    dispatch(ActionCreator.saveCitiesData(data));
+  saveCitiesData(dataCities) {
+    dispatch(ActionCreator.saveCitiesData(dataCities));
   }
 });
 

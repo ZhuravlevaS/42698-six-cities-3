@@ -2,7 +2,7 @@ import {extend} from "./utils.js";
 
 const InitialState = {
   city: ``,
-  citiesData: {}
+  citiesData: null
 };
 
 const ActionCreator = {
@@ -34,8 +34,9 @@ const reducer = (state = InitialState, action) => {
       });
     case ActionType.SAVE_CITIES_DATA:
       return extend(state, {
-        cityData: action.payload.citiesData
-      })
+        citiesData: action.payload.citiesData,
+        city: action.payload.city
+      });
     default:
       return InitialState;
   }
