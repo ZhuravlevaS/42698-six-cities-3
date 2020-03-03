@@ -3,7 +3,7 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
 const DEFAULT_ZOOM = 12;
-const ICON = {
+const Icon = {
   iconUrl: `img/pin.svg`,
   iconSizes: [30, 40]
 };
@@ -19,7 +19,7 @@ class Map extends PureComponent {
       this.map.remove();
     }
 
-    const icon = leaflet.icon(ICON);
+    const icon = leaflet.icon(Icon);
 
     this.map = leaflet.map(`map`, {
       center: city,

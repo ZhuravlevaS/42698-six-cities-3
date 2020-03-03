@@ -5,10 +5,12 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import data from "../../mocks/dataCities.js";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    this.props.saveCitiesData(data);
 
     this.state = {
       property: {}
@@ -19,7 +21,6 @@ class App extends PureComponent {
   }
 
   handleCardMouseOver(prop) {
-
     if (this.state.property && this.state.property.id === prop.id) {
       return;
     }
@@ -36,7 +37,10 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {aparts, cityCords, onCityClick, city} = this.props;
+    const {citiesData, onCityClick, city} = this.props;
+
+    const cityCords = citiesData[city].cords;
+    const aparts = citiesData[city].aparts;
 
     return (
       <Main
@@ -157,6 +161,10 @@ App.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(city) {
     dispatch(ActionCreator.getCity(city));
+  },
+
+  saveCitiesData(data) {
+    dispatch(ActionCreator.saveCitiesData(data));
   }
 });
 
@@ -164,8 +172,7 @@ export {App};
 export default connect(
     (state) => ({
       city: state.city,
-      aparts: state.properties,
-      cityCords: state.cityCords
+      citiesData: state.citiesData
     }),
     mapDispatchToProps
 )(App);
