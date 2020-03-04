@@ -20,40 +20,38 @@ const CardList = (props) => {
 CardList.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
-        imgs: PropTypes.arrayOf(PropTypes.exact(
-            {
-              url: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        insides: PropTypes.arrayOf(PropTypes.exact(
-            {
-              name: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        img: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isMarked: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        adults: PropTypes.number.isRequired,
-        id: PropTypes.number.isRequired,
-        cords: PropTypes.arrayOf(PropTypes.number),
-        host: PropTypes.exact({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          description: PropTypes.arrayOf(PropTypes.exact(
-              {
-                text: PropTypes.string.isRequired,
-                id: PropTypes.number.isRequired
-              })
-          ),
-        })
+        type: PropTypes.string.isRequired
       })
   ),
   onMouseOver: PropTypes.func.isRequired,

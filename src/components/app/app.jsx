@@ -36,14 +36,11 @@ class App extends PureComponent {
 
   _renderMain() {
     const {citiesData, onCityClick, city, saveCitiesData} = this.props;
-
-    const cityCords = citiesData ? citiesData[city].cords : [];
-    const aparts = citiesData ? citiesData[city].aparts : [];
+    const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
 
     return (
       <Main
         aparts={aparts}
-        cityCords={cityCords}
         city={city}
         onCityClick={onCityClick}
         onMouseOver={this.handleCardMouseOver}
@@ -80,118 +77,115 @@ class App extends PureComponent {
 App.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
-        imgs: PropTypes.arrayOf(PropTypes.exact(
-            {
-              url: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        insides: PropTypes.arrayOf(PropTypes.exact(
-            {
-              name: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        img: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isMarked: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        adults: PropTypes.number.isRequired,
-        id: PropTypes.number.isRequired,
-        cords: PropTypes.arrayOf(PropTypes.number),
-        host: PropTypes.exact({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          description: PropTypes.arrayOf(PropTypes.exact(
-              {
-                text: PropTypes.string.isRequired,
-                id: PropTypes.number.isRequired
-              })
-          ),
-        })
+        type: PropTypes.string.isRequired
       })
   ),
-  apart: PropTypes.exact({
-    imgs: PropTypes.arrayOf(PropTypes.exact(
-        {
-          url: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    insides: PropTypes.arrayOf(PropTypes.exact(
-        {
+  apart: PropTypes.exact(
+      {
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
           name: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    img: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isMarked: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    adults: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number),
-    host: PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      description: PropTypes.arrayOf(PropTypes.exact(
-          {
-            text: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired
-          })
-      ),
-    })
-  }),
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired
+      }),
   onCityClick: PropTypes.func.isRequired,
   saveCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
-  citiesData: PropTypes.shape(
+  citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
-        imgs: PropTypes.arrayOf(PropTypes.exact(
-            {
-              url: PropTypes.string,
-              id: PropTypes.number
-            })
-        ),
-        insides: PropTypes.arrayOf(PropTypes.exact(
-            {
-              name: PropTypes.string,
-              id: PropTypes.number
-            })
-        ),
-        img: PropTypes.string,
-        price: PropTypes.number,
-        rating: PropTypes.number,
-        title: PropTypes.string,
-        type: PropTypes.string,
-        isMarked: PropTypes.bool,
-        isPremium: PropTypes.bool,
-        bedrooms: PropTypes.number,
-        adults: PropTypes.number,
-        id: PropTypes.number,
-        cords: PropTypes.arrayOf(PropTypes.number),
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
         host: PropTypes.exact({
-          name: PropTypes.string,
-          avatar: PropTypes.string,
-          isPro: PropTypes.bool,
-          description: PropTypes.arrayOf(PropTypes.exact(
-              {
-                text: PropTypes.string,
-                id: PropTypes.number
-              })
-          ),
-        })
-      }),
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired
+      }
+  )
+  )
 };
 
 const mapDispatchToProps = (dispatch) => ({

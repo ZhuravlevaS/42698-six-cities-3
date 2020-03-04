@@ -16,7 +16,7 @@ const ActionCreator = {
     type: ActionType.SAVE_CITIES_DATA,
     payload: {
       citiesData,
-      city: Object.keys(citiesData)[0]
+      city: citiesData[0].city.name
     }
   })
 };

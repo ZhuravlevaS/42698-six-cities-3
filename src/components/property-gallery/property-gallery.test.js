@@ -1,11 +1,11 @@
 import React from 'react';
 import PropertyGallery from './property-gallery.jsx';
 import renderer from 'react-test-renderer';
-import imgs from '../../mocks/imgs.js';
+import images from '../../mocks/imgs.js';
 
 it(`<PropertyGallery/> render`, () => {
   const tree = renderer
-    .create(<PropertyGallery imgs={imgs} />)
+    .create(<PropertyGallery images={images} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

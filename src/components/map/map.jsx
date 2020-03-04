@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
-const DEFAULT_ZOOM = 12;
 const Icon = {
   iconUrl: `img/pin.svg`,
   iconSizes: [30, 40]
@@ -21,18 +20,19 @@ class Map extends PureComponent {
     }
 
     const icon = leaflet.icon(Icon);
-
+    const {latitude, longitude, zoom} = city;
+    const cityCords = [latitude, longitude];
     this.map = leaflet.map(`map`, {
-      center: city,
-      zoom: DEFAULT_ZOOM,
+      center: cityCords,
+      zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(city, DEFAULT_ZOOM);
+    this.map.setView(cityCords, zoom);
 
     cords.forEach((element) => {
-      leaflet.marker(element, {icon}).addTo(this.map);
+      leaflet.marker([element.latitude, element.longitude], {icon}).addTo(this.map);
     });
 
     leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -46,7 +46,7 @@ class Map extends PureComponent {
     const {city, cords} = this.props;
 
     try {
-      if (city.length === 2) {
+      if (city) {
         this.initMap(city, cords);
       }
     } catch (e) {
@@ -57,7 +57,9 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.city !== prevProps.city && this.props.city.length === 2) {
+    if (this.props.city &&
+      this.props.city.latitude !== prevProps.city.latitude &&
+      this.props.city.longitude !== prevProps.city.longitude) {
       const {city, cords} = this.props;
 
       this.initMap(city, cords);
@@ -78,8 +80,16 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  city: PropTypes.arrayOf(PropTypes.number),
-  cords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+  city: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number,
+  }),
+  cords: PropTypes.arrayOf(PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number,
+  }))
 };
 
 export default Map;

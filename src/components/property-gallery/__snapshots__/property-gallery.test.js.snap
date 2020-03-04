@@ -25,42 +25,6 @@ exports[`<PropertyGallery/> render 1`] = `
         src="img/room.jpg"
       />
     </div>
-    <div
-      className="property__image-wrapper"
-    >
-      <img
-        alt="Photo studio"
-        className="property__image"
-        src="img/apartment-02.jpg"
-      />
-    </div>
-    <div
-      className="property__image-wrapper"
-    >
-      <img
-        alt="Photo studio"
-        className="property__image"
-        src="img/apartment-03.jpg"
-      />
-    </div>
-    <div
-      className="property__image-wrapper"
-    >
-      <img
-        alt="Photo studio"
-        className="property__image"
-        src="img/apartment-02.jpg"
-      />
-    </div>
-    <div
-      className="property__image-wrapper"
-    >
-      <img
-        alt="Photo studio"
-        className="property__image"
-        src="img/apartment-01.jpg"
-      />
-    </div>
   </div>
 </div>
 `;

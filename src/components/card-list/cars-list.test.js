@@ -1,6 +1,6 @@
 import React from 'react';
 import CardList from './card-list.jsx';
-import offers from '../../mocks/offers.js';
+import offers from '../../mocks/dataCities.js';
 import renderer from 'react-test-renderer';
 
 

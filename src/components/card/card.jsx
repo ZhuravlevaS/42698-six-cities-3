@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const Card = (props) => {
-  const {apart: {img, price, rating, title, type, isMarked, isPremium, id}, onTitleClick, typesClass} = props;
+  const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, onTitleClick, typesClass} = props;
   const ratingRound = Math.round(rating);
 
   const _handleMouseOver = () => props.onMouseOver(props.apart);
@@ -16,7 +16,7 @@ const Card = (props) => {
       }
       <div className={`cities__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={`${img}`} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={`${previewImage}`} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -25,11 +25,11 @@ const Card = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isMarked ? `place-card__bookmark-button--active` : ``}`} type="button">
+          <button className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>
-            <span className="visually-hidden">{isMarked ? `In bookmarks` : `To bookmarks`}</span>
+            <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -49,40 +49,38 @@ const Card = (props) => {
 
 Card.propTypes = {
   apart: PropTypes.exact({
-    imgs: PropTypes.arrayOf(PropTypes.exact(
-        {
-          url: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    insides: PropTypes.arrayOf(PropTypes.exact(
-        {
-          name: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    img: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.exact({
+      location: PropTypes.exact({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }),
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      avatarUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired
+    }),
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.exact({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    maxAdults: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isMarked: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    adults: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number),
-    host: PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      description: PropTypes.arrayOf(PropTypes.exact(
-          {
-            text: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired
-          })
-      ),
-    })
+    type: PropTypes.string.isRequired
   }),
   onMouseOver: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,

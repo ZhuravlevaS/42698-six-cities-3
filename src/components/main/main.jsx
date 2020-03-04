@@ -8,6 +8,7 @@ import data from "../../mocks/dataCities.js";
 class Main extends PureComponent {
   constructor(props) {
     super(props);
+    this.props.saveCitiesData(data);
   }
 
   componentDidMount() {
@@ -15,8 +16,10 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, cityCords, onCityClick, city} = this.props;
-    const cords = aparts.map((apart) => apart.cords);
+    const {aparts, onMouseOut, onMouseOver, onCityClick, city} = this.props;
+    const location = aparts.map((apart) => apart.location);
+    const locationCity = aparts[0] ? aparts[0].city.location : null;
+    const cityName = locationCity ? aparts[0].city.name : null;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -60,7 +63,7 @@ class Main extends PureComponent {
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{aparts.length} places to stay in {city}</b>
+                  <b className="places__found">{aparts.length} places to stay in {cityName}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex="0">
@@ -88,7 +91,10 @@ class Main extends PureComponent {
                 </section>
                 <div className="cities__right-section">
                   <section className="cities__map map" style={{backgroundImage: `none`}}>
-                    <Map city={cityCords} cords={cords}/>
+                    {aparts.length > 0 &&
+                      <Map city={locationCity} cords={location}/>
+                    }
+
                   </section>
                 </div>
               </div>
@@ -103,47 +109,43 @@ class Main extends PureComponent {
 Main.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
-        imgs: PropTypes.arrayOf(PropTypes.exact(
-            {
-              url: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        insides: PropTypes.arrayOf(PropTypes.exact(
-            {
-              name: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        img: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.exact({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isMarked: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        adults: PropTypes.number.isRequired,
-        id: PropTypes.number.isRequired,
-        cords: PropTypes.arrayOf(PropTypes.number),
-        host: PropTypes.exact({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          description: PropTypes.arrayOf(PropTypes.exact(
-              {
-                text: PropTypes.string.isRequired,
-                id: PropTypes.number.isRequired
-              })
-          ),
-        })
+        type: PropTypes.string.isRequired
       })
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  cityCords: PropTypes.arrayOf(PropTypes.number),
   onCityClick: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
   saveCitiesData: PropTypes.func.isRequired,
 };
 

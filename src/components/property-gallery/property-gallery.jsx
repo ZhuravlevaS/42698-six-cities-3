@@ -2,18 +2,17 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const PropertyGallery = (props) => {
-  const {imgs} = props;
+  const {images} = props;
   const maxImg = 6;
-  const imgFixed = imgs.slice(0, maxImg);
+  const imgFixed = images.slice(0, maxImg);
 
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
         {
           imgFixed.map((img) => {
-            const {url, id} = img;
-            return <div className="property__image-wrapper" key={id}>
-              <img className="property__image" src={url} alt="Photo studio"/>
+            return <div className="property__image-wrapper" key={img}>
+              <img className="property__image" src={img} alt="Photo studio"/>
             </div>;
           })
         }
@@ -23,12 +22,7 @@ const PropertyGallery = (props) => {
 };
 
 PropertyGallery.propTypes = {
-  imgs: PropTypes.arrayOf(PropTypes.exact(
-      {
-        url: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
-      })
-  )
+  images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 export default PropertyGallery;
