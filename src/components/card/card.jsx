@@ -6,9 +6,10 @@ const Card = (props) => {
   const ratingRound = Math.round(rating);
 
   const _handleMouseOver = () => props.onMouseOver(props.apart);
+  const _handleMouseOut = () => props.onMouseOut();
 
   return (
-    <article className={`${typesClass[1]} place-card`} onMouseOver={_handleMouseOver}>
+    <article className={`${typesClass[1]} place-card`} onMouseOver={_handleMouseOver} onMouseOut={_handleMouseOut}>
       { isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -51,7 +52,7 @@ Card.propTypes = {
   apart: PropTypes.exact({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
-      location: PropTypes.exact({
+      location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
@@ -70,7 +71,7 @@ Card.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    location: PropTypes.exact({
+    location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired
@@ -85,6 +86,7 @@ Card.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
 };
 
 export default Card;

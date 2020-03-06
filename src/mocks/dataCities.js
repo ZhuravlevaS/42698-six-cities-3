@@ -22,8 +22,8 @@ export default [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3551496378,
-      longitude: 4.6499948,
+      latitude: 52.370216,
+      longitude: 4.8499948,
       zoom: 8
     },
     maxAdults: 4,
@@ -56,7 +56,7 @@ export default [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 51.35514938,
+      latitude: 52.37514938,
       longitude: 4.6738799948,
       zoom: 8
     },
@@ -71,8 +71,8 @@ export default [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 53.370216,
-        longitude: 4.8,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 10
       },
       name: `Amsterdam`
@@ -90,7 +90,7 @@ export default [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 51.35514938496378,
+      latitude: 52.35514938496378,
       longitude: 4.77537499948,
       zoom: 8
     },

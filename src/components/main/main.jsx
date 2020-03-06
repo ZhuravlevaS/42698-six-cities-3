@@ -1,14 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import CardList from '../card-list/card-list.jsx';
 import Map from '../map/map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
+import SortedVariants from '../sorted-variants/sorted-variants.jsx';
 import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
   constructor(props) {
     super(props);
-    this.props.saveCitiesData(data);
   }
 
   componentDidMount() {
@@ -16,7 +15,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, onCityClick, city} = this.props;
+    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin} = this.props;
     const location = aparts.map((apart) => apart.location);
     const locationCity = aparts[0] ? aparts[0].city.location : null;
     const cityName = locationCity ? aparts[0].city.name : null;
@@ -64,35 +63,22 @@ class Main extends PureComponent {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{aparts.length} places to stay in {cityName}</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by</span>
-                    <span className="places__sorting-type" tabIndex="0">
-                      Popular
-                      <svg className="places__sorting-arrow" width="7" height="4">
-                        <use xlinkHref="#icon-arrow-select"/>
-                      </svg>
-                    </span>
-                    <ul className="places__options places__options--custom places__options--opened">
-                      <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                      <li className="places__option" tabIndex="0">Price: low to high</li>
-                      <li className="places__option" tabIndex="0">Price: high to low</li>
-                      <li className="places__option" tabIndex="0">Top rated first</li>
-                    </ul>
 
-                    {/* <select className="places__sorting-type" id="places-sorting">
-                      <option className="places__option" value="popular" selected="">Popular</option>
-                      <option className="places__option" value="to-high">Price: low to high</option>
-                      <option className="places__option" value="to-low">Price: high to low</option>
-                      <option className="places__option" value="top-rated">Top rated first</option>
-                    </select> */}
+                  <SortedVariants
+                    aparts={aparts}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                  />
 
-                  </form>
-                  <CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`cities__places-list`, `cities__place-card`]}/>
                 </section>
                 <div className="cities__right-section">
                   <section className="cities__map map" style={{backgroundImage: `none`}}>
                     {aparts.length > 0 &&
-                      <Map city={locationCity} cords={location}/>
+                      <Map
+                        city={locationCity}
+                        cords={location}
+                        activePin={activePin}
+                      />
                     }
 
                   </section>
@@ -130,7 +116,7 @@ Main.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.exact({
+        location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired
@@ -147,6 +133,11 @@ Main.propTypes = {
   onMouseOut: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   saveCitiesData: PropTypes.func.isRequired,
+  activePin: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number
+  })
 };
 
 export default Main;

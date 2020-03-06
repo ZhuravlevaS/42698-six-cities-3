@@ -9,16 +9,16 @@ const CardList = (props) => {
   };
 
   return (
-    <div className={`${typesClass[0]} places__list tabs__content`} onMouseOut={onMouseOut}>
+    <div className={`${typesClass[0]} places__list tabs__content`}>
       {
-        aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={onMouseOver} onTitleClick={_handleTitleClick} typesClass={typesClass}/>)
+        aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onTitleClick={_handleTitleClick} typesClass={typesClass}/>)
       }
     </div>
   );
 };
 
 CardList.propTypes = {
-  aparts: PropTypes.arrayOf(PropTypes.exact(
+  aparts: PropTypes.arrayOf(PropTypes.shape(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
@@ -41,7 +41,7 @@ CardList.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.exact({
+        location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired

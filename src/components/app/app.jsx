@@ -14,11 +14,11 @@ class App extends PureComponent {
       property: {}
     };
 
-    this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
-    this.handleCardMouseOut = this.handleCardMouseOut.bind(this);
+    this._handleCardMouseOver = this._handleCardMouseOver.bind(this);
+    this._handleCardMouseOut = this._handleCardMouseOut.bind(this);
   }
 
-  handleCardMouseOver(prop) {
+  _handleCardMouseOver(prop) {
     if (this.state.property && this.state.property.id === prop.id) {
       return;
     }
@@ -28,7 +28,7 @@ class App extends PureComponent {
     });
   }
 
-  handleCardMouseOut() {
+  _handleCardMouseOut() {
     this.setState({
       property: {}
     });
@@ -43,9 +43,10 @@ class App extends PureComponent {
         aparts={aparts}
         city={city}
         onCityClick={onCityClick}
-        onMouseOver={this.handleCardMouseOver}
-        onMouseOut={this.handleCardMouseOut}
+        onMouseOver={this._handleCardMouseOver}
+        onMouseOut={this._handleCardMouseOut}
         saveCitiesData={saveCitiesData}
+        activePin={this.state.property.location}
       />
     );
   }
@@ -53,8 +54,9 @@ class App extends PureComponent {
   _renderOffer() {
     return <Property
       apart={this.props.apart}
-      onMouseOver={this.handleCardMouseOver}
-      onMouseOut={this.handleCardMouseOut}
+      onMouseOver={this._handleCardMouseOver}
+      onMouseOut={this._handleCardMouseOut}
+      activePin={this.state.property.location}
     />;
   }
 

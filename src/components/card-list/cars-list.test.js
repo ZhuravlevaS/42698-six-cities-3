@@ -9,7 +9,12 @@ it(`<CardList/> render`, () => {
   const onMouseOut = jest.fn();
 
   const tree = renderer
-    .create(<CardList aparts={offers} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`near-places__list`, `near-places__card`]}/>)
+    .create(<CardList
+      aparts={offers}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+      typesClass={[`near-places__list`, `near-places__card`]}
+    />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

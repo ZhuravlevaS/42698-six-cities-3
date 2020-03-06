@@ -9,7 +9,7 @@ import offersNearby from "../../mocks/offersNearby.js";
 
 const Property = (props) => {
   const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, location, city, description} = props.apart;
-  const {onMouseOver, onMouseOut} = props;
+  const {onMouseOver, onMouseOut, activePin} = props;
   const cordsNearby = offersNearby.map((apart) => apart.location);
   const cordsArray = [location, ...cordsNearby];
   const ratingRound = Math.round(rating);
@@ -180,7 +180,7 @@ const Property = (props) => {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city.location} cords={cordsArray}/>
+              <Map city={city.location} cords={cordsArray} activePin={activePin}/>
             </section>
           </section>
           <div className="container">
@@ -229,6 +229,11 @@ Property.propTypes = {
   }),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
+  activePin: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number
+  })
 };
 
 export default Property;

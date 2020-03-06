@@ -241,41 +241,44 @@ exports[`<Main/> render 1`] = `
                   />
                 </svg>
               </span>
-              <ul
-                className="places__options places__options--custom places__options--opened"
+              <select
+                className="places__sorting-type"
+                defaultValue="popular"
+                id="places-sorting"
+                onChange={[Function]}
               >
-                <li
-                  className="places__option places__option--active"
-                  tabIndex="0"
+                <option
+                  className="places__option"
+                  value="popular"
                 >
                   Popular
-                </li>
-                <li
+                </option>
+                <option
                   className="places__option"
-                  tabIndex="0"
+                  value="to-high"
                 >
                   Price: low to high
-                </li>
-                <li
+                </option>
+                <option
                   className="places__option"
-                  tabIndex="0"
+                  value="to-low"
                 >
                   Price: high to low
-                </li>
-                <li
+                </option>
+                <option
                   className="places__option"
-                  tabIndex="0"
+                  value="top-rated"
                 >
                   Top rated first
-                </li>
-              </ul>
+                </option>
+              </select>
             </form>
             <div
               className="cities__places-list places__list tabs__content"
-              onMouseOut={[MockFunction]}
             >
               <article
                 className="cities__place-card place-card"
+                onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
                 <div
@@ -373,6 +376,7 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
                 <div
@@ -470,6 +474,7 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
                 <div
@@ -567,6 +572,7 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
                 <div
@@ -664,6 +670,7 @@ exports[`<Main/> render 1`] = `
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
                 <div

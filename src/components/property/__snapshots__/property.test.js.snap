@@ -623,10 +623,10 @@ Array [
       >
         <div
           className="near-places__list places__list tabs__content"
-          onMouseOut={[MockFunction]}
         >
           <article
             className="near-places__card place-card"
+            onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <div
@@ -724,6 +724,7 @@ Array [
           </article>
           <article
             className="near-places__card place-card"
+            onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <div
@@ -821,6 +822,7 @@ Array [
           </article>
           <article
             className="near-places__card place-card"
+            onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <div
