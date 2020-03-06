@@ -1,0 +1,557 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SortedVariants/> render 1`] = `
+Array [
+  <form
+    action="#"
+    className="places__sorting"
+    method="get"
+  >
+    <span
+      className="places__sorting-caption"
+    >
+      Sort by
+    </span>
+    <span
+      className="places__sorting-type"
+      tabIndex="0"
+    >
+      Popular
+      <svg
+        className="places__sorting-arrow"
+        height="4"
+        width="7"
+      >
+        <use
+          xlinkHref="#icon-arrow-select"
+        />
+      </svg>
+    </span>
+    <select
+      className="places__sorting-type"
+      defaultValue="popular"
+      id="places-sorting"
+      onChange={[Function]}
+    >
+      <option
+        className="places__option"
+        value="popular"
+      >
+        Popular
+      </option>
+      <option
+        className="places__option"
+        value="to-high"
+      >
+        Price: low to high
+      </option>
+      <option
+        className="places__option"
+        value="to-low"
+      >
+        Price: high to low
+      </option>
+      <option
+        className="places__option"
+        value="top-rated"
+      >
+        Top rated first
+      </option>
+    </select>
+  </form>,
+  <div
+    className="cities__places-list places__list tabs__content"
+  >
+    <article
+      className="cities__place-card place-card"
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+      >
+        <a
+          href="#"
+        >
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-03.jpg"
+            width="260"
+          />
+        </a>
+      </div>
+      <div
+        className="place-card__info"
+      >
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              110
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button "
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "80%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+          onClick={[Function]}
+        >
+          <a
+            href="/offer/1"
+          >
+            Beautiful & luxurious studio at great location
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          apartment
+        </p>
+      </div>
+    </article>
+    <article
+      className="cities__place-card place-card"
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+      >
+        <a
+          href="#"
+        >
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-03.jpg"
+            width="260"
+          />
+        </a>
+      </div>
+      <div
+        className="place-card__info"
+      >
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              10
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button "
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "80%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+          onClick={[Function]}
+        >
+          <a
+            href="/offer/2"
+          >
+            Beautiful & luxurious studio at great location
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          apartment
+        </p>
+      </div>
+    </article>
+    <article
+      className="cities__place-card place-card"
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+      >
+        <a
+          href="#"
+        >
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-03.jpg"
+            width="260"
+          />
+        </a>
+      </div>
+      <div
+        className="place-card__info"
+      >
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              1200
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button "
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "60%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+          onClick={[Function]}
+        >
+          <a
+            href="/offer/3"
+          >
+            Beautiful & luxurious studio at great location
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          apartment
+        </p>
+      </div>
+    </article>
+    <article
+      className="cities__place-card place-card"
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+      >
+        <a
+          href="#"
+        >
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-03.jpg"
+            width="260"
+          />
+        </a>
+      </div>
+      <div
+        className="place-card__info"
+      >
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              120
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button "
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "20%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+          onClick={[Function]}
+        >
+          <a
+            href="/offer/4"
+          >
+            Beautiful & luxurious studio at great location
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          apartment
+        </p>
+      </div>
+    </article>
+    <article
+      className="cities__place-card place-card"
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+    >
+      <div
+        className="cities__image-wrapper place-card__image-wrapper"
+      >
+        <a
+          href="#"
+        >
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-02.jpg"
+            width="260"
+          />
+        </a>
+      </div>
+      <div
+        className="place-card__info"
+      >
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              80
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button "
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "80%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+          onClick={[Function]}
+        >
+          <a
+            href="/offer/8"
+          >
+            Beautiful & luxurious studio at great location
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          apartment
+        </p>
+      </div>
+    </article>
+  </div>,
+]
+`;
