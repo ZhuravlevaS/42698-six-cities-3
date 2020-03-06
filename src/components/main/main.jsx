@@ -60,27 +60,35 @@ class Main extends PureComponent {
             </div>
             <div className="cities">
               <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{aparts.length} places to stay in {cityName}</b>
+              {aparts.length > 0 &&
+                  <section className="cities__places places">
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{aparts.length} places to stay in {cityName}</b>
 
-                  <SortedVariants
-                    aparts={aparts}
-                    onMouseOver={onMouseOver}
-                    onMouseOut={onMouseOut}
-                  />
-
+                    <SortedVariants
+                      aparts={aparts}
+                      onMouseOver={onMouseOver}
+                      onMouseOut={onMouseOut}
+                    />
+                  </section>  
+              }
+              { aparts.length > 0 ||
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
+                  </div>
                 </section>
+              }
+                  
+                
                 <div className="cities__right-section">
                   <section className="cities__map map" style={{backgroundImage: `none`}}>
-                    {aparts.length > 0 &&
-                      <Map
-                        city={locationCity}
-                        cords={location}
-                        activePin={activePin}
-                      />
-                    }
-
+                    <Map
+                      city={locationCity}
+                      cords={location}
+                      activePin={activePin}
+                    />
                   </section>
                 </div>
               </div>
