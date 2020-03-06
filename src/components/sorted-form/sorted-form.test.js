@@ -6,7 +6,7 @@ const handleSelectSortType = jest.fn();
 
 it(`<SortedForm/> render`, () => {
   const tree = renderer
-    .create(<SortedForm 
+    .create(<SortedForm
       onSelectSortType={handleSelectSortType}
     />)
     .toJSON();

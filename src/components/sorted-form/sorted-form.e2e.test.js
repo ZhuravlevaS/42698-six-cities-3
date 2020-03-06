@@ -14,17 +14,16 @@ it(`<SortedForm/> render`, () => {
       value: `to-high`
     }
   };
-  const handleSelectSortType = jest.fn((event) => event);
+  const handleSelectSortType = jest.fn((item) => item);
 
   const form = shallow(
-    <SortedForm 
-      onSelectSortType={handleSelectSortType}
-    />
-  )
-
+      <SortedForm
+        onSelectSortType={handleSelectSortType}
+      />
+  );
 
   let select = form.find(`#places-sorting`);
   select.simulate(`change`, handleSelectSortType(event));
 
-  expect(handleSelectSortType).toHaveBeenNthCalledWith(1, event.target.value);
+  expect(handleSelectSortType).toHaveBeenNthCalledWith(1, event);
 });

@@ -9,7 +9,7 @@ Enzyme.configure({
 
 it(`Card MouseOver`, () => {
   const handlerMouseOver = jest.fn((apart) => apart);
-  const handlerMouseOut = jest.fn();
+  const handlerMouseOut = jest.fn((object) => object);
   const titleClick = jest.fn();
 
   const apart = {
@@ -62,10 +62,9 @@ it(`Card MouseOver`, () => {
 
   title.props().onClick();
   cardWrap.simulate(`mouseover`, handlerMouseOver);
+  cardWrap.simulate(`mouseout`, handlerMouseOut);
 
   expect(titleClick.mock.calls.length).toBe(1);
   expect(handlerMouseOver).toHaveBeenNthCalledWith(1, apart);
-
-  cardWrap.simulate(`mouseout`, handlerMouseOut);
-  expect(handlerMouseOut).toHaveBeenNthCalledWith(1);
+  expect(handlerMouseOut.mock.calls.length).toBe(1);
 });
