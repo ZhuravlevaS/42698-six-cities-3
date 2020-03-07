@@ -15,7 +15,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin} = this.props;
+    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin, city} = this.props;
     const location = aparts.map((apart) => apart.location);
     const locationCity = aparts[0] ? aparts[0].city.location : null;
     const cityName = locationCity ? aparts[0].city.name : null;
@@ -60,7 +60,7 @@ class Main extends PureComponent {
             </div>
             <div className="cities">
               <div className="cities__places-container container">
-              {aparts.length > 0 &&
+                {aparts.length > 0 &&
                   <section className="cities__places places">
                     <h2 className="visually-hidden">Places</h2>
                     <b className="places__found">{aparts.length} places to stay in {cityName}</b>
@@ -69,20 +69,20 @@ class Main extends PureComponent {
                       aparts={aparts}
                       onMouseOver={onMouseOver}
                       onMouseOut={onMouseOut}
-                      city={locationCity}
+                      city={city}
                     />
-                  </section>  
-              }
-              { aparts.length > 0 ||
-                <section className="cities__no-places">
-                  <div className="cities__status-wrapper tabs__content">
-                    <b className="cities__status">No places to stay available</b>
-                    <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
-                  </div>
-                </section>
-              }
-                  
-                
+                  </section>
+                }
+                {aparts.length > 0 ||
+                  <section className="cities__no-places">
+                    <div className="cities__status-wrapper tabs__content">
+                      <b className="cities__status">No places to stay available</b>
+                      <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
+                    </div>
+                  </section>
+                }
+
+
                 <div className="cities__right-section">
                   <section className="cities__map map" style={{backgroundImage: `none`}}>
                     <Map
@@ -146,7 +146,8 @@ Main.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     zoom: PropTypes.number
-  })
+  }),
+  city: PropTypes.string.isRequired,
 };
 
 export default Main;

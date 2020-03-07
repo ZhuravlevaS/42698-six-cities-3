@@ -177,7 +177,8 @@ const data = [
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     city: ``,
-    citiesData: null
+    citiesData: null,
+    sortType: `popular`,
   });
 });
 
@@ -194,8 +195,21 @@ it(`Reducer should change city`, () => {
   });
 });
 
+it(`Reducer should change sortType`, () => {
+  expect(reducer({
+    sortType: `popular`
+  }, {
+    type: ActionType.SET_SORT_TYPE,
+    payload: {
+      sortType: `to-high`
+    },
+  })).toEqual({
+    sortType: `to-high`
+  });
+});
+
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for getting city returns correct action`, () => {
+  it(`Action creator for setting city returns correct action`, () => {
     expect(ActionCreator.setCity(`Paris`)).toEqual({
       type: ActionType.SET_CITY,
       payload: {
@@ -204,7 +218,16 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for saving data returns correct action`, () => {
+  it(`Action creator for setting sortType returns correct action`, () => {
+    expect(ActionCreator.setSortType(`to-high`)).toEqual({
+      type: ActionType.SET_SORT_TYPE,
+      payload: {
+        sortType: `to-high`,
+      },
+    });
+  });
+
+  it(`Action creator for setting data returns correct action`, () => {
     expect(ActionCreator.setCitiesData(data)).toEqual({
       type: ActionType.SET_CITIES_DATA,
       payload: {

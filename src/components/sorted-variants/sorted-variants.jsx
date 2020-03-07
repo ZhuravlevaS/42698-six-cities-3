@@ -38,14 +38,14 @@ class SortedVariants extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.city !== this.props.city) {
-      if(this.props.sortType !== DEUFAULT_TYPE) {
+      if (this.props.sortType !== DEUFAULT_TYPE) {
         this.sortAparts();
       } else {
         this.setState({aparts: this.props.aparts});
-      }     
+      }
     }
 
-    if(prevProps.sortType !== this.props.sortType) {
+    if (prevProps.sortType !== this.props.sortType) {
       this.sortAparts();
     }
   }
@@ -110,7 +110,9 @@ SortedVariants.propTypes = {
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired
+  city: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
+  setSortType: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

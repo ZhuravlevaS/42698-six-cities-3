@@ -4,7 +4,6 @@ const InitialState = {
   city: ``,
   citiesData: null,
   sortType: `popular`,
-  offers: null
 };
 
 const ActionCreator = {
