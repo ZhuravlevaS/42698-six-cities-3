@@ -1,5 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+
 import SortedForm from '../sorted-form/sorted-form.jsx';
 import CardList from '../card-list/card-list.jsx';
 
@@ -14,44 +17,46 @@ const SortType = {
     return b.rating - a.rating;
   },
 };
+const DEUFAULT_TYPE = `popular`;
 
 class SortedVariants extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      aparts: props.aparts,
-      sortType: `popular`
+      aparts: props.aparts
     };
-
-    this._handleSelectSortType = this._handleSelectSortType.bind(this);
-  }
-
-  _handleSelectSortType(value) {
-    this.setState({sortType: value}, this.sortAparts);
   }
 
   sortAparts() {
     this.setState({
-      aparts: this.state.sortType === `popular`
+      aparts: this.props.sortType === DEUFAULT_TYPE
         ? this.props.aparts
-        : [...this.props.aparts].sort(SortType[this.state.sortType])
+        : [...this.props.aparts].sort(SortType[this.props.sortType])
     });
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.aparts !== this.props.aparts) {
-      this.setState({aparts: this.props.aparts});
+    if (prevProps.city !== this.props.city) {
+      if(this.props.sortType !== DEUFAULT_TYPE) {
+        this.sortAparts();
+      } else {
+        this.setState({aparts: this.props.aparts});
+      }     
+    }
+
+    if(prevProps.sortType !== this.props.sortType) {
+      this.sortAparts();
     }
   }
 
   render() {
-    const {onMouseOver, onMouseOut} = this.props;
+    const {onMouseOver, onMouseOut, setSortType} = this.props;
 
     return (
       <React.Fragment>
         <SortedForm
-          onSelectSortType={this._handleSelectSortType}
+          onSelectSortType={setSortType}
         />
 
         <CardList
@@ -105,6 +110,19 @@ SortedVariants.propTypes = {
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired
 };
 
-export default SortedVariants;
+const mapDispatchToProps = (dispatch) => ({
+  setSortType(sortType) {
+    dispatch(ActionCreator.setSortType(sortType));
+  },
+});
+
+export {SortedVariants};
+export default connect(
+    (state) => ({
+      sortType: state.sortType,
+    }),
+    mapDispatchToProps
+)(SortedVariants);

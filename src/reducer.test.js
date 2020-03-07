@@ -185,7 +185,7 @@ it(`Reducer should change city`, () => {
   expect(reducer({
     city: `Amsterdam`
   }, {
-    type: ActionType.GET_CITY,
+    type: ActionType.SET_CITY,
     payload: {
       city: `Paris`
     },
@@ -196,8 +196,8 @@ it(`Reducer should change city`, () => {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for getting city returns correct action`, () => {
-    expect(ActionCreator.getCity(`Paris`)).toEqual({
-      type: ActionType.GET_CITY,
+    expect(ActionCreator.setCity(`Paris`)).toEqual({
+      type: ActionType.SET_CITY,
       payload: {
         city: `Paris`,
       },
@@ -205,8 +205,8 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for saving data returns correct action`, () => {
-    expect(ActionCreator.saveCitiesData(data)).toEqual({
-      type: ActionType.SAVE_CITIES_DATA,
+    expect(ActionCreator.setCitiesData(data)).toEqual({
+      type: ActionType.SET_CITIES_DATA,
       payload: {
         city: `Amsterdam`,
         citiesData: [

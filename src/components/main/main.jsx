@@ -11,7 +11,7 @@ class Main extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.saveCitiesData(data);
+    this.props.setCitiesData(data);
   }
 
   render() {
@@ -69,6 +69,7 @@ class Main extends PureComponent {
                       aparts={aparts}
                       onMouseOver={onMouseOver}
                       onMouseOut={onMouseOut}
+                      city={locationCity}
                     />
                   </section>  
               }
@@ -140,7 +141,7 @@ Main.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  saveCitiesData: PropTypes.func.isRequired,
+  setCitiesData: PropTypes.func.isRequired,
   activePin: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,

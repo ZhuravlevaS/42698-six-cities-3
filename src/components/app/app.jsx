@@ -35,7 +35,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {citiesData, onCityClick, city, saveCitiesData} = this.props;
+    const {citiesData, onCityClick, city, setCitiesData} = this.props;
     const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
 
     return (
@@ -45,7 +45,7 @@ class App extends PureComponent {
         onCityClick={onCityClick}
         onMouseOver={this._handleCardMouseOver}
         onMouseOut={this._handleCardMouseOut}
-        saveCitiesData={saveCitiesData}
+        setCitiesData={setCitiesData}
         activePin={this.state.property.location}
       />
     );
@@ -100,7 +100,7 @@ App.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.exact({
+        location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired
@@ -136,7 +136,7 @@ App.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.exact({
+        location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired
@@ -149,7 +149,7 @@ App.propTypes = {
         type: PropTypes.string.isRequired
       }),
   onCityClick: PropTypes.func.isRequired,
-  saveCitiesData: PropTypes.func.isRequired,
+  setCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
@@ -174,7 +174,7 @@ App.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.exact({
+        location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired
@@ -192,11 +192,11 @@ App.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(city) {
-    dispatch(ActionCreator.getCity(city));
+    dispatch(ActionCreator.setCity(city));
   },
 
-  saveCitiesData(dataCities) {
-    dispatch(ActionCreator.saveCitiesData(dataCities));
+  setCitiesData(dataCities) {
+    dispatch(ActionCreator.setCitiesData(dataCities));
   }
 });
 
