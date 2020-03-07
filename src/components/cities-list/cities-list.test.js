@@ -6,9 +6,10 @@ const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseld
 
 it(`<CitiesList/> render`, () => {
   const onCityClick = jest.fn();
+  const aciveCity = `Paris`;
 
   const tree = renderer
-    .create(<CitiesList cities={cities} onCityClick={onCityClick}/>)
+    .create(<CitiesList cities={cities} onCityClick={onCityClick} aciveCity={aciveCity}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
