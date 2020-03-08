@@ -2,17 +2,58 @@ import React, {PureComponent} from "react";
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
-const DEFAULT_ZOOM = 12;
-const Icon = {
-  iconUrl: `img/pin.svg`,
-  iconSizes: [30, 40]
-};
-
 class Map extends PureComponent {
   constructor(props) {
     super(props);
     this.map = undefined;
     this.isMapInit = false;
+    this.isActive = false;
+    this.markers = [];
+  }
+
+  renderMarkers(cords) {
+    if (this.markers.length > 0) {
+      this.clearMarkers(this.markers);
+    }
+
+    const iconOptions = {
+      iconUrl: `img/pin.svg`,
+      iconSizes: [30, 40]
+    };
+
+    const iconActiveOptions = {
+      iconUrl: `img/pin-active.svg`,
+      iconSizes: [30, 30]
+    };
+
+    const icon = leaflet.icon(iconOptions);
+    const iconActive = leaflet.icon(iconActiveOptions);
+
+    cords.forEach((element) => {
+      if (this.props.activePin &&
+        this.props.activePin.latitude === element.latitude &&
+        this.props.activePin.longitude === element.longitude) {
+
+        this.addMarker([element.latitude, element.longitude], iconActive);
+      } else {
+        this.addMarker([element.latitude, element.longitude], icon);
+      }
+    });
+  }
+
+  addMarker(lonlat, icon) {
+    const marker = leaflet.marker(lonlat, {icon}).addTo(this.map);
+    this.markers.push(marker);
+  }
+
+  clearMarkers(markers) {
+    if (this.map !== null) {
+      markers.forEach((marker) => {
+        this.map.removeLayer(marker);
+      });
+    }
+
+    this.markers = [];
   }
 
   initMap(city, cords) {
@@ -20,20 +61,19 @@ class Map extends PureComponent {
       this.map.remove();
     }
 
-    const icon = leaflet.icon(Icon);
+    const {latitude, longitude, zoom} = city;
+    const cityCords = [latitude, longitude];
 
     this.map = leaflet.map(`map`, {
-      center: city,
-      zoom: DEFAULT_ZOOM,
+      center: cityCords,
+      zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(city, DEFAULT_ZOOM);
+    this.map.setView(cityCords, zoom);
 
-    cords.forEach((element) => {
-      leaflet.marker(element, {icon}).addTo(this.map);
-    });
+    this.renderMarkers(cords);
 
     leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -46,7 +86,7 @@ class Map extends PureComponent {
     const {city, cords} = this.props;
 
     try {
-      if (city.length === 2) {
+      if (city) {
         this.initMap(city, cords);
       }
     } catch (e) {
@@ -57,10 +97,17 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.city !== prevProps.city && this.props.city.length === 2) {
-      const {city, cords} = this.props;
+    const {city, cords} = this.props;
+
+    if (this.props.city &&
+      this.props.city !== prevProps.city) {
 
       this.initMap(city, cords);
+    }
+
+    if (this.props.activePin !== prevProps.activePin) {
+      this.clearMarkers(prevProps.cords);
+      this.renderMarkers(cords);
     }
   }
 
@@ -78,8 +125,21 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  city: PropTypes.arrayOf(PropTypes.number),
-  cords: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+  city: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number,
+  }),
+  cords: PropTypes.arrayOf(PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number,
+  })),
+  activePin: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number
+  })
 };
 
 export default Map;

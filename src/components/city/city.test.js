@@ -6,9 +6,10 @@ const city = `Paris`;
 
 it(`<City/> render`, () => {
   const onCityClick = jest.fn();
+  const activeClass = `tabs__item--active`;
 
   const tree = renderer
-    .create(<City city={city} onCityClick={onCityClick}/>)
+    .create(<City city={city} onCityClick={onCityClick} activeClass={activeClass}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

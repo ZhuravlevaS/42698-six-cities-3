@@ -2,45 +2,56 @@ import {extend} from "./utils.js";
 
 const InitialState = {
   city: ``,
-  citiesData: null
+  citiesData: null,
+  sortType: `popular`,
 };
 
 const ActionCreator = {
-  getCity: (city) => ({
-    type: ActionType.GET_CITY,
+  setCity: (city) => ({
+    type: ActionType.SET_CITY,
     payload: {
       city
     },
   }),
-  saveCitiesData: (citiesData) => ({
-    type: ActionType.SAVE_CITIES_DATA,
+  setCitiesData: (citiesData) => ({
+    type: ActionType.SET_CITIES_DATA,
     payload: {
       citiesData,
-      city: Object.keys(citiesData)[0]
+      city: citiesData[0].city.name
+    }
+  }),
+  setSortType: (sortType) => ({
+    type: ActionType.SET_SORT_TYPE,
+    payload: {
+      sortType
     }
   })
 };
 
 const ActionType = {
-  GET_CITY: `GET_CITY`,
-  SAVE_CITIES_DATA: `SAVE_CITIES_DATA`
+  SET_CITY: `SET_CITY`,
+  SET_CITIES_DATA: `SET_CITIES_DATA`,
+  SET_SORT_TYPE: `SET_SORT_TYPE`
 };
 
 const reducer = (state = InitialState, action) => {
   switch (action.type) {
-    case ActionType.GET_CITY:
+    case ActionType.SET_CITY:
       return extend(state, {
         city: action.payload.city,
       });
-    case ActionType.SAVE_CITIES_DATA:
+    case ActionType.SET_CITIES_DATA:
       return extend(state, {
         citiesData: action.payload.citiesData,
         city: action.payload.city
+      });
+    case ActionType.SET_SORT_TYPE:
+      return extend(state, {
+        sortType: action.payload.sortType
       });
     default:
       return InitialState;
   }
 };
-
 
 export {reducer, ActionType, ActionCreator};

@@ -8,11 +8,10 @@ import reviews from '../../mocks/reviews.js';
 import offersNearby from "../../mocks/offersNearby.js";
 
 const Property = (props) => {
-  const {imgs, price, rating, title, type, isMarked, isPremium, bedrooms, adults, insides, host, cords} = props.apart;
-  const {onMouseOver, onMouseOut} = props;
-  const cordsNearby = offersNearby.map((apart) => apart.cords);
-  const cordsArray = [cords, ...cordsNearby];
-  const cityCords = [52.38333, 4.9];
+  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, location, city, description} = props.apart;
+  const {onMouseOver, onMouseOut, activePin} = props;
+  const cordsNearby = offersNearby.map((apart) => apart.location);
+  const cordsArray = [location, ...cordsNearby];
   const ratingRound = Math.round(rating);
   const ratingComa = rating.toString().replace(/\./g, `,`);
 
@@ -48,7 +47,7 @@ const Property = (props) => {
 
         <main className="page__main page__main--property">
           <section className="property">
-            <PropertyGallery imgs={imgs} />
+            <PropertyGallery images={images} />
 
             <div className="property__container container">
               <div className="property__wrapper">
@@ -61,7 +60,7 @@ const Property = (props) => {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className={`property__bookmark-button button ${isMarked ? `property__bookmark-button--active` : ``}`} type="button">
+                  <button className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -94,11 +93,9 @@ const Property = (props) => {
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
                     {
-                      insides.map((inside) => {
-                        const {name, id} = inside;
-
-                        return <li className="property__inside-item" key={id}>
-                          {name}
+                      goods.map((good) => {
+                        return <li className="property__inside-item" key={good}>
+                          {good}
                         </li>;
                       })
                     }
@@ -115,13 +112,17 @@ const Property = (props) => {
                     </span>
                   </div>
                   <div className="property__description">
-                    {
+                    {/* {
                       host.description.map((text) => {
                         return <p className="property__text" key={text.id}>
                           {text.text}
                         </p>;
                       })
-                    }
+                    } */}
+
+                    <p className="property__text">
+                      {description}
+                    </p>;
                   </div>
                 </div>
                 <section className="property__reviews reviews">
@@ -179,7 +180,7 @@ const Property = (props) => {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={cityCords} cords={cordsArray}/>
+              <Map city={city.location} cords={cordsArray} activePin={activePin}/>
             </section>
           </section>
           <div className="container">
@@ -193,43 +194,46 @@ const Property = (props) => {
 
 Property.propTypes = {
   apart: PropTypes.exact({
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.exact({
+      location: PropTypes.exact({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }),
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      avatarUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired
+    }),
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.exact({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    maxAdults: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isMarked: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    id: PropTypes.number.isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number),
-    img: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    adults: PropTypes.number.isRequired,
-    imgs: PropTypes.arrayOf(PropTypes.exact(
-        {
-          url: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    insides: PropTypes.arrayOf(PropTypes.exact(
-        {
-          name: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired
-        })
-    ),
-    host: PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      description: PropTypes.arrayOf(PropTypes.exact(
-          {
-            text: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired
-          })
-      ),
-    })
+    type: PropTypes.string.isRequired
   }),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
+  activePin: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number
+  })
 };
 
 export default Property;

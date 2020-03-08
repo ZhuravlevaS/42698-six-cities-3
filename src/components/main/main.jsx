@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import CardList from '../card-list/card-list.jsx';
 import Map from '../map/map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
+import SortedVariants from '../sorted-variants/sorted-variants.jsx';
 import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
@@ -11,12 +11,14 @@ class Main extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.saveCitiesData(data);
+    this.props.setCitiesData(data);
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, cityCords, onCityClick, city} = this.props;
-    const cords = aparts.map((apart) => apart.cords);
+    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin, city} = this.props;
+    const location = aparts.map((apart) => apart.location);
+    const locationCity = aparts[0] ? aparts[0].city.location : null;
+    const cityName = locationCity ? aparts[0].city.name : null;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -53,42 +55,41 @@ class Main extends PureComponent {
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
-                <CitiesList cities={cities} onCityClick={onCityClick}/>
+                <CitiesList cities={cities} onCityClick={onCityClick} aciveCity={city} />
               </section>
             </div>
             <div className="cities">
               <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{aparts.length} places to stay in {city}</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by</span>
-                    <span className="places__sorting-type" tabIndex="0">
-                      Popular
-                      <svg className="places__sorting-arrow" width="7" height="4">
-                        <use xlinkHref="#icon-arrow-select"/>
-                      </svg>
-                    </span>
-                    <ul className="places__options places__options--custom places__options--opened">
-                      <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                      <li className="places__option" tabIndex="0">Price: low to high</li>
-                      <li className="places__option" tabIndex="0">Price: high to low</li>
-                      <li className="places__option" tabIndex="0">Top rated first</li>
-                    </ul>
+                {aparts.length > 0 &&
+                  <section className="cities__places places">
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{aparts.length} places to stay in {cityName}</b>
 
-                    {/* <select className="places__sorting-type" id="places-sorting">
-                      <option className="places__option" value="popular" selected="">Popular</option>
-                      <option className="places__option" value="to-high">Price: low to high</option>
-                      <option className="places__option" value="to-low">Price: high to low</option>
-                      <option className="places__option" value="top-rated">Top rated first</option>
-                    </select> */}
+                    <SortedVariants
+                      aparts={aparts}
+                      onMouseOver={onMouseOver}
+                      onMouseOut={onMouseOut}
+                      city={city}
+                    />
+                  </section>
+                }
+                {aparts.length > 0 ||
+                  <section className="cities__no-places">
+                    <div className="cities__status-wrapper tabs__content">
+                      <b className="cities__status">No places to stay available</b>
+                      <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
+                    </div>
+                  </section>
+                }
 
-                  </form>
-                  <CardList aparts={aparts} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`cities__places-list`, `cities__place-card`]}/>
-                </section>
+
                 <div className="cities__right-section">
                   <section className="cities__map map" style={{backgroundImage: `none`}}>
-                    <Map city={cityCords} cords={cords}/>
+                    <Map
+                      city={locationCity}
+                      cords={location}
+                      activePin={activePin}
+                    />
                   </section>
                 </div>
               </div>
@@ -103,48 +104,50 @@ class Main extends PureComponent {
 Main.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.exact(
       {
-        imgs: PropTypes.arrayOf(PropTypes.exact(
-            {
-              url: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        insides: PropTypes.arrayOf(PropTypes.exact(
-            {
-              name: PropTypes.string.isRequired,
-              id: PropTypes.number.isRequired
-            })
-        ),
-        img: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isMarked: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        adults: PropTypes.number.isRequired,
-        id: PropTypes.number.isRequired,
-        cords: PropTypes.arrayOf(PropTypes.number),
-        host: PropTypes.exact({
-          name: PropTypes.string.isRequired,
-          avatar: PropTypes.string.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          description: PropTypes.arrayOf(PropTypes.exact(
-              {
-                text: PropTypes.string.isRequired,
-                id: PropTypes.number.isRequired
-              })
-          ),
-        })
+        type: PropTypes.string.isRequired
       })
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  cityCords: PropTypes.arrayOf(PropTypes.number),
   onCityClick: PropTypes.func.isRequired,
+  setCitiesData: PropTypes.func.isRequired,
+  activePin: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number
+  }),
   city: PropTypes.string.isRequired,
-  saveCitiesData: PropTypes.func.isRequired,
 };
 
 export default Main;
