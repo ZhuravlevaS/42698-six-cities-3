@@ -54,8 +54,8 @@ CardList.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func,
   typesClass: PropTypes.array.isRequired,
 };
 

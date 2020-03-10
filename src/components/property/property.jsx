@@ -8,10 +8,10 @@ import reviews from '../../mocks/reviews.js';
 import offersNearby from "../../mocks/offersNearby.js";
 
 const Property = (props) => {
-  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, location, city, description} = props.apart;
-  const {onMouseOver, onMouseOut, activePin} = props;
+  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, city, description} = props.apart;
+  const {activePin} = props;
   const cordsNearby = offersNearby.map((apart) => apart.location);
-  const cordsArray = [location, ...cordsNearby];
+  const cordsArray = [activePin, ...cordsNearby];
   const ratingRound = Math.round(rating);
   const ratingComa = rating.toString().replace(/\./g, `,`);
 
@@ -184,7 +184,7 @@ const Property = (props) => {
             </section>
           </section>
           <div className="container">
-            <CardList aparts={offersNearby} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`near-places__list`, `near-places__card`]}/>
+            <CardList aparts={offersNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
           </div>
         </main>
       </div>
@@ -227,8 +227,6 @@ Property.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
   activePin: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,

@@ -7,35 +7,8 @@ import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      property: {}
-    };
-
-    this._handleCardMouseOver = this._handleCardMouseOver.bind(this);
-    this._handleCardMouseOut = this._handleCardMouseOut.bind(this);
-  }
-
-  _handleCardMouseOver(prop) {
-    if (this.state.property && this.state.property.id === prop.id) {
-      return;
-    }
-
-    this.setState({
-      property: prop
-    });
-  }
-
-  _handleCardMouseOut() {
-    this.setState({
-      property: {}
-    });
-  }
-
   _renderMain() {
-    const {citiesData, onCityClick, city, setCitiesData} = this.props;
+    const {citiesData, onCityClick, city, setCitiesData, handleCardMouseOver, handleCardMouseOut, hoverProperty, sortType} = this.props;
     const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
 
     return (
@@ -43,10 +16,11 @@ class App extends PureComponent {
         aparts={aparts}
         city={city}
         onCityClick={onCityClick}
-        onMouseOver={this._handleCardMouseOver}
-        onMouseOut={this._handleCardMouseOut}
+        onMouseOver={handleCardMouseOver}
+        onMouseOut={handleCardMouseOut}
         setCitiesData={setCitiesData}
-        activePin={this.state.property.location}
+        activePin={hoverProperty.location}
+        sortType={sortType}
       />
     );
   }
@@ -54,9 +28,7 @@ class App extends PureComponent {
   _renderOffer() {
     return <Property
       apart={this.props.apart}
-      onMouseOver={this._handleCardMouseOver}
-      onMouseOut={this._handleCardMouseOut}
-      activePin={this.state.property.location}
+      activePin={this.props.apart.location}
     />;
   }
 
@@ -77,42 +49,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  aparts: PropTypes.arrayOf(PropTypes.exact(
-      {
-        bedrooms: PropTypes.number.isRequired,
-        city: PropTypes.exact({
-          location: PropTypes.exact({
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired,
-            zoom: PropTypes.number.isRequired,
-          }),
-          name: PropTypes.string.isRequired,
-        }),
-        description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.exact({
-          avatarUrl: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          name: PropTypes.string.isRequired
-        }),
-        id: PropTypes.number.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired
-        }),
-        maxAdults: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired
-      })
-  ),
   apart: PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
@@ -151,6 +87,45 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   setCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
+  handleCardMouseOver: PropTypes.func.isRequired,
+  handleCardMouseOut: PropTypes.func.isRequired,
+  hoverProperty: PropTypes.exact(
+      {
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        sortType: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired
+      }),
   citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
@@ -197,14 +172,25 @@ const mapDispatchToProps = (dispatch) => ({
 
   setCitiesData(dataCities) {
     dispatch(ActionCreator.setCitiesData(dataCities));
+  },
+
+  handleCardMouseOver(property) {
+    dispatch(ActionCreator.setHoverProperty(property));
+  },
+
+  handleCardMouseOut() {
+    dispatch(ActionCreator.clearHoverProperty());
   }
+
 });
 
 export {App};
 export default connect(
     (state) => ({
       city: state.city,
-      citiesData: state.citiesData
+      citiesData: state.citiesData,
+      hoverProperty: state.hoverProperty,
+      sortType: state.sortType
     }),
     mapDispatchToProps
 )(App);

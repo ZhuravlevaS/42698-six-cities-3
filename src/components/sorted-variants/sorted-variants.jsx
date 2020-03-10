@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
@@ -6,70 +6,24 @@ import {ActionCreator} from "../../reducer.js";
 import SortedForm from '../sorted-form/sorted-form.jsx';
 import CardList from '../card-list/card-list.jsx';
 
-const SortType = {
-  'to-high': (a, b) => {
-    return a.price - b.price;
-  },
-  'to-low': (a, b) => {
-    return b.price - a.price;
-  },
-  'top-rated': (a, b) => {
-    return b.rating - a.rating;
-  },
+const SortedVariants = (props) => {
+  const {onMouseOver, onMouseOut, setSortType, aparts} = props;
+
+  return (
+    <React.Fragment>
+      <SortedForm
+        onSelectSortType={setSortType}
+      />
+
+      <CardList
+        aparts={aparts}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+        typesClass={[`cities__places-list`, `cities__place-card`]}
+      />
+    </React.Fragment>
+  );
 };
-const DEUFAULT_TYPE = `popular`;
-
-class SortedVariants extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      aparts: props.aparts
-    };
-  }
-
-  sortAparts() {
-    this.setState({
-      aparts: this.props.sortType === DEUFAULT_TYPE
-        ? this.props.aparts
-        : [...this.props.aparts].sort(SortType[this.props.sortType])
-    });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.city !== this.props.city) {
-      if (this.props.sortType !== DEUFAULT_TYPE) {
-        this.sortAparts();
-      } else {
-        this.setState({aparts: this.props.aparts});
-      }
-    }
-
-    if (prevProps.sortType !== this.props.sortType) {
-      this.sortAparts();
-    }
-  }
-
-  render() {
-    const {onMouseOver, onMouseOut, setSortType} = this.props;
-
-    return (
-      <React.Fragment>
-        <SortedForm
-          onSelectSortType={setSortType}
-        />
-
-        <CardList
-          aparts={this.state.aparts}
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-          typesClass={[`cities__places-list`, `cities__place-card`]}
-        />
-
-      </React.Fragment>
-    );
-  }
-}
 
 SortedVariants.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.shape(
@@ -110,7 +64,6 @@ SortedVariants.propTypes = {
   ),
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
   sortType: PropTypes.string.isRequired,
   setSortType: PropTypes.func.isRequired,
 };
