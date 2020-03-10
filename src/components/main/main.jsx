@@ -19,7 +19,7 @@ const SortType = {
   'default': `popular`
 };
 
-const withSortingVariants = withSorting(SortedVariants, SortType);
+const WithSortingVariants = withSorting(SortedVariants, SortType);
 
 class Main extends PureComponent {
   constructor(props) {
@@ -80,7 +80,7 @@ class Main extends PureComponent {
                   <section className="cities__places places">
                     <h2 className="visually-hidden">Places</h2>
                     <b className="places__found">{aparts.length} places to stay in {cityName}</b>
-                    <withSortingVariants
+                    <WithSortingVariants
                       aparts={aparts}
                       onMouseOver={onMouseOver}
                       onMouseOut={onMouseOut}

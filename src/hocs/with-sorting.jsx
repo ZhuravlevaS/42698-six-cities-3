@@ -72,8 +72,8 @@ const withSortingVar = (Component, SortType) => {
           type: PropTypes.string.isRequired
         })
     ),
-    sortType: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
+    sortType: PropTypes.string,
+    city: PropTypes.string,
   };
 
   return withSorting;

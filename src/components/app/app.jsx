@@ -92,39 +92,39 @@ App.propTypes = {
   handleCardMouseOut: PropTypes.func.isRequired,
   hoverProperty: PropTypes.exact(
       {
-        bedrooms: PropTypes.number.isRequired,
+        bedrooms: PropTypes.number,
         city: PropTypes.exact({
           location: PropTypes.exact({
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired,
-            zoom: PropTypes.number.isRequired,
+            latitude: PropTypes.number,
+            longitude: PropTypes.number,
+            zoom: PropTypes.number,
           }),
-          name: PropTypes.string.isRequired,
+          name: PropTypes.string,
         }),
-        description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        description: PropTypes.string,
+        goods: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
-          avatarUrl: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          name: PropTypes.string.isRequired
+          avatarUrl: PropTypes.string,
+          id: PropTypes.number,
+          isPro: PropTypes.bool,
+          name: PropTypes.string
         }),
-        id: PropTypes.number.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
+        id: PropTypes.number,
+        images: PropTypes.arrayOf(PropTypes.string),
+        isFavorite: PropTypes.bool,
+        isPremium: PropTypes.bool,
         location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired
+          latitude: PropTypes.number,
+          longitude: PropTypes.number,
+          zoom: PropTypes.number
         }),
-        maxAdults: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        sortType: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired
+        maxAdults: PropTypes.number,
+        previewImage: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.number,
+        title: PropTypes.string,
+        sortType: PropTypes.string,
+        type: PropTypes.string
       }),
   citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
