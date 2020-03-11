@@ -1,5 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+
 import CitiesList from '../cities-list/cities-list.jsx';
 import CitiesWrap from '../cities-wrap/cities-wrap.jsx'
 import data from "../../mocks/dataCities.js";
@@ -14,7 +17,8 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {aparts, onCityClick, city} = this.props;
+    const {onCityClick, city, citiesData} = this.props;
+    const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -61,6 +65,7 @@ class Main extends PureComponent {
                 aparts.length > 0 && 
                 <CitiesWrap
                   aparts={aparts}
+                  aciveCity={city}
                 />
               }
 
@@ -119,14 +124,22 @@ Main.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onCityClick: PropTypes.func.isRequired,
   setCitiesData: PropTypes.func.isRequired,
-  activePin: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number
-  }),
   city: PropTypes.string.isRequired,
 };
 
-export default Main;
+const mapDispatchToProps = (dispatch) => ({
+
+  setCitiesData(dataCities) {
+    dispatch(ActionCreator.setCitiesData(dataCities));
+  },
+
+});
+
+export default connect(
+    (state) => ({
+      citiesData: state.citiesData,
+      city: state.city
+    }),
+    mapDispatchToProps
+)(Main);

@@ -83,10 +83,11 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onMouseEnter: PropTypes.func.isRequired,
+  
   onTitleClick: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
 };
 
 export default Card;

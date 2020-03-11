@@ -21,19 +21,18 @@ const SortType = {
 const WithSortingVariants = withSorting(SortedVariants, SortType);
 
 const CitiesWrap = (props) => {
-  const {aparts, activePin, city, sortType} = props;
+  const {aparts, activePin, sortType, aciveCity} = props;
   const locationCity = aparts[0] ? aparts[0].city.location : null;
-  const cityName = locationCity ? aparts[0].city.name : null;
 
   return (
     <div className="cities">
       <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{aparts.length} places to stay in {cityName}</b>
+            <b className="places__found">{aparts.length} places to stay in {aciveCity}</b>
             <WithSortingVariants
               aparts={aparts}
-              city={city}
+              city={aciveCity}
               sortType={sortType}
             />
           </section>
@@ -51,6 +50,7 @@ const CitiesWrap = (props) => {
     </div>
   )
 }
+
 export default connect(
   (state) => ({
     sortType: state.sortType,

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 
 import City from '../city/city.jsx';
 
@@ -21,4 +23,15 @@ CitiesList.propTypes = {
   aciveCity: PropTypes.string.isRequired
 };
 
-export default CitiesList;
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(city) {
+    dispatch(ActionCreator.setCity(city));
+  },
+});
+
+export default connect(
+    (state) => ({
+      city: state.city,
+    }),
+    mapDispatchToProps
+)(CitiesList);

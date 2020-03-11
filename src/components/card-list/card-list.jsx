@@ -7,20 +7,23 @@ import {ActionCreator} from "../../reducer.js";
 
 const CardList = (props) => {
   const {aparts, typesClass, handleCardMouseEnter, handleCardMouseLeave} = props;
-  const _handleTitleClick = () => {
+  const handleTitleClick = () => {
     return true;
   };
 
   return (
     <div className={`${typesClass[0]} places__list tabs__content`}>
       {
-        aparts.map((apart) => <Card 
-        key={apart.id} 
-        apart={apart} 
-        onMouseEnter={handleCardMouseEnter} 
-        onMouseLeave={handleCardMouseLeave} 
-        onTitleClick={_handleTitleClick} 
-        typesClass={typesClass}/>)
+        aparts.map((apart) => {
+          return <Card 
+            key={apart.id} 
+            apart={apart} 
+            onMouseEnter={handleCardMouseEnter} 
+            onMouseLeave={handleCardMouseLeave} 
+            onTitleClick={handleTitleClick} 
+            typesClass={typesClass}
+          />
+        })
       }
     </div>
   );
