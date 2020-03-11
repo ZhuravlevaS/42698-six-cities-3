@@ -96,7 +96,7 @@ const Property = (props) => {
                       goods.map((good) => {
                         return <li className="property__inside-item" key={good}>
                           {good}
-                        </li>;
+                        </li>
                       })
                     }
                   </ul>
@@ -112,17 +112,9 @@ const Property = (props) => {
                     </span>
                   </div>
                   <div className="property__description">
-                    {/* {
-                      host.description.map((text) => {
-                        return <p className="property__text" key={text.id}>
-                          {text.text}
-                        </p>;
-                      })
-                    } */}
-
                     <p className="property__text">
                       {description}
-                    </p>;
+                    </p>
                   </div>
                 </div>
                 <section className="property__reviews reviews">

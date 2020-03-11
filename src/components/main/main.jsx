@@ -8,10 +8,6 @@ import CitiesWrap from '../cities-wrap/cities-wrap.jsx'
 import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.setCitiesData(data);
   }
@@ -19,6 +15,7 @@ class Main extends PureComponent {
   render() {
     const {onCityClick, city, citiesData} = this.props;
     const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
+    const emptyClass = aparts > 0 ? `` : `page__main--index-empty`;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -51,7 +48,7 @@ class Main extends PureComponent {
             </div>
           </header>
 
-          <main className="page__main page__main--index">
+          <main className={`page__main page__main--index ${emptyClass}`}>
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
@@ -60,26 +57,25 @@ class Main extends PureComponent {
                   onCityClick={onCityClick} 
                   aciveCity={city} />
               </section>
-
+            </div>
               {
-                aparts.length > 0 && 
+                aparts.length > 0 ?
                 <CitiesWrap
                   aparts={aparts}
                   aciveCity={city}
-                />
-              }
-
-              {
-                aparts.length > 0 ||
-                <section className="cities__no-places">
-                  <div className="cities__status-wrapper tabs__content">
-                    <b className="cities__status">No places to stay available</b>
-                    <p className="cities__status-description">We could not find any property availbale at the moment in {city}</p>
+                /> :
+                <div className="cities">
+                  <div className="cities__places-container cities__places-container--empty container">
+                    <section className="cities__no-places">
+                      <div className="cities__status-wrapper tabs__content">
+                        <b className="cities__status">No places to stay available</b>
+                        <p className="cities__status-description">We could not find any property availbale at the moment in {city}</p>
+                      </div>
+                    </section>
+                    <div className="cities__right-section"></div>
                   </div>
-                </section>
+                </div>
               }
-            </div>
-
           </main>
         </div>
       </div>
