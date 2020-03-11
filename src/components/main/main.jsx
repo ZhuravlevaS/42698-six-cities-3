@@ -1,25 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import Map from '../map/map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-import SortedVariants from '../sorted-variants/sorted-variants.jsx';
-import withSorting from '../../hocs/with-sorting.jsx';
+import CitiesWrap from '../cities-wrap/cities-wrap.jsx'
 import data from "../../mocks/dataCities.js";
-
-const SortType = {
-  'to-high': (a, b) => {
-    return a.price - b.price;
-  },
-  'to-low': (a, b) => {
-    return b.price - a.price;
-  },
-  'top-rated': (a, b) => {
-    return b.rating - a.rating;
-  },
-  'default': `popular`
-};
-
-const WithSortingVariants = withSorting(SortedVariants, SortType);
 
 class Main extends PureComponent {
   constructor(props) {
@@ -31,10 +14,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin, city, sortType} = this.props;
-    const location = aparts.map((apart) => apart.location);
-    const locationCity = aparts[0] ? aparts[0].city.location : null;
-    const cityName = locationCity ? aparts[0].city.name : null;
+    const {aparts, onCityClick, city} = this.props;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -71,45 +51,30 @@ class Main extends PureComponent {
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
-                <CitiesList cities={cities} onCityClick={onCityClick} aciveCity={city} />
+                <CitiesList 
+                  cities={cities} 
+                  onCityClick={onCityClick} 
+                  aciveCity={city} />
               </section>
-            </div>
-            <div className="cities">
-              <div className="cities__places-container container">
-                {aparts.length > 0 &&
-                  <section className="cities__places places">
-                    <h2 className="visually-hidden">Places</h2>
-                    <b className="places__found">{aparts.length} places to stay in {cityName}</b>
-                    <WithSortingVariants
-                      aparts={aparts}
-                      onMouseOver={onMouseOver}
-                      onMouseOut={onMouseOut}
-                      city={city}
-                      sortType={sortType}
-                    />
-                  </section>
-                }
-                {aparts.length > 0 ||
-                  <section className="cities__no-places">
-                    <div className="cities__status-wrapper tabs__content">
-                      <b className="cities__status">No places to stay available</b>
-                      <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
-                    </div>
-                  </section>
-                }
 
+              {
+                aparts.length > 0 && 
+                <CitiesWrap
+                  aparts={aparts}
+                />
+              }
 
-                <div className="cities__right-section">
-                  <section className="cities__map map" style={{backgroundImage: `none`}}>
-                    <Map
-                      city={locationCity}
-                      cords={location}
-                      activePin={activePin}
-                    />
-                  </section>
-                </div>
-              </div>
+              {
+                aparts.length > 0 ||
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property availbale at the moment in {city}</p>
+                  </div>
+                </section>
+              }
             </div>
+
           </main>
         </div>
       </div>
@@ -154,8 +119,6 @@ Main.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   setCitiesData: PropTypes.func.isRequired,
   activePin: PropTypes.shape({
@@ -164,7 +127,6 @@ Main.propTypes = {
     zoom: PropTypes.number
   }),
   city: PropTypes.string.isRequired,
-  sortType: PropTypes.string.isRequired,
 };
 
 export default Main;

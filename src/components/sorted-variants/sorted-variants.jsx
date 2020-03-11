@@ -7,7 +7,7 @@ import SortedForm from '../sorted-form/sorted-form.jsx';
 import CardList from '../card-list/card-list.jsx';
 
 const SortedVariants = (props) => {
-  const {onMouseOver, onMouseOut, setSortType, aparts} = props;
+  const {setSortType, aparts} = props;
 
   return (
     <React.Fragment>
@@ -17,8 +17,6 @@ const SortedVariants = (props) => {
 
       <CardList
         aparts={aparts}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
         typesClass={[`cities__places-list`, `cities__place-card`]}
       />
     </React.Fragment>
@@ -62,8 +60,6 @@ SortedVariants.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   setSortType: PropTypes.func.isRequired,
 };

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -11,7 +12,7 @@ class Map extends PureComponent {
     this.markers = [];
   }
 
-  renderMarkers(cords) {
+  renderMarkers(aparts) {
     if (this.markers.length > 0) {
       this.clearMarkers(this.markers);
     }
@@ -28,15 +29,12 @@ class Map extends PureComponent {
 
     const icon = leaflet.icon(iconOptions);
     const iconActive = leaflet.icon(iconActiveOptions);
-
-    cords.forEach((element) => {
-      if (this.props.activePin &&
-        this.props.activePin.latitude === element.latitude &&
-        this.props.activePin.longitude === element.longitude) {
-
-        this.addMarker([element.latitude, element.longitude], iconActive);
+    
+    aparts.forEach((element) => {
+      if (this.props.hoverProperty.id === element.id) {
+        this.addMarker([element.location.latitude, element.location.longitude], iconActive);
       } else {
-        this.addMarker([element.latitude, element.longitude], icon);
+        this.addMarker([element.location.latitude, element.location.longitude], icon);
       }
     });
   }
@@ -56,11 +54,12 @@ class Map extends PureComponent {
     this.markers = [];
   }
 
-  initMap(city, cords) {
+  initMap(aparts) {
     if (this.isMapInit) {
       this.map.remove();
     }
 
+    const city = aparts[0] ? aparts[0].city.location : null;
     const {latitude, longitude, zoom} = city;
     const cityCords = [latitude, longitude];
 
@@ -73,7 +72,7 @@ class Map extends PureComponent {
 
     this.map.setView(cityCords, zoom);
 
-    this.renderMarkers(cords);
+    this.renderMarkers(aparts);
 
     leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -83,31 +82,30 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {city, cords} = this.props;
+    const {aparts} = this.props;
 
     try {
-      if (city) {
-        this.initMap(city, cords);
+      if (aparts) {
+        this.initMap(aparts);
       }
     } catch (e) {
-      return e;
+      console.error(e)
     }
 
     return true;
   }
 
   componentDidUpdate(prevProps) {
-    const {city, cords} = this.props;
+    const {aparts} = this.props;
 
-    if (this.props.city &&
-      this.props.city !== prevProps.city) {
-
-      this.initMap(city, cords);
+    if (aparts[0].city.name !== prevProps.aparts[0].city.name) {
+      this.initMap(aparts);
     }
 
-    if (this.props.activePin !== prevProps.activePin) {
-      this.clearMarkers(prevProps.cords);
-      this.renderMarkers(cords);
+    if (this.props.hoverProperty.id !== prevProps.hoverProperty.id) {
+      const cords = prevProps.aparts.map((apart) => apart.location);
+      this.clearMarkers(cords);
+      this.renderMarkers(aparts);
     }
   }
 
@@ -142,4 +140,8 @@ Map.propTypes = {
   })
 };
 
-export default Map;
+export default connect(
+  (state) => ({
+    hoverProperty: state.hoverProperty,
+  })
+)(Map);

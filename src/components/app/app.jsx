@@ -8,7 +8,7 @@ import Property from "../property/property.jsx";
 
 class App extends PureComponent {
   _renderMain() {
-    const {citiesData, onCityClick, city, setCitiesData, handleCardMouseOver, handleCardMouseOut, hoverProperty, sortType} = this.props;
+    const {citiesData, onCityClick, city, setCitiesData} = this.props;
     const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
 
     return (
@@ -16,11 +16,7 @@ class App extends PureComponent {
         aparts={aparts}
         city={city}
         onCityClick={onCityClick}
-        onMouseOver={handleCardMouseOver}
-        onMouseOut={handleCardMouseOut}
         setCitiesData={setCitiesData}
-        activePin={hoverProperty.location}
-        sortType={sortType}
       />
     );
   }
@@ -87,9 +83,6 @@ App.propTypes = {
   onCityClick: PropTypes.func.isRequired,
   setCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
-  sortType: PropTypes.string.isRequired,
-  handleCardMouseOver: PropTypes.func.isRequired,
-  handleCardMouseOut: PropTypes.func.isRequired,
   hoverProperty: PropTypes.exact(
       {
         bedrooms: PropTypes.number,
@@ -174,14 +167,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setCitiesData(dataCities));
   },
 
-  handleCardMouseOver(property) {
-    dispatch(ActionCreator.setHoverProperty(property));
-  },
-
-  handleCardMouseOut() {
-    dispatch(ActionCreator.clearHoverProperty());
-  }
-
 });
 
 export {App};
@@ -189,8 +174,6 @@ export default connect(
     (state) => ({
       city: state.city,
       citiesData: state.citiesData,
-      hoverProperty: state.hoverProperty,
-      sortType: state.sortType
     }),
     mapDispatchToProps
 )(App);
