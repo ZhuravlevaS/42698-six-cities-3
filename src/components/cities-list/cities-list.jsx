@@ -6,12 +6,12 @@ import {ActionCreator} from "../../reducer.js";
 import City from '../city/city.jsx';
 
 const CitiesList = (props) => {
-  const {cities, onCityClick, aciveCity} = props;
+  const {cities, onCityClick, activeCity} = props;
 
   return (
     <ul className="locations__list tabs__list">
       {
-        cities.map((city) => <City key={city} city={city} onCityClick={onCityClick} activeClass={city === aciveCity ? `tabs__item--active` : ``}/>)
+        cities.map((city) => <City key={city} city={city} onCityClick={onCityClick} activeClass={city === activeCity ? `tabs__item--active` : ``}/>)
       }
     </ul>
   );
@@ -20,7 +20,7 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string),
   onCityClick: PropTypes.func.isRequired,
-  aciveCity: PropTypes.string.isRequired
+  activeCity: PropTypes.string.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

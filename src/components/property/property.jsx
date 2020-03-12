@@ -5,13 +5,16 @@ import ReviewList from '../review-list/review-list.jsx';
 import Map from '../map/map.jsx';
 import CardList from '../card-list/card-list.jsx';
 import reviews from '../../mocks/reviews.js';
-import offersNearby from "../../mocks/offersNearby.js";
+import citiesData from '../../mocks/dataCities.js';
 
 const Property = (props) => {
-  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, city, description} = props.apart;
-  const {activePin} = props;
-  const cordsNearby = offersNearby.map((apart) => apart.location);
-  const cordsArray = [activePin, ...cordsNearby];
+  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, city, description, id} = props.apart;
+  let offersNearby = [];
+  citiesData.forEach((item) => {
+    if (offersNearby.length < 3 && item.id !== id && item.city.name === city.name) {
+      offersNearby.push(item);
+    }
+  });
   const ratingRound = Math.round(rating);
   const ratingComa = rating.toString().replace(/\./g, `,`);
 
@@ -96,7 +99,7 @@ const Property = (props) => {
                       goods.map((good) => {
                         return <li className="property__inside-item" key={good}>
                           {good}
-                        </li>
+                        </li>;
                       })
                     }
                   </ul>
@@ -172,7 +175,7 @@ const Property = (props) => {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city.location} cords={cordsArray} activePin={activePin}/>
+              <Map city={city.location} aparts={[props.apart, ...offersNearby]} activePin={props.apart}/>
             </section>
           </section>
           <div className="container">
@@ -219,11 +222,6 @@ Property.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  activePin: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number
-  })
 };
 
 export default Property;

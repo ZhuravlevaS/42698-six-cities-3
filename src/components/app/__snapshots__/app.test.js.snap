@@ -98,7 +98,7 @@ exports[`<App/> render 1`] = `
       </div>
     </header>
     <main
-      className="page__main page__main--index"
+      className="page__main page__main--index page__main--index-empty"
     >
       <h1
         className="visually-hidden"
@@ -199,7 +199,7 @@ exports[`<App/> render 1`] = `
         className="cities"
       >
         <div
-          className="cities__places-container container"
+          className="cities__places-container cities__places-container--empty container"
         >
           <section
             className="cities__no-places"
@@ -216,31 +216,13 @@ exports[`<App/> render 1`] = `
                 className="cities__status-description"
               >
                 We could not find any property availbale at the moment in 
+                Amsterdam
               </p>
             </div>
           </section>
           <div
             className="cities__right-section"
-          >
-            <section
-              className="cities__map map"
-              style={
-                Object {
-                  "backgroundImage": "none",
-                }
-              }
-            >
-              <div
-                id="map"
-                style={
-                  Object {
-                    "height": "100%",
-                    "width": "100%",
-                  }
-                }
-              />
-            </section>
-          </div>
+          />
         </div>
       </div>
     </main>

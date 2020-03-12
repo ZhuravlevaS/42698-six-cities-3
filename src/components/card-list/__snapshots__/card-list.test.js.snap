@@ -6,8 +6,8 @@ exports[`<CardList/> render 1`] = `
 >
   <article
     className="near-places__card place-card"
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
@@ -104,8 +104,8 @@ exports[`<CardList/> render 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
@@ -202,8 +202,8 @@ exports[`<CardList/> render 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
@@ -300,8 +300,8 @@ exports[`<CardList/> render 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
@@ -398,8 +398,8 @@ exports[`<CardList/> render 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"

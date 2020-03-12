@@ -15,14 +15,14 @@ const CardList = (props) => {
     <div className={`${typesClass[0]} places__list tabs__content`}>
       {
         aparts.map((apart) => {
-          return <Card 
-            key={apart.id} 
-            apart={apart} 
-            onMouseEnter={handleCardMouseEnter} 
-            onMouseLeave={handleCardMouseLeave} 
-            onTitleClick={handleTitleClick} 
+          return <Card
+            key={apart.id}
+            apart={apart}
+            onMouseEnter={handleCardMouseEnter}
+            onMouseLeave={handleCardMouseLeave}
+            onTitleClick={handleTitleClick}
             typesClass={typesClass}
-          />
+          />;
         })
       }
     </div>
@@ -67,6 +67,8 @@ CardList.propTypes = {
       })
   ),
   typesClass: PropTypes.array.isRequired,
+  handleCardMouseEnter: PropTypes.func,
+  handleCardMouseLeave: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

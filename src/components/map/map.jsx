@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -29,9 +28,9 @@ class Map extends PureComponent {
 
     const icon = leaflet.icon(iconOptions);
     const iconActive = leaflet.icon(iconActiveOptions);
-    
+
     aparts.forEach((element) => {
-      if (this.props.hoverProperty.id === element.id) {
+      if (this.props.activePin.id === element.id) {
         this.addMarker([element.location.latitude, element.location.longitude], iconActive);
       } else {
         this.addMarker([element.location.latitude, element.location.longitude], icon);
@@ -89,7 +88,7 @@ class Map extends PureComponent {
         this.initMap(aparts);
       }
     } catch (e) {
-      console.error(e)
+      return e;
     }
 
     return true;
@@ -102,7 +101,7 @@ class Map extends PureComponent {
       this.initMap(aparts);
     }
 
-    if (this.props.hoverProperty.id !== prevProps.hoverProperty.id) {
+    if (this.props.activePin.id !== prevProps.activePin.id) {
       const cords = prevProps.aparts.map((apart) => apart.location);
       this.clearMarkers(cords);
       this.renderMarkers(aparts);
@@ -123,25 +122,43 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  city: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    zoom: PropTypes.number,
-  }),
-  cords: PropTypes.arrayOf(PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    zoom: PropTypes.number,
-  })),
-  activePin: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number
-  })
+  aparts: PropTypes.arrayOf(PropTypes.exact(
+      {
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.exact({
+          location: PropTypes.exact({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.exact({
+          avatarUrl: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        id: PropTypes.number.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }),
+        maxAdults: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired
+      })
+  ),
+  activePin: PropTypes.object
 };
 
-export default connect(
-  (state) => ({
-    hoverProperty: state.hoverProperty,
-  })
-)(Map);
+export default Map;

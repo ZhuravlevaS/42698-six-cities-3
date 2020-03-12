@@ -17,12 +17,12 @@ export default [
       isPro: true,
       name: `Angelina`
     },
-    id: 1,
+    id: 3,
     images: [`img/apartment-03.jpg`, `img/apartment-03.jpg`],
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3551496378,
+      latitude: 52.355149378,
       longitude: 4.6499948,
       zoom: 8
     },
@@ -57,7 +57,7 @@ export default [
     isPremium: false,
     location: {
       latitude: 51.35514938,
-      longitude: 4.6738799948,
+      longitude: 4.6738748,
       zoom: 8
     },
     maxAdults: 4,
@@ -85,7 +85,7 @@ export default [
       isPro: true,
       name: `Angelina`
     },
-    id: 3,
+    id: 4,
     images: [`img/apartment-03.jpg`, `img/apartment-03.jpg`],
     isFavorite: false,
     isPremium: false,

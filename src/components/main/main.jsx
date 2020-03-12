@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
 import CitiesList from '../cities-list/cities-list.jsx';
-import CitiesWrap from '../cities-wrap/cities-wrap.jsx'
+import CitiesWrap from '../cities-wrap/cities-wrap.jsx';
 import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
@@ -52,14 +52,14 @@ class Main extends PureComponent {
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
-                <CitiesList 
-                  cities={cities} 
-                  onCityClick={onCityClick} 
+                <CitiesList
+                  cities={cities}
+                  onCityClick={onCityClick}
                   aciveCity={city} />
               </section>
             </div>
-              {
-                aparts.length > 0 ?
+            {
+              aparts.length > 0 ?
                 <CitiesWrap
                   aparts={aparts}
                   aciveCity={city}
@@ -75,7 +75,7 @@ class Main extends PureComponent {
                     <div className="cities__right-section"></div>
                   </div>
                 </div>
-              }
+            }
           </main>
         </div>
       </div>
@@ -84,7 +84,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  aparts: PropTypes.arrayOf(PropTypes.exact(
+  citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
@@ -122,6 +122,7 @@ Main.propTypes = {
   ),
   setCitiesData: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
+  onCityClick: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
