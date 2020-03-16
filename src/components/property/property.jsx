@@ -5,13 +5,16 @@ import ReviewList from '../review-list/review-list.jsx';
 import Map from '../map/map.jsx';
 import CardList from '../card-list/card-list.jsx';
 import reviews from '../../mocks/reviews.js';
-import offersNearby from "../../mocks/offersNearby.js";
+import citiesData from '../../mocks/dataCities.js';
 
 const Property = (props) => {
-  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, location, city, description} = props.apart;
-  const {onMouseOver, onMouseOut, activePin} = props;
-  const cordsNearby = offersNearby.map((apart) => apart.location);
-  const cordsArray = [location, ...cordsNearby];
+  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, city, description, id} = props.apart;
+  let offersNearby = [];
+  citiesData.forEach((item) => {
+    if (offersNearby.length < 3 && item.id !== id && item.city.name === city.name) {
+      offersNearby.push(item);
+    }
+  });
   const ratingRound = Math.round(rating);
   const ratingComa = rating.toString().replace(/\./g, `,`);
 
@@ -112,17 +115,9 @@ const Property = (props) => {
                     </span>
                   </div>
                   <div className="property__description">
-                    {/* {
-                      host.description.map((text) => {
-                        return <p className="property__text" key={text.id}>
-                          {text.text}
-                        </p>;
-                      })
-                    } */}
-
                     <p className="property__text">
                       {description}
-                    </p>;
+                    </p>
                   </div>
                 </div>
                 <section className="property__reviews reviews">
@@ -180,11 +175,11 @@ const Property = (props) => {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city.location} cords={cordsArray} activePin={activePin}/>
+              <Map city={city.location} aparts={[props.apart, ...offersNearby]} activePin={props.apart}/>
             </section>
           </section>
           <div className="container">
-            <CardList aparts={offersNearby} onMouseOver={onMouseOver} onMouseOut={onMouseOut} typesClass={[`near-places__list`, `near-places__card`]}/>
+            <CardList aparts={offersNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
           </div>
         </main>
       </div>
@@ -227,13 +222,6 @@ Property.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
-  activePin: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number
-  })
 };
 
 export default Property;

@@ -5,11 +5,11 @@ const Card = (props) => {
   const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, onTitleClick, typesClass} = props;
   const ratingRound = Math.round(rating);
 
-  const _handleMouseOver = () => props.onMouseOver(props.apart);
-  const _handleMouseOut = () => props.onMouseOut();
+  const handleMouseEnter = () => props.onMouseEnter(props.apart);
+  const handleMouseLeave = () => props.onMouseLeave();
 
   return (
-    <article className={`${typesClass[1]} place-card`} onMouseOver={_handleMouseOver} onMouseOut={_handleMouseOut}>
+    <article className={`${typesClass[1]} place-card`} onMouseEnter={handleMouseEnter ? handleMouseEnter : null} onMouseLeave={handleMouseLeave ? handleMouseLeave : null}>
       { isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -83,10 +83,10 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onMouseOver: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
 };
 
 export default Card;

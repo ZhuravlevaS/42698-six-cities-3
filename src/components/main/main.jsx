@@ -1,24 +1,21 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import Map from '../map/map.jsx';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+
 import CitiesList from '../cities-list/cities-list.jsx';
-import SortedVariants from '../sorted-variants/sorted-variants.jsx';
+import CitiesWrap from '../cities-wrap/cities-wrap.jsx';
 import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.setCitiesData(data);
   }
 
   render() {
-    const {aparts, onMouseOut, onMouseOver, onCityClick, activePin, city} = this.props;
-    const location = aparts.map((apart) => apart.location);
-    const locationCity = aparts[0] ? aparts[0].city.location : null;
-    const cityName = locationCity ? aparts[0].city.name : null;
+    const {city, citiesData} = this.props;
+    const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
+    const emptyClass = aparts > 0 ? `` : `page__main--index-empty`;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
     return (
@@ -51,49 +48,33 @@ class Main extends PureComponent {
             </div>
           </header>
 
-          <main className="page__main page__main--index">
+          <main className={`page__main page__main--index ${emptyClass}`}>
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
               <section className="locations container">
-                <CitiesList cities={cities} onCityClick={onCityClick} aciveCity={city} />
+                <CitiesList
+                  cities={cities}
+                  activeCity={city} />
               </section>
             </div>
-            <div className="cities">
-              <div className="cities__places-container container">
-                {aparts.length > 0 &&
-                  <section className="cities__places places">
-                    <h2 className="visually-hidden">Places</h2>
-                    <b className="places__found">{aparts.length} places to stay in {cityName}</b>
-
-                    <SortedVariants
-                      aparts={aparts}
-                      onMouseOver={onMouseOver}
-                      onMouseOut={onMouseOut}
-                      city={city}
-                    />
-                  </section>
-                }
-                {aparts.length > 0 ||
-                  <section className="cities__no-places">
-                    <div className="cities__status-wrapper tabs__content">
-                      <b className="cities__status">No places to stay available</b>
-                      <p className="cities__status-description">We could not find any property availbale at the moment in {cityName}</p>
-                    </div>
-                  </section>
-                }
-
-
-                <div className="cities__right-section">
-                  <section className="cities__map map" style={{backgroundImage: `none`}}>
-                    <Map
-                      city={locationCity}
-                      cords={location}
-                      activePin={activePin}
-                    />
-                  </section>
+            {
+              aparts.length > 0 ?
+                <CitiesWrap
+                  aparts={aparts}
+                  activeCity={city}
+                /> :
+                <div className="cities">
+                  <div className="cities__places-container cities__places-container--empty container">
+                    <section className="cities__no-places">
+                      <div className="cities__status-wrapper tabs__content">
+                        <b className="cities__status">No places to stay available</b>
+                        <p className="cities__status-description">We could not find any property availbale at the moment in {city}</p>
+                      </div>
+                    </section>
+                    <div className="cities__right-section"></div>
+                  </div>
                 </div>
-              </div>
-            </div>
+            }
           </main>
         </div>
       </div>
@@ -102,7 +83,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  aparts: PropTypes.arrayOf(PropTypes.exact(
+  citiesData: PropTypes.arrayOf(PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
@@ -138,16 +119,22 @@ Main.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired,
   setCitiesData: PropTypes.func.isRequired,
-  activePin: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number
-  }),
-  city: PropTypes.string.isRequired,
+  city: PropTypes.string,
 };
 
-export default Main;
+const mapDispatchToProps = (dispatch) => ({
+
+  setCitiesData(dataCities) {
+    dispatch(ActionCreator.setCitiesData(dataCities));
+  },
+
+});
+
+export default connect(
+    (state) => ({
+      citiesData: state.citiesData,
+      city: state.city
+    }),
+    mapDispatchToProps
+)(Main);

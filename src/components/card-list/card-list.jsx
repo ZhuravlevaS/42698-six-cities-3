@@ -2,16 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
 
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+
 const CardList = (props) => {
-  const {aparts, onMouseOut, onMouseOver, typesClass} = props;
-  const _handleTitleClick = () => {
+  const {aparts, typesClass, handleCardMouseEnter, handleCardMouseLeave} = props;
+  const handleTitleClick = () => {
     return true;
   };
 
   return (
     <div className={`${typesClass[0]} places__list tabs__content`}>
       {
-        aparts.map((apart) => <Card key={apart.id} apart={apart} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onTitleClick={_handleTitleClick} typesClass={typesClass}/>)
+        aparts.map((apart) => {
+          return <Card
+            key={apart.id}
+            apart={apart}
+            onMouseEnter={handleCardMouseEnter}
+            onMouseLeave={handleCardMouseLeave}
+            onTitleClick={handleTitleClick}
+            typesClass={typesClass}
+          />;
+        })
       }
     </div>
   );
@@ -54,9 +66,22 @@ CardList.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
+  handleCardMouseEnter: PropTypes.func,
+  handleCardMouseLeave: PropTypes.func,
 };
 
-export default CardList;
+const mapDispatchToProps = (dispatch) => ({
+  handleCardMouseEnter(property) {
+    dispatch(ActionCreator.setHoverProperty(property));
+  },
+
+  handleCardMouseLeave() {
+    dispatch(ActionCreator.clearHoverProperty());
+  }
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(CardList);
