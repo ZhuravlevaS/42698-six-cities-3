@@ -20,7 +20,7 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string),
   onCityClick: PropTypes.func.isRequired,
-  activeCity: PropTypes.string.isRequired
+  activeCity: PropTypes.string
 };
 
 const mapDispatchToProps = (dispatch) => ({

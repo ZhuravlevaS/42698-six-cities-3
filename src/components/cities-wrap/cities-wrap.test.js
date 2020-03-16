@@ -1,27 +1,27 @@
 import React from 'react';
-import App from './app.jsx';
+import CitiesWrap from './cities-wrap.jsx';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import offers from '../../mocks/dataCities';
-import propertyObj from "../../mocks/property.js";
+import property from '../../mocks/property.js';
 import renderer from 'react-test-renderer';
+import offers from '../../mocks/dataCities';
 
 const mockStore = configureStore([]);
 
-it(`<App/> render`, () => {
+it(`<CitiesWrap/> render`, () => {
   const store = mockStore({
-    city: `Amsterdam`,
-    citiesData: offers,
     sortType: `popular`,
-    hoverProperty: propertyObj
+    hoverProperty: property
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App apart={propertyObj} />
-        </Provider>
-    )
+          <CitiesWrap
+            aparts={offers}
+            activeCity={`Paris`} />
+        </Provider>)
     .toJSON();
+
   expect(tree).toMatchSnapshot();
 });

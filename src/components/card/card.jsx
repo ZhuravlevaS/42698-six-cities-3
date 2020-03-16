@@ -9,7 +9,7 @@ const Card = (props) => {
   const handleMouseLeave = () => props.onMouseLeave();
 
   return (
-    <article className={`${typesClass[1]} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article className={`${typesClass[1]} place-card`} onMouseEnter={handleMouseEnter ? handleMouseEnter : null} onMouseLeave={handleMouseLeave ? handleMouseLeave : null}>
       { isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

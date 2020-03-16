@@ -82,8 +82,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-    (state) => ({
-      hoverProperty: state.hoverProperty,
-    }),
+    null,
     mapDispatchToProps
 )(CardList);

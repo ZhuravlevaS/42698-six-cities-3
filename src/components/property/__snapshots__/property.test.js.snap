@@ -303,7 +303,6 @@ Array [
                 >
                   A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
                 </p>
-                ;
               </div>
             </div>
             <section
@@ -626,8 +625,8 @@ Array [
         >
           <article
             className="near-places__card place-card"
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -657,7 +656,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    120
+                    110
                   </b>
                   <span
                     className="place-card__price-text"
@@ -724,8 +723,8 @@ Array [
           </article>
           <article
             className="near-places__card place-card"
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -755,7 +754,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    120
+                    10
                   </b>
                   <span
                     className="place-card__price-text"
@@ -822,8 +821,8 @@ Array [
           </article>
           <article
             className="near-places__card place-card"
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -853,7 +852,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    120
+                    1200
                   </b>
                   <span
                     className="place-card__price-text"
@@ -890,7 +889,7 @@ Array [
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "60%",
                       }
                     }
                   />

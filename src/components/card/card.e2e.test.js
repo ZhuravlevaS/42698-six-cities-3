@@ -8,8 +8,8 @@ Enzyme.configure({
 });
 
 it(`Card MouseOver`, () => {
-  const handlerMouseOver = jest.fn((apart) => apart);
-  const handlerMouseOut = jest.fn((object) => object);
+  const handlerMouseEnter = jest.fn((apart) => apart);
+  const handlerMouseLeave = jest.fn((object) => object);
   const titleClick = jest.fn();
 
   const apart = {
@@ -50,8 +50,8 @@ it(`Card MouseOver`, () => {
   const card = shallow(
       <Card
         apart={apart}
-        onMouseOver={handlerMouseOver}
-        onMouseOut={handlerMouseOut}
+        onMouseEnter={handlerMouseEnter}
+        onMouseLeave={handlerMouseLeave}
         onTitleClick={titleClick}
         typesClass={[`near-places__list`, `near-places__card`]}
       />
@@ -61,10 +61,10 @@ it(`Card MouseOver`, () => {
   let title = card.find(`.place-card__name`);
 
   title.props().onClick();
-  cardWrap.simulate(`mouseover`, handlerMouseOver);
-  cardWrap.simulate(`mouseout`, handlerMouseOut);
+  cardWrap.simulate(`mouseenter`, handlerMouseEnter);
+  cardWrap.simulate(`mouseleave`, handlerMouseLeave);
 
   expect(titleClick.mock.calls.length).toBe(1);
-  expect(handlerMouseOver).toHaveBeenNthCalledWith(1, apart);
-  expect(handlerMouseOut.mock.calls.length).toBe(1);
+  expect(handlerMouseEnter).toHaveBeenNthCalledWith(1, apart);
+  expect(handlerMouseLeave.mock.calls.length).toBe(1);
 });

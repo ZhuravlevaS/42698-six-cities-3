@@ -88,7 +88,7 @@ CitiesWrap.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  aciveCity: PropTypes.string.isRequired,
+  aciveCity: PropTypes.string,
   sortType: PropTypes.string.isRequired,
   hoverProperty: PropTypes.exact(
       {

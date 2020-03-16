@@ -13,7 +13,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {onCityClick, city, citiesData} = this.props;
+    const {city, citiesData} = this.props;
     const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
     const emptyClass = aparts > 0 ? `` : `page__main--index-empty`;
     const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
@@ -54,15 +54,14 @@ class Main extends PureComponent {
               <section className="locations container">
                 <CitiesList
                   cities={cities}
-                  onCityClick={onCityClick}
-                  aciveCity={city} />
+                  activeCity={city} />
               </section>
             </div>
             {
               aparts.length > 0 ?
                 <CitiesWrap
                   aparts={aparts}
-                  aciveCity={city}
+                  activeCity={city}
                 /> :
                 <div className="cities">
                   <div className="cities__places-container cities__places-container--empty container">
@@ -121,8 +120,7 @@ Main.propTypes = {
       })
   ),
   setCitiesData: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
-  onCityClick: PropTypes.func.isRequired
+  city: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
