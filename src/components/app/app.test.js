@@ -2,8 +2,8 @@ import React from 'react';
 import App from './app.jsx';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import offers from '../../mocks/dataCities';
-import propertyObj from "../../mocks/property.js";
+import offers from './dataCities';
+import propertyObj from "./property.js";
 import renderer from 'react-test-renderer';
 
 const mockStore = configureStore([]);

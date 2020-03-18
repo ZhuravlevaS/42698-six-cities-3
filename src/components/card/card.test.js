@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './card.jsx';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import property from '../../mocks/property.js';
+import property from './property.js';
 import renderer from 'react-test-renderer';
 
 const handleCardMouseEnter = jest.fn((item) => item);

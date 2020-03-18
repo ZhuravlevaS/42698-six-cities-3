@@ -1,10 +1,12 @@
 import React from 'react';
-import CardList from './card-list.jsx';
-import offers from '../../mocks/dataCities.js';
 import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import property from '../../mocks/property.js';
+
+import CardList from './card-list.jsx';
+
+import property from './property.js';
+import offers from './dataCities.js';
 
 const mockStore = configureStore([]);
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import Main from './main.jsx';
 import renderer from 'react-test-renderer';
-import offers from '../../mocks/dataCities.js';
+
+import Main from './main.jsx';
+
+import offers from './dataCities.js';
 
 const mockStore = configureStore([]);
 
