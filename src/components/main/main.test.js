@@ -13,7 +13,7 @@ it(`<Main/> render`, () => {
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();
   const onCityClick = jest.fn();
-  const setCitiesData = jest.fn();
+  const setoffersData = jest.fn();
   const city = `Amsterdam`;
   const store = mockStore({
     sortType: `popular`
@@ -27,7 +27,7 @@ it(`<Main/> render`, () => {
             onMouseOut={onMouseOut}
             city={city}
             onCityClick={onCityClick}
-            setCitiesData={setCitiesData}/>
+            setoffersData={setoffersData}/>
         </Provider>
     )
     .toJSON();

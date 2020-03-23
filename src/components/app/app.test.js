@@ -11,7 +11,7 @@ const mockStore = configureStore([]);
 it(`<App/> render`, () => {
   const store = mockStore({
     city: `Amsterdam`,
-    citiesData: offers,
+    offersData: offers,
     sortType: `popular`,
     hoverProperty: propertyObj
   });

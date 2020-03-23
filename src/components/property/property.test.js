@@ -12,7 +12,7 @@ const mockStore = configureStore([]);
 it(`<Property/> render`, () => {
   const store = mockStore({
     city: `Amsterdam`,
-    citiesData: offers
+    offersData: offers
   });
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();

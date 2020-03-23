@@ -12,7 +12,7 @@ const data = [
       name: `Amsterdam`
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `img/avatar-angelina.jpg`,
       id: 3,
@@ -46,7 +46,7 @@ const data = [
       name: `Amsterdam`
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `img/avatar-angelina.jpg`,
       id: 4,
@@ -80,7 +80,7 @@ const data = [
       name: `Amsterdam`
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `img/avatar-angelina.jpg`,
       id: 5,
@@ -114,7 +114,7 @@ const data = [
       name: `Amsterdam`
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `img/avatar-angelina.jpg`,
       id: 6,
@@ -148,7 +148,7 @@ const data = [
       name: `Paris`
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
     host: {
       avatarUrl: `img/avatar-angelina.jpg`,
       id: 7,
@@ -177,7 +177,7 @@ const data = [
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     city: ``,
-    citiesData: null,
+    offersData: null,
     sortType: `popular`,
     hoverProperty: {}
   });
@@ -229,11 +229,11 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for setting data returns correct action`, () => {
-    expect(ActionCreator.setCitiesData(data)).toEqual({
+    expect(ActionCreator.setoffersData(data)).toEqual({
       type: ActionType.SET_CITIES_DATA,
       payload: {
         city: `Amsterdam`,
-        citiesData: [
+        offersData: [
           {
             bedrooms: 3,
             city: {
@@ -245,7 +245,7 @@ describe(`Action creators work correctly`, () => {
               name: `Amsterdam`
             },
             description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-            goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+            amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
             host: {
               avatarUrl: `img/avatar-angelina.jpg`,
               id: 3,
@@ -279,7 +279,7 @@ describe(`Action creators work correctly`, () => {
               name: `Amsterdam`
             },
             description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-            goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+            amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
             host: {
               avatarUrl: `img/avatar-angelina.jpg`,
               id: 4,
@@ -313,7 +313,7 @@ describe(`Action creators work correctly`, () => {
               name: `Amsterdam`
             },
             description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-            goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+            amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
             host: {
               avatarUrl: `img/avatar-angelina.jpg`,
               id: 5,
@@ -347,7 +347,7 @@ describe(`Action creators work correctly`, () => {
               name: `Amsterdam`
             },
             description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-            goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+            amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
             host: {
               avatarUrl: `img/avatar-angelina.jpg`,
               id: 6,
@@ -381,7 +381,7 @@ describe(`Action creators work correctly`, () => {
               name: `Paris`
             },
             description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-            goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+            amenities: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
             host: {
               avatarUrl: `img/avatar-angelina.jpg`,
               id: 7,

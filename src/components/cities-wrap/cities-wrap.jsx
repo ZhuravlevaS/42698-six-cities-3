@@ -21,7 +21,7 @@ const SortType = {
 const WithSortingVariants = withSorting(SortedVariants, SortType);
 
 const CitiesWrap = (props) => {
-  const {aparts, hoverProperty, sortType, aciveCity} = props;
+  const {aparts, hoverProperty, sortType, activeCity} = props;
   const locationCity = aparts[0] ? aparts[0].city.location : null;
 
   return (
@@ -29,10 +29,10 @@ const CitiesWrap = (props) => {
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{aparts.length} places to stay in {aciveCity}</b>
+          <b className="places__found">{aparts.length} places to stay in {activeCity}</b>
           <WithSortingVariants
             aparts={aparts}
-            city={aciveCity}
+            city={activeCity}
             sortType={sortType}
           />
         </section>
@@ -64,7 +64,7 @@ CitiesWrap.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        amenities: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,
@@ -88,8 +88,8 @@ CitiesWrap.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  aciveCity: PropTypes.string,
-  sortType: PropTypes.string.isRequired,
+  activeCity: PropTypes.string,
+  sortType: PropTypes.string,
   hoverProperty: PropTypes.exact(
       {
         bedrooms: PropTypes.number,
@@ -102,7 +102,7 @@ CitiesWrap.propTypes = {
           name: PropTypes.string,
         }),
         description: PropTypes.string,
-        goods: PropTypes.arrayOf(PropTypes.string),
+        amenities: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string,
           id: PropTypes.number,
@@ -129,7 +129,7 @@ CitiesWrap.propTypes = {
 
 export default connect(
     (state) => ({
-      sortType: state.sortType,
-      hoverProperty: state.hoverProperty,
+      sortType: state.STATE.sortType,
+      hoverProperty: state.STATE.hoverProperty,
     })
 )(CitiesWrap);

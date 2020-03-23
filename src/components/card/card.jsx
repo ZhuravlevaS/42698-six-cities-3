@@ -60,7 +60,7 @@ Card.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     description: PropTypes.string.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    amenities: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,

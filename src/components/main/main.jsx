@@ -1,23 +1,16 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
-
+import {getOffersByCity, getCities} from "../../reducer/data/selectors.js"
 import CitiesList from '../cities-list/cities-list.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import CitiesWrap from '../cities-wrap/cities-wrap.jsx';
-import data from "../../mocks/dataCities.js";
 
 class Main extends PureComponent {
-  componentDidMount() {
-    this.props.setCitiesData(data);
-  }
-
   render() {
-    const {city, citiesData} = this.props;
-    const aparts = citiesData ? citiesData.filter((item) => item.city.name === city) : [];
-    const emptyClass = aparts > 0 ? `` : `page__main--index-empty`;
-    const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+    const {activeCity, aparts, cities} = this.props;
+    const isAparts = aparts.length > 0;
+    const emptyClass = isAparts ? `` : `page__main--index-empty`;
 
     return (
       <div>
@@ -54,17 +47,16 @@ class Main extends PureComponent {
             <div className="tabs">
               <section className="locations container">
                 <CitiesList
-                  cities={cities}
-                  activeCity={city} />
+                  cities={cities}/>
               </section>
             </div>
             {
-              aparts.length > 0 ?
+              isAparts ?
                 <CitiesWrap
                   aparts={aparts}
-                  activeCity={city}
+                  activeCity={activeCity}
                 /> :
-                <MainEmpty city={city}/>
+                <MainEmpty city={activeCity}/>
             }
           </main>
         </div>
@@ -74,7 +66,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  citiesData: PropTypes.arrayOf(PropTypes.exact(
+  offersData: PropTypes.arrayOf(PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
@@ -86,7 +78,7 @@ Main.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        amenities: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,
@@ -110,22 +102,13 @@ Main.propTypes = {
         type: PropTypes.string.isRequired
       })
   ),
-  setCitiesData: PropTypes.func.isRequired,
-  city: PropTypes.string,
+  activeCity: PropTypes.string,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-
-  setCitiesData(dataCities) {
-    dispatch(ActionCreator.setCitiesData(dataCities));
-  },
-
+const mapStateToProps = (state) => ({
+  aparts: getOffersByCity(state),
+  activeCity: state.DATA.city, 
+  cities: getCities(state)
 });
 
-export default connect(
-    (state) => ({
-      citiesData: state.citiesData,
-      city: state.city
-    }),
-    mapDispatchToProps
-)(Main);
+export default connect(mapStateToProps)(Main);
