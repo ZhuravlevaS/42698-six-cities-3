@@ -12,7 +12,9 @@ it(`<SortedVariants/> render`, () => {
   const onMouseOut = jest.fn();
 
   const store = mockStore({
-    sortType: `popular`
+    STATE: {
+      sortType: `popular`
+    }
   });
 
   const tree = renderer

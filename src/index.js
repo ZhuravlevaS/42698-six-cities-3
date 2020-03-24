@@ -19,13 +19,13 @@ const api = createAPI(onUnauthorized);
 const store = createStore(
     reducer,
     compose(
-      applyMiddleware(thunk.withExtraArgument(api)),
-      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
-    ) 
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
 );
 
 store.dispatch(DataOperation.loadOffers());
-//store.dispatch(UserOperation.checkAuth());
+store.dispatch(UserOperation.checkAuth());
 
 
 ReactDOM.render(

@@ -1,5 +1,5 @@
 import {extend} from "../../utils.js";
-import Offer from "../../models/offer.js"
+import Offer from "../../models/offer.js";
 
 const initialState = {
   offersData: [],

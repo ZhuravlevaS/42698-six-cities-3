@@ -20,7 +20,6 @@ const withSortingVar = (Component, SortType) => {
     }
 
     componentDidUpdate(prevProps) {
-      debugger
       if (prevProps.sortType !== this.props.sortType || prevProps.city !== this.props.city) {
         this.sortAparts();
       }

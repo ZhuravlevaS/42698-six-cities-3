@@ -98,7 +98,7 @@ exports[`<App/> render 1`] = `
       </div>
     </header>
     <main
-      className="page__main page__main--index page__main--index-empty"
+      className="page__main page__main--index "
     >
       <h1
         className="visually-hidden"
@@ -114,45 +114,6 @@ exports[`<App/> render 1`] = `
           <ul
             className="locations__list tabs__list"
           >
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item "
-                href="#"
-                onClick={[Function]}
-              >
-                <span>
-                  Paris
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item "
-                href="#"
-                onClick={[Function]}
-              >
-                <span>
-                  Cologne
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item "
-                href="#"
-                onClick={[Function]}
-              >
-                <span>
-                  Brussels
-                </span>
-              </a>
-            </li>
             <li
               className="locations__item"
             >
@@ -175,20 +136,7 @@ exports[`<App/> render 1`] = `
                 onClick={[Function]}
               >
                 <span>
-                  Hamburg
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item "
-                href="#"
-                onClick={[Function]}
-              >
-                <span>
-                  Dusseldorf
+                  Paris
                 </span>
               </a>
             </li>
@@ -214,6 +162,7 @@ exports[`<App/> render 1`] = `
             >
               4
                places to stay in 
+              Amsterdam
             </b>
             <form
               action="#"

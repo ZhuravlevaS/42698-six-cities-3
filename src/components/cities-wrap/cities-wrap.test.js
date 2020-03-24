@@ -12,16 +12,19 @@ const mockStore = configureStore([]);
 
 it(`<CitiesWrap/> render`, () => {
   const store = mockStore({
-    sortType: `popular`,
-    hoverProperty: property
+    STATE: {
+      sortType: `popular`,
+      hoverProperty: property
+    },
+    DATE: {
+      city: `Paris`
+    }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <CitiesWrap
-            aparts={offers}
-            activeCity={`Paris`} />
+          <CitiesWrap aparts={offers}/>
         </Provider>)
     .toJSON();
 

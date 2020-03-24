@@ -6,28 +6,25 @@ import renderer from 'react-test-renderer';
 import Main from './main.jsx';
 
 import offers from './dataCities.js';
+import offer from './property.js';
 
 const mockStore = configureStore([]);
 
 it(`<Main/> render`, () => {
-  const onMouseOver = jest.fn();
-  const onMouseOut = jest.fn();
-  const onCityClick = jest.fn();
-  const setoffersData = jest.fn();
-  const city = `Amsterdam`;
   const store = mockStore({
-    sortType: `popular`
+    DATA: {
+      offersData: offers,
+      city: `Amsterdam`
+    },
+    STATE: {
+      sortType: `popular`,
+      hoverProperty: offer
+    }
   });
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main
-            aparts={offers}
-            onMouseOver={onMouseOver}
-            onMouseOut={onMouseOut}
-            city={city}
-            onCityClick={onCityClick}
-            setoffersData={setoffersData}/>
+          <Main/>
         </Provider>
     )
     .toJSON();

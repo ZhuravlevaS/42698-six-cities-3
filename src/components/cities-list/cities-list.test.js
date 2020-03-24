@@ -10,7 +10,9 @@ const mockStore = configureStore([]);
 
 it(`<CitiesList/> render`, () => {
   const store = mockStore({
-    city: `Paris`
+    DATA: {
+      city: `Amsterdam`
+    },
   });
   const onCityClick = jest.fn();
   const activeCity = `Paris`;

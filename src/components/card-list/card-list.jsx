@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleCardMouseLeave() {
-    dispatch(ActionCreator.clearHoverProperty());
+    dispatch(ActionCreator.cleanHoverProperty());
   }
 });
 

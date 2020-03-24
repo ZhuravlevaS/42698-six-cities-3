@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {getOffersByCity, getCities} from "../../reducer/data/selectors.js"
+import {getOffersByCity, getCities} from "../../reducer/data/selectors.js";
 import CitiesList from '../cities-list/cities-list.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
 import CitiesWrap from '../cities-wrap/cities-wrap.jsx';
@@ -66,7 +66,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  offersData: PropTypes.arrayOf(PropTypes.exact(
+  aparts: PropTypes.arrayOf(PropTypes.exact(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
@@ -103,11 +103,12 @@ Main.propTypes = {
       })
   ),
   activeCity: PropTypes.string,
+  cities: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = (state) => ({
   aparts: getOffersByCity(state),
-  activeCity: state.DATA.city, 
+  activeCity: state.DATA.city,
   cities: getCities(state)
 });
 

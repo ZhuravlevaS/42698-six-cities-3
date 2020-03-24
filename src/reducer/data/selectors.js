@@ -6,10 +6,10 @@ const NAMESPACE = NameSpace.DATA;
 const getUniqueCities = (offersData) => {
   let cities = offersData.map((el) =>{
     return el.city.name;
-  })
+  });
 
   return Array.from(new Set(cities));
-}
+};
 
 export const getOffers = (state) => state[NAMESPACE].offersData;
 
@@ -23,5 +23,5 @@ export const getCities = createSelector(
 export const getOffersByCity = createSelector(
     getOffers,
     getActiveCity,
-    (offersData, city) => { const arr = offersData.filter((offer) => offer.city.name === city); return arr}
+    (offersData, city) => offersData.filter((offer) => offer.city.name === city)
 );
