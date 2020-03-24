@@ -3,15 +3,16 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import Property from './property.jsx';
 import renderer from 'react-test-renderer';
-import property from '../../mocks/property.js';
-import offers from '../../mocks/dataCities';
+
+import property from './property.js';
+import offers from './dataCities';
 
 const mockStore = configureStore([]);
 
 it(`<Property/> render`, () => {
   const store = mockStore({
     city: `Amsterdam`,
-    citiesData: offers
+    offersData: offers
   });
   const onMouseOver = jest.fn();
   const onMouseOut = jest.fn();

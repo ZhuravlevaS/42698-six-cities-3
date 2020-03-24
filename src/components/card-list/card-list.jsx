@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
 
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state.js";
 
 const CardList = (props) => {
   const {aparts, typesClass, handleCardMouseEnter, handleCardMouseLeave} = props;
@@ -42,7 +42,7 @@ CardList.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        amenities: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleCardMouseLeave() {
-    dispatch(ActionCreator.clearHoverProperty());
+    dispatch(ActionCreator.cleanHoverProperty());
   }
 });
 

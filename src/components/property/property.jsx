@@ -5,12 +5,12 @@ import ReviewList from '../review-list/review-list.jsx';
 import Map from '../map/map.jsx';
 import CardList from '../card-list/card-list.jsx';
 import reviews from '../../mocks/reviews.js';
-import citiesData from '../../mocks/dataCities.js';
+import offersData from '../../mocks/dataCities.js';
 
 const Property = (props) => {
-  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, goods, host, city, description, id} = props.apart;
+  const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, amenities, host, city, description, id} = props.apart;
   let offersNearby = [];
-  citiesData.forEach((item) => {
+  offersData.forEach((item) => {
     if (offersNearby.length < 3 && item.id !== id && item.city.name === city.name) {
       offersNearby.push(item);
     }
@@ -96,7 +96,7 @@ const Property = (props) => {
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
                     {
-                      goods.map((good) => {
+                      amenities.map((good) => {
                         return <li className="property__inside-item" key={good}>
                           {good}
                         </li>;
@@ -199,7 +199,7 @@ Property.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     description: PropTypes.string.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    amenities: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
