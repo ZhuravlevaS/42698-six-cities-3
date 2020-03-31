@@ -17,6 +17,12 @@ it(`<App/> render`, () => {
     STATE: {
       sortType: `popular`,
       hoverProperty: offer
+    },
+    USER: {
+      authorizationStatus: `AUTH`,
+      user: {
+        email: ``,
+      }
     }
   });
 

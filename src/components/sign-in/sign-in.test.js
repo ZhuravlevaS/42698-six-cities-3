@@ -1,38 +1,29 @@
 import React from 'react';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import SignIn from './sign-in.jsx';
 import renderer from 'react-test-renderer';
-
-import Main from './main.jsx';
-
-import offers from './dataCities.js';
-import offer from './property.js';
 
 const mockStore = configureStore([]);
 
-it(`<Main/> render`, () => {
+it(`<SignIn/> render`, () => {
   const store = mockStore({
     DATA: {
-      offersData: offers,
       city: `Amsterdam`
     },
-    STATE: {
-      sortType: `popular`,
-      hoverProperty: offer
-    },
     USER: {
-      authorizationStatus: `AUTH`,
+      authorizationStatus: `NO_AUTH`,
       user: {
         email: ``,
       }
     }
   });
+
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main/>
-        </Provider>
-    )
+          <SignIn/>
+        </Provider>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
