@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 
 class App extends PureComponent {
   _renderMain() {
@@ -18,6 +19,10 @@ class App extends PureComponent {
     />;
   }
 
+  _renderLogin() {
+    return <SignIn/>;
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -27,6 +32,9 @@ class App extends PureComponent {
           </Route>
           <Route path={`/dev-offer`}>
             {this._renderOffer()}
+          </Route>
+          <Route path={`/login`}>
+            {this._renderLogin()}
           </Route>
         </Switch>
       </BrowserRouter>

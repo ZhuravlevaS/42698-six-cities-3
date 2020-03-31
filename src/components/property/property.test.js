@@ -5,22 +5,24 @@ import Property from './property.jsx';
 import renderer from 'react-test-renderer';
 
 import property from './property.js';
-import offers from './dataCities';
+
 
 const mockStore = configureStore([]);
 
 it(`<Property/> render`, () => {
   const store = mockStore({
-    city: `Amsterdam`,
-    offersData: offers
+    USER: {
+      authorizationStatus: `AUTH`,
+      user: {
+        email: ``,
+      }
+    }
   });
-  const onMouseOver = jest.fn();
-  const onMouseOut = jest.fn();
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Property apart={property} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+          <Property apart={property}/>
         </Provider>)
     .toJSON();
 
