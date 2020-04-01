@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {Operation as StateOperation} from "../../reducer/state/state.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 import PropertyGallery from "../property-gallery/property-gallery.jsx";
 import ReviewList from '../review-list/review-list.jsx';
@@ -10,9 +12,6 @@ import Header from '../header/header.jsx';
 import FeedbackForm from '../feedbsck-form/feedback-form.jsx';
 import withSendingReview from '../../hocs/with-sending-feedback.jsx';
 
-import offersData from '../../mocks/dataCities.js';
-import reviews from '../../mocks/reviews.js';
-
 const FeedbackFormSending = withSendingReview(FeedbackForm);
 
 class Property extends PureComponent {
@@ -20,14 +19,14 @@ class Property extends PureComponent {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.loadReviews(this.props.apart.id);
+    this.props.loadHotelsNearby(this.props.apart.id);
+  }
+
   render() {
-    const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, adults, amenities, host, city, description, id} = this.props.apart;
-    let offersNearby = [];
-    offersData.forEach((item) => {
-      if (offersNearby.length < 3 && item.id !== id && item.city.name === city.name) {
-        offersNearby.push(item);
-      }
-    });
+    const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, maxAdults, amenities, host, city, description, id} = this.props.apart;
+
     const ratingRound = Math.round(rating);
     const ratingComa = rating.toString().replace(/\./g, `,`);
     return (
@@ -76,7 +75,7 @@ class Property extends PureComponent {
                       {bedrooms} Bedrooms
                     </li>
                     <li className="property__feature property__feature--adults">
-                      Max {adults} adults
+                      Max {maxAdults} adults
                     </li>
                   </ul>
                   <div className="property__price">
@@ -111,25 +110,34 @@ class Property extends PureComponent {
                       </p>
                     </div>
                   </div>
-                  <section className="property__reviews reviews">
-                    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
-                    <ReviewList reviews= {reviews}/>
+                  <section className="property__reviews reviews">
+                    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.props.reviews ? this.props.reviews.length : 0}</span></h2>
+                    {
+                      this.props.reviews &&
+                      <ReviewList reviews= {this.props.reviews}/>
+                    }
                     {
                       this.props.authStat === `AUTH` &&
                       <FeedbackFormSending id={id}/>
                     }
-
                   </section>
+
                 </div>
               </div>
-              <section className="property__map map">
-                <Map city={city.location} aparts={[this.props.apart, ...offersNearby]} activePin={this.props.apart}/>
-              </section>
+              { this.props.hotelsNearby &&
+                <section className="property__map map">
+                  <Map city={city.location} aparts={[this.props.apart, ...this.props.hotelsNearby]} activePin={this.props.apart}/>
+                </section>
+              }
+
             </section>
-            <div className="container">
-              <CardList aparts={offersNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
-            </div>
+            { this.props.hotelsNearby &&
+              <div className="container">
+                <CardList aparts={this.props.hotelsNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
+              </div>
+            }
+
           </main>
         </div>
       </React.Fragment>
@@ -138,7 +146,7 @@ class Property extends PureComponent {
 }
 
 Property.propTypes = {
-  apart: PropTypes.exact({
+  apart: PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
       location: PropTypes.exact({
@@ -172,11 +180,73 @@ Property.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  authStat: PropTypes.string.isRequired
+  authStat: PropTypes.string.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    comment: PropTypes.string,
+    date: PropTypes.string,
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    user: PropTypes.shape({
+      avatarUrl: PropTypes.string,
+      id: PropTypes.number,
+      isPro: PropTypes.bool,
+      name: PropTypes.string
+    })
+  })
+  ),
+  loadReviews: PropTypes.func.isRequired,
+  loadHotelsNearby: PropTypes.func.isRequired,
+  hotelsNearby: PropTypes.arrayOf(PropTypes.shape({
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.exact({
+      location: PropTypes.exact({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }),
+    description: PropTypes.string.isRequired,
+    amenities: PropTypes.arrayOf(PropTypes.string),
+    host: PropTypes.exact({
+      avatarUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired
+    }),
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.exact({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    maxAdults: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
+  })
+  )
 };
 
 const mapStateToProps = (state) => ({
-  authStat: state.USER.authorizationStatus
+  authStat: state.USER.authorizationStatus,
+  reviews: state.STATE.reviews,
+  hotelsNearby: state.DATA.hotelsNearby
 });
 
-export default connect(mapStateToProps)(Property);
+const mapDispatchToProps = (dispatch) => ({
+  loadReviews(id) {
+    dispatch(StateOperation.getReviews(id));
+  },
+
+  loadHotelsNearby(id) {
+    dispatch(DataOperation.loadHotelsNearby(id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

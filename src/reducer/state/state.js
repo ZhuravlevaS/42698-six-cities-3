@@ -1,10 +1,12 @@
 import {extend} from "../../utils.js";
+import Comment from "../../models/comment.js";
 
 const InitialState = {
   sortType: `popular`,
   hoverProperty: {},
   isReviewSending: false,
-  isResetForm: false
+  isResetForm: false,
+  reviews: null
 };
 
 const ActionCreator = {
@@ -34,11 +36,23 @@ const ActionCreator = {
     type: ActionType.SET_RESET_FORM,
     payload: bool
   }),
+  setReviews: (data)=> ({
+    type: ActionType.SET_REVIEWS,
+    payload: data
+  })
 };
 
-const onReviwOperationSuccess = (dispatch) => {
+const onReviwOperationSuccess = (response, dispatch) => {
   dispatch(ActionCreator.setReviewSending(false));
   dispatch(ActionCreator.setResetForm(true));
+
+  const comments = Comment.parseComments(response.data);
+  dispatch(ActionCreator.setReviews(comments));
+};
+
+const onReviewsLoadSuccess = (response, dispatch) => {
+  const comments = Comment.parseComments(response.data);
+  dispatch(ActionCreator.setReviews(comments));
 };
 
 const Operation = {
@@ -49,8 +63,14 @@ const Operation = {
       comment: data.comment,
       rating: data.rating,
     })
-      .then(() => {
-        onReviwOperationSuccess(dispatch);
+      .then((response) => {
+        onReviwOperationSuccess(response, dispatch);
+      });
+  },
+  getReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((responce) => {
+        onReviewsLoadSuccess(responce, dispatch);
       });
   },
 };
@@ -60,7 +80,8 @@ const ActionType = {
   SET_HOVER_PROPERTY: `SET_HOVER_PROPERTY`,
   CLEAN_HOVER_PROPERTY: `CLEAN_HOVER_PROPERTY`,
   SET_REVIEW_SENDING: `SET_REVIEW_SENDING`,
-  SET_RESET_FORM: `SET_RESET_FORM`
+  SET_RESET_FORM: `SET_RESET_FORM`,
+  SET_REVIEWS: `SET_REVIEWS`
 };
 
 const reducer = (state = InitialState, action) => {
@@ -84,6 +105,10 @@ const reducer = (state = InitialState, action) => {
     case ActionType.SET_RESET_FORM:
       return extend(state, {
         isResetForm: action.payload
+      });
+    case ActionType.SET_REVIEWS:
+      return extend(state, {
+        reviews: action.payload
       });
     default:
       return InitialState;

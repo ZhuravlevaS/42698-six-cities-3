@@ -24,14 +24,18 @@ const ReviewList = (props) => {
 
 
 ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.exact(
-      {
-        username: PropTypes.string.isRequired,
-        rate: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-      })
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    comment: PropTypes.string,
+    date: PropTypes.string,
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    user: PropTypes.shape({
+      avatarUrl: PropTypes.string,
+      id: PropTypes.number,
+      isPro: PropTypes.bool,
+      name: PropTypes.string
+    })
+  })
   )
 };
 
