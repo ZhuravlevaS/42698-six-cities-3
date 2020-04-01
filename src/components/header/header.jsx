@@ -16,7 +16,7 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <a className="header__nav-link header__nav-link--profile" href="/login">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">{props.user.email ? props.user.email : `Sign in`}</span>
@@ -31,7 +31,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  user: PropTypes.exact({
+  user: PropTypes.shape({
     email: PropTypes.string.isRequired,
   })
 };

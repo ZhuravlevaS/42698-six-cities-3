@@ -16,7 +16,7 @@ export default {
     isPro: true,
     name: `Angelina`
   },
-  id: 100,
+  id: 42,
   images: [`img/apartment-02.jpg`, `img/apartment-03.jpg`],
   isFavorite: false,
   isPremium: false,
