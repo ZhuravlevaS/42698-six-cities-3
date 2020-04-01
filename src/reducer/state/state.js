@@ -6,7 +6,7 @@ const InitialState = {
   hoverProperty: {},
   isReviewSending: false,
   isResetForm: false,
-  reviews: null
+  feedbacks: []
 };
 
 const ActionCreator = {
@@ -42,19 +42,6 @@ const ActionCreator = {
   })
 };
 
-const onReviwOperationSuccess = (response, dispatch) => {
-  dispatch(ActionCreator.setReviewSending(false));
-  dispatch(ActionCreator.setResetForm(true));
-
-  const comments = Comment.parseComments(response.data);
-  dispatch(ActionCreator.setReviews(comments));
-};
-
-const onReviewsLoadSuccess = (response, dispatch) => {
-  const comments = Comment.parseComments(response.data);
-  dispatch(ActionCreator.setReviews(comments));
-};
-
 const Operation = {
   sendReview: (data, id) => (dispatch, getState, api) => {
     dispatch(ActionCreator.setReviewSending(true));
@@ -64,13 +51,19 @@ const Operation = {
       rating: data.rating,
     })
       .then((response) => {
-        onReviwOperationSuccess(response, dispatch);
+        dispatch(ActionCreator.setReviewSending(false));
+        dispatch(ActionCreator.setResetForm(true));
+
+        const comments = Comment.parseComments(response.data);
+        dispatch(ActionCreator.setReviews(comments));
       });
   },
   getReviews: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-      .then((responce) => {
-        onReviewsLoadSuccess(responce, dispatch);
+      .then((response) => {
+        console.log(response)
+        const comments = Comment.parseComments(response.data);
+        dispatch(ActionCreator.setReviews(comments));
       });
   },
 };
@@ -108,10 +101,10 @@ const reducer = (state = InitialState, action) => {
       });
     case ActionType.SET_REVIEWS:
       return extend(state, {
-        reviews: action.payload
+        feedbacks: action.payload
       });
     default:
-      return InitialState;
+      return state;
   }
 };
 

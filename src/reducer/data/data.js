@@ -24,7 +24,7 @@ const ActionCreator = {
     payload: city
   }),
 
-  setHotelsNearb: (data)=> ({
+  setHotelsNearby: (data)=> ({
     type: ActionType.SET_HOTELS_NEARBY,
     payload: data
   })
@@ -46,7 +46,7 @@ const Operation = {
       .then((response) => {
         const hotels = Offer.parseOffers(response.data);
 
-        dispatch(ActionCreator.setHotelsNearb(hotels));
+        dispatch(ActionCreator.setHotelsNearby(hotels));
       });
   }
 };
@@ -54,11 +54,17 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS:
-      return extend(state, {offersData: action.payload});
+      return extend(state, {
+        offersData: action.payload
+      });
     case ActionType.SET_ACTIVE_CITY:
-      return extend(state, {city: action.payload});
+      return extend(state, {
+        city: action.payload
+      });
     case ActionType.SET_HOTELS_NEARBY:
-      return extend(state, {hotelsNearby: action.payload});
+      return extend(state, {
+        hotelsNearby: action.payload
+      });
     default:
       return state;
   }

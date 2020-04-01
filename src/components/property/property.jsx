@@ -20,8 +20,7 @@ class Property extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadReviews(this.props.apart.id);
-    this.props.loadHotelsNearby(this.props.apart.id);
+    this.props.loadData(this.props.apart.id);
   }
 
   render() {
@@ -194,8 +193,7 @@ Property.propTypes = {
     })
   })
   ),
-  loadReviews: PropTypes.func.isRequired,
-  loadHotelsNearby: PropTypes.func.isRequired,
+  loadData: PropTypes.func.isRequired,
   hotelsNearby: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
@@ -235,17 +233,14 @@ Property.propTypes = {
 
 const mapStateToProps = (state) => ({
   authStat: state.USER.authorizationStatus,
-  reviews: state.STATE.reviews,
+  reviews: state.STATE.feedbacks,
   hotelsNearby: state.DATA.hotelsNearby
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadReviews(id) {
-    dispatch(StateOperation.getReviews(id));
-  },
-
-  loadHotelsNearby(id) {
+  loadData(id) {
     dispatch(DataOperation.loadHotelsNearby(id));
+    dispatch(StateOperation.getReviews(id));
   }
 });
 
