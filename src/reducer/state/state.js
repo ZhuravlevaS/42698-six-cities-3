@@ -58,10 +58,9 @@ const Operation = {
         dispatch(ActionCreator.setReviews(comments));
       });
   },
-  getReviews: (id) => (dispatch, getState, api) => {
-    return api.get(`/comments/${id}`)
+  getReviews: (data) => (dispatch, getState, api) => {
+    return api.get(`/comments/${data.id}`)
       .then((response) => {
-        console.log(response)
         const comments = Comment.parseComments(response.data);
         dispatch(ActionCreator.setReviews(comments));
       });

@@ -3,27 +3,26 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import renderer from 'react-test-renderer';
 
-import FeedbackForm from './feedbsck-form.jsx';
+import FeedbackForm from './feedback-form.jsx';
 
-import property from './property.js';
 
 const mockStore = configureStore([]);
 
 it(`<FeedbackForm/> render`, () => {
   const store = mockStore({
     STATE: {
-      sortType: `popular`,
-      hoverProperty: property
+      isReviewSending: false
     },
-    DATE: {
-      city: `Paris`
-    }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <FeedbackForm />
+          <FeedbackForm valid={false}
+            onChangeInput={jest.fn(() =>{})}
+            onSubmitForm= {jest.fn(() =>{})}
+            isResetForm={false}
+            cleanState={jest.fn(() =>{})}/>
         </Provider>)
     .toJSON();
 

@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
+const DATE_OPTIONS = {
+  month: `long`,
+  year: `numeric`,
+};
+
 const Review = (props) => {
   const {user, rating, comment, date} = props.review;
+  const dateClass = new Date(date);
+
+  const dateNormal = dateClass.toLocaleString(`en-US`, DATE_OPTIONS);
 
   return (
     <li className="reviews__item">
@@ -24,7 +32,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>{date}</time>
+        <time className="reviews__time" dateTime={date}>{dateNormal}</time>
       </div>
     </li>
   );

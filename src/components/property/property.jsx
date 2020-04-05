@@ -9,7 +9,7 @@ import ReviewList from '../review-list/review-list.jsx';
 import Map from '../map/map.jsx';
 import CardList from '../card-list/card-list.jsx';
 import Header from '../header/header.jsx';
-import FeedbackForm from '../feedbsck-form/feedback-form.jsx';
+import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import withSendingReview from '../../hocs/with-sending-feedback.jsx';
 
 const FeedbackFormSending = withSendingReview(FeedbackForm);
@@ -20,7 +20,12 @@ class Property extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadData(this.props.apart.id);
+    const data = {
+      id: this.props.apart.id
+    };
+
+    this.props.loadHotels(data);
+    this.props.loadReviews(data);
   }
 
   render() {
@@ -52,7 +57,7 @@ class Property extends PureComponent {
                     <h1 className="property__name">
                       {title}
                     </h1>
-                    <button className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
+                    <button className={`property__bookmark-button button${isFavorite ? ` property__bookmark-button--active` : ``}`} type="button">
                       <svg className="property__bookmark-icon" width="31" height="33">
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
@@ -97,7 +102,7 @@ class Property extends PureComponent {
                     <h2 className="property__host-title">Meet the host</h2>
                     <div className="property__host-user user">
                       <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
-                        <img className="property__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar"/>
+                        <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                       </div>
                       <span className="property__user-name">
                         {host.name}
@@ -113,7 +118,7 @@ class Property extends PureComponent {
                   <section className="property__reviews reviews">
                     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.props.reviews ? this.props.reviews.length : 0}</span></h2>
                     {
-                      this.props.reviews &&
+                      this.props.reviews && this.props.reviews.length > 0 &&
                       <ReviewList reviews= {this.props.reviews}/>
                     }
                     {
@@ -124,14 +129,14 @@ class Property extends PureComponent {
 
                 </div>
               </div>
-              { this.props.hotelsNearby &&
+              { this.props.hotelsNearby && this.props.hotelsNearby.length > 0 &&
                 <section className="property__map map">
                   <Map city={city.location} aparts={[this.props.apart, ...this.props.hotelsNearby]} activePin={this.props.apart}/>
                 </section>
               }
 
             </section>
-            { this.props.hotelsNearby &&
+            { this.props.hotelsNearby && this.props.hotelsNearby.length > 0 &&
               <div className="container">
                 <CardList aparts={this.props.hotelsNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
               </div>
@@ -193,7 +198,8 @@ Property.propTypes = {
     })
   })
   ),
-  loadData: PropTypes.func.isRequired,
+  loadHotels: PropTypes.func.isRequired,
+  loadReviews: PropTypes.func.isRequired,
   hotelsNearby: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
@@ -238,9 +244,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadData(id) {
-    dispatch(DataOperation.loadHotelsNearby(id));
-    dispatch(StateOperation.getReviews(id));
+  loadHotels(data) {
+    dispatch(DataOperation.loadHotelsNearby(data));
+  },
+  loadReviews(data) {
+    dispatch(StateOperation.getReviews(data));
   }
 });
 

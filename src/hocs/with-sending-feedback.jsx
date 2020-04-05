@@ -24,7 +24,9 @@ const withSendingReview = (Component) => {
       }, this.validForm);
     }
 
-    _onSubmitForm() {
+    _onSubmitForm(event) {
+      event.preventDefault();
+
       const feedback = {
         comment: this.state.comment,
         rating: this.state.rating
@@ -77,8 +79,8 @@ const withSendingReview = (Component) => {
       dispatch(Operation.sendReview(feedback, id));
     },
 
-    setResetForm(bool) {
-      dispatch(ActionCreator.setResetForm(bool));
+    setResetForm(isReset) {
+      dispatch(ActionCreator.setResetForm(isReset));
     }
   });
 

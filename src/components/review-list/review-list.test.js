@@ -4,18 +4,28 @@ import renderer from 'react-test-renderer';
 
 const reviews = [
   {
-    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    username: `Max`,
-    rate: 3,
-    date: `December 24, 2018`,
-    id: 1
+    id: 3,
+    user: {
+      id: 1,
+      isPro: false,
+      name: `karpenter.xo`,
+      avatarUrl: `https://htmlacademy-react-3.appspot.com/six-cities/static/avatar/4.jpg`
+    },
+    rating: 5,
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness ofA quiet cozy and picturesque that hides behind a a river by the unique lightness of`,
+    date: `2020-04-01T15:14:31.636Z`
   },
   {
-    text: `A quiet cozy and picturesque lightness of Amsterdam. The building is green and from 18th century.`,
-    username: `Ray`,
-    rate: 5,
-    date: `January 24, 2017`,
-    id: 2
+    id: 5,
+    user: {
+      id: 7,
+      isPro: false,
+      name: `karpenter.xo`,
+      avatarUrl: `https://htmlacademy-react-3.appspot.com/six-cities/static/avatar/4.jpg`
+    },
+    rating: 5,
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness ofA quiet cozy and picturesque that hides behind a a river by the unique lightness of`,
+    date: `2020-04-01T15:14:31.636Z`
   }
 ];
 

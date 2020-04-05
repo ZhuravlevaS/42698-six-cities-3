@@ -4,7 +4,8 @@ import offers from "../../mocks/dataCities.js";
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     offersData: [],
-    city: ``
+    city: ``,
+    hotelsNearby: null
   });
 });
 
@@ -29,6 +30,18 @@ it(`setActiveCity`, () => {
   });
 });
 
+it(`setHotelsNearby`, () => {
+  expect(reducer({
+    offersData: [],
+    city: ``,
+    hotelsNearby: null
+  }, ActionCreator.setHotelsNearby(offers))).toEqual({
+    offersData: [],
+    city: ``,
+    hotelsNearby: offers
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for setting city returns correct action`, () => {
     expect(ActionCreator.setActiveCity(`Paris`)).toEqual({
@@ -40,7 +53,18 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for setting data returns correct action`, () => {
     expect(ActionCreator.loadOffers(offers)).toEqual({
       type: ActionType.LOAD_OFFERS,
-      payload: offers
+      payload: {
+        offersData: offers
+      }
+    });
+  });
+
+  it(`Action creator for setting hotels hear returns correct action`, () => {
+    expect(ActionCreator.setHotelsNearby(offers)).toEqual({
+      type: ActionType.SET_HOTELS_NEARBY,
+      payload: {
+        data: offers
+      }
     });
   });
 });

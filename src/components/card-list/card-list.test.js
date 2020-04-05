@@ -11,8 +11,6 @@ import offers from './dataCities.js';
 const mockStore = configureStore([]);
 
 it(`<CardList/> render`, () => {
-  const onMouseOver = jest.fn();
-  const onMouseOut = jest.fn();
   const store = mockStore({
     hoverProperty: property
   });
@@ -21,8 +19,6 @@ it(`<CardList/> render`, () => {
         <Provider store={store}>
           <CardList
             aparts={offers}
-            onMouseOver={onMouseOver}
-            onMouseOut={onMouseOut}
             typesClass={[`near-places__list`, `near-places__card`]}
           />
         </Provider>)
