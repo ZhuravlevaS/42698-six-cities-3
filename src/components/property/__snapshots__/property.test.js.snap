@@ -80,7 +80,7 @@ Array [
               >
                 <a
                   className="header__nav-link header__nav-link--profile"
-                  href="#"
+                  href="/login"
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
@@ -144,7 +144,7 @@ Array [
                 Beautiful & luxurious studio at great location
               </h1>
               <button
-                className="property__bookmark-button button "
+                className="property__bookmark-button button"
                 type="button"
               >
                 <svg
@@ -206,6 +206,7 @@ Array [
                 className="property__feature property__feature--adults"
               >
                 Max 
+                4
                  adults
               </li>
             </ul>
@@ -285,6 +286,7 @@ Array [
                     alt="Host avatar"
                     className="property__avatar user__avatar"
                     height="74"
+                    src="img/avatar-angelina.jpg"
                     width="74"
                   />
                 </div>
@@ -333,73 +335,14 @@ Array [
                         alt="Reviews avatar"
                         className="reviews__avatar user__avatar"
                         height="54"
-                        src="img/avatar-max.jpg"
+                        src="https://htmlacademy-react-3.appspot.com/six-cities/static/avatar/4.jpg"
                         width="54"
                       />
                     </div>
                     <span
                       className="reviews__user-name"
                     >
-                      Max
-                    </span>
-                  </div>
-                  <div
-                    className="reviews__info"
-                  >
-                    <div
-                      className="reviews__rating rating"
-                    >
-                      <div
-                        className="reviews__stars rating__stars"
-                      >
-                        <span
-                          style={
-                            Object {
-                              "width": "60%",
-                            }
-                          }
-                        />
-                        <span
-                          className="visually-hidden"
-                        >
-                          Rating
-                        </span>
-                      </div>
-                    </div>
-                    <p
-                      className="reviews__text"
-                    >
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <time
-                      className="reviews__time"
-                      dateTime="December 24, 2018"
-                    >
-                      December 24, 2018
-                    </time>
-                  </div>
-                </li>
-                <li
-                  className="reviews__item"
-                >
-                  <div
-                    className="reviews__user user"
-                  >
-                    <div
-                      className="reviews__avatar-wrapper user__avatar-wrapper"
-                    >
-                      <img
-                        alt="Reviews avatar"
-                        className="reviews__avatar user__avatar"
-                        height="54"
-                        src="img/avatar-max.jpg"
-                        width="54"
-                      />
-                    </div>
-                    <span
-                      className="reviews__user-name"
-                    >
-                      Ray
+                      karpenter.xo
                     </span>
                   </div>
                   <div
@@ -428,13 +371,72 @@ Array [
                     <p
                       className="reviews__text"
                     >
-                      A quiet cozy and picturesque lightness of Amsterdam. The building is green and from 18th century.
+                      A quiet cozy and picturesque that hides behind a a river by the unique lightness ofA quiet cozy and picturesque that hides behind a a river by the unique lightness of
                     </p>
                     <time
                       className="reviews__time"
-                      dateTime="January 24, 2017"
+                      dateTime="2020-04-01T15:14:31.636Z"
                     >
-                      January 24, 2017
+                      April 2020
+                    </time>
+                  </div>
+                </li>
+                <li
+                  className="reviews__item"
+                >
+                  <div
+                    className="reviews__user user"
+                  >
+                    <div
+                      className="reviews__avatar-wrapper user__avatar-wrapper"
+                    >
+                      <img
+                        alt="Reviews avatar"
+                        className="reviews__avatar user__avatar"
+                        height="54"
+                        src="https://htmlacademy-react-3.appspot.com/six-cities/static/avatar/4.jpg"
+                        width="54"
+                      />
+                    </div>
+                    <span
+                      className="reviews__user-name"
+                    >
+                      karpenter.xo
+                    </span>
+                  </div>
+                  <div
+                    className="reviews__info"
+                  >
+                    <div
+                      className="reviews__rating rating"
+                    >
+                      <div
+                        className="reviews__stars rating__stars"
+                      >
+                        <span
+                          style={
+                            Object {
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <span
+                          className="visually-hidden"
+                        >
+                          Rating
+                        </span>
+                      </div>
+                    </div>
+                    <p
+                      className="reviews__text"
+                    >
+                      A quiet cozy and picturesque that hides behind a a river by the unique lightness ofA quiet cozy and picturesque that hides behind a a river by the unique lightness of
+                    </p>
+                    <time
+                      className="reviews__time"
+                      dateTime="2020-04-01T15:14:31.636Z"
+                    >
+                      April 2020
                     </time>
                   </div>
                 </li>
@@ -443,6 +445,7 @@ Array [
                 action="#"
                 className="reviews__form form"
                 method="post"
+                onSubmit={[Function]}
               >
                 <label
                   className="reviews__label form__label"
@@ -455,8 +458,10 @@ Array [
                 >
                   <input
                     className="form__rating-input visually-hidden"
+                    disabled={false}
                     id="5-stars"
                     name="rating"
+                    onChange={[Function]}
                     type="radio"
                     value="5"
                   />
@@ -477,8 +482,10 @@ Array [
                   </label>
                   <input
                     className="form__rating-input visually-hidden"
+                    disabled={false}
                     id="4-stars"
                     name="rating"
+                    onChange={[Function]}
                     type="radio"
                     value="4"
                   />
@@ -499,8 +506,10 @@ Array [
                   </label>
                   <input
                     className="form__rating-input visually-hidden"
+                    disabled={false}
                     id="3-stars"
                     name="rating"
+                    onChange={[Function]}
                     type="radio"
                     value="3"
                   />
@@ -521,8 +530,10 @@ Array [
                   </label>
                   <input
                     className="form__rating-input visually-hidden"
+                    disabled={false}
                     id="2-stars"
                     name="rating"
+                    onChange={[Function]}
                     type="radio"
                     value="2"
                   />
@@ -543,8 +554,10 @@ Array [
                   </label>
                   <input
                     className="form__rating-input visually-hidden"
+                    disabled={false}
                     id="1-star"
                     name="rating"
+                    onChange={[Function]}
                     type="radio"
                     value="1"
                   />
@@ -566,8 +579,10 @@ Array [
                 </div>
                 <textarea
                   className="reviews__textarea form__textarea"
-                  id="review"
-                  name="review"
+                  disabled={false}
+                  id="comment"
+                  name="comment"
+                  onChange={[Function]}
                   placeholder="Tell how was your stay, what you like and what can be improved"
                 />
                 <div
@@ -592,7 +607,7 @@ Array [
                   </p>
                   <button
                     className="reviews__submit form__submit button"
-                    disabled=""
+                    disabled={true}
                     type="submit"
                   >
                     Submit
@@ -655,7 +670,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    110
+                    120
                   </b>
                   <span
                     className="place-card__price-text"
@@ -708,7 +723,7 @@ Array [
                 onClick={[Function]}
               >
                 <a
-                  href="/offer/1"
+                  href="/offer/3"
                 >
                   Beautiful & luxurious studio at great location
                 </a>
@@ -753,7 +768,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    10
+                    120
                   </b>
                   <span
                     className="place-card__price-text"
@@ -851,7 +866,7 @@ Array [
                     className="place-card__price-value"
                   >
                     €
-                    1200
+                    120
                   </b>
                   <span
                     className="place-card__price-text"
@@ -888,7 +903,7 @@ Array [
                   <span
                     style={
                       Object {
-                        "width": "60%",
+                        "width": "80%",
                       }
                     }
                   />
@@ -904,7 +919,7 @@ Array [
                 onClick={[Function]}
               >
                 <a
-                  href="/offer/3"
+                  href="/offer/4"
                 >
                   Beautiful & luxurious studio at great location
                 </a>

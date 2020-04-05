@@ -1,10 +1,14 @@
 import {reducer, ActionCreator, ActionType} from "./state.js";
 import offer from "../../mocks/property.js";
+import reviews from "../../mocks/reviews.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     sortType: `popular`,
-    hoverProperty: {}
+    hoverProperty: {},
+    isReviewSending: false,
+    isResetForm: false,
+    feedbacks: []
   });
 });
 
@@ -38,13 +42,45 @@ it(`Reducer should clean hover prop`, () => {
   expect(reducer({
     hoverProperty: offer
   }, {
-    type: ActionType.cleanHoverProperty,
+    type: ActionType.CLEAN_HOVER_PROPERTY,
     payload: {
       property: {}
     },
   })).toEqual({
     hoverProperty: {},
-    sortType: `popular`
+  });
+});
+
+it(`Reducer should setReviewSending prop`, () => {
+  expect(reducer({
+    isReviewSending: false,
+  }, {
+    type: ActionType.SET_REVIEW_SENDING,
+    payload: true,
+  })).toEqual({
+    isReviewSending: true,
+  });
+});
+
+it(`Reducer should setResetForm prop`, () => {
+  expect(reducer({
+    isResetForm: false,
+  }, {
+    type: ActionType.SET_RESET_FORM,
+    payload: true,
+  })).toEqual({
+    isResetForm: true,
+  });
+});
+
+it(`Reducer should setReviews prop`, () => {
+  expect(reducer({
+    feedbacks: [],
+  }, {
+    type: ActionType.SET_REVIEWS,
+    payload: reviews,
+  })).toEqual({
+    feedbacks: reviews,
   });
 });
 
@@ -73,6 +109,27 @@ describe(`Action creators work correctly`, () => {
       payload: {
         property: {}
       }
+    });
+  });
+
+  it(`Action creator for setReviewSending returns correct action`, () => {
+    expect(ActionCreator.setReviewSending(offer)).toEqual({
+      type: ActionType.SET_REVIEW_SENDING,
+      payload: offer
+    });
+  });
+
+  it(`Action creator for setReviewSending returns correct action`, () => {
+    expect(ActionCreator.setResetForm(offer)).toEqual({
+      type: ActionType.SET_RESET_FORM,
+      payload: offer
+    });
+  });
+
+  it(`Action creator for setReviewSending returns correct action`, () => {
+    expect(ActionCreator.setReviews(offer)).toEqual({
+      type: ActionType.SET_REVIEWS,
+      payload: offer
     });
   });
 });
