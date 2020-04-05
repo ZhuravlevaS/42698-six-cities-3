@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Operation as StateOperation} from "../../reducer/state/state.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {AppRoute} from "../../const.js";
 
 import PropertyGallery from "../property-gallery/property-gallery.jsx";
 import ReviewList from '../review-list/review-list.jsx';
@@ -21,18 +22,29 @@ class Property extends PureComponent {
 
   componentDidMount() {
     const data = {
-      id: this.props.apart.id
+      id: this.props.match.params.id
     };
 
     this.props.loadHotels(data);
     this.props.loadReviews(data);
   }
 
+  getApart() {
+    let { id } = this.props.match.params;
+    return this.props.aparts.find((el) => el.id == id)
+  }
+
   render() {
-    const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, maxAdults, amenities, host, city, description, id} = this.props.apart;
+    const apart = this.getApart();
+    if (!apart) {
+      return null;
+    }
+    const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, maxAdults, goods, host, city, description, id} = apart;
 
     const ratingRound = Math.round(rating);
     const ratingComa = rating.toString().replace(/\./g, `,`);
+    
+    
     return (
       <React.Fragment>
         <div style={{display: `none`}}>
@@ -90,7 +102,7 @@ class Property extends PureComponent {
                     <h2 className="property__inside-title">What&apos;s inside</h2>
                     <ul className="property__inside-list">
                       {
-                        amenities.map((good) => {
+                        goods.map((good) => {
                           return <li className="property__inside-item" key={good}>
                             {good}
                           </li>;
@@ -102,7 +114,7 @@ class Property extends PureComponent {
                     <h2 className="property__host-title">Meet the host</h2>
                     <div className="property__host-user user">
                       <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
-                        <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                        <img className="property__avatar user__avatar" src={AppRoute.ROOT + host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                       </div>
                       <span className="property__user-name">
                         {host.name}
@@ -118,7 +130,7 @@ class Property extends PureComponent {
                   <section className="property__reviews reviews">
                     <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.props.reviews ? this.props.reviews.length : 0}</span></h2>
                     {
-                      this.props.reviews && this.props.reviews.length > 0 &&
+                      this.props.reviews.length > 0 &&
                       <ReviewList reviews= {this.props.reviews}/>
                     }
                     {
@@ -129,14 +141,14 @@ class Property extends PureComponent {
 
                 </div>
               </div>
-              { this.props.hotelsNearby && this.props.hotelsNearby.length > 0 &&
+              { this.props.hotelsNearby.length > 0 &&
                 <section className="property__map map">
-                  <Map city={city.location} aparts={[this.props.apart, ...this.props.hotelsNearby]} activePin={this.props.apart}/>
+                  <Map city={city.location} aparts={[apart, ...this.props.hotelsNearby]} activePin={apart}/>
                 </section>
               }
 
             </section>
-            { this.props.hotelsNearby && this.props.hotelsNearby.length > 0 &&
+            { this.props.hotelsNearby.length > 0 &&
               <div className="container">
                 <CardList aparts={this.props.hotelsNearby} typesClass={[`near-places__list`, `near-places__card`]}/>
               </div>
@@ -161,7 +173,7 @@ Property.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     description: PropTypes.string.isRequired,
-    amenities: PropTypes.arrayOf(PropTypes.string),
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
@@ -211,7 +223,7 @@ Property.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     description: PropTypes.string.isRequired,
-    amenities: PropTypes.arrayOf(PropTypes.string),
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
@@ -240,7 +252,8 @@ Property.propTypes = {
 const mapStateToProps = (state) => ({
   authStat: state.USER.authorizationStatus,
   reviews: state.STATE.feedbacks,
-  hotelsNearby: state.DATA.hotelsNearby
+  hotelsNearby: state.DATA.hotelsNearby,
+  aparts: state.DATA.offersData
 });
 
 const mapDispatchToProps = (dispatch) => ({

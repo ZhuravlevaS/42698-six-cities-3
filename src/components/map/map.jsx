@@ -17,12 +17,12 @@ class Map extends PureComponent {
     }
 
     const iconOptions = {
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSizes: [30, 40]
     };
 
     const iconActiveOptions = {
-      iconUrl: `img/pin-active.svg`,
+      iconUrl: `/img/pin-active.svg`,
       iconSizes: [30, 30]
     };
 
@@ -122,11 +122,11 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  aparts: PropTypes.arrayOf(PropTypes.exact(
+  aparts: PropTypes.arrayOf(PropTypes.shape(
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
-          location: PropTypes.exact({
+          location: PropTypes.shape({
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired,
             zoom: PropTypes.number.isRequired,
@@ -134,8 +134,8 @@ Map.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        amenities: PropTypes.arrayOf(PropTypes.string),
-        host: PropTypes.exact({
+        goods: PropTypes.arrayOf(PropTypes.string),
+        host: PropTypes.shape({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,
           isPro: PropTypes.bool.isRequired,
