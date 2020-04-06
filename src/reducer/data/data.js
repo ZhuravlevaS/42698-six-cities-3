@@ -1,16 +1,20 @@
 import {extend} from "../../utils.js";
 import Offer from "../../models/offer.js";
+import {createAPI} from "../../api.js";
+import {AppRoute} from "../../const.js";
+import history from '../../history.js';
 
 const initialState = {
   offersData: [],
   city: ``,
-  hotelsNearby: null
+  hotelsNearby: []
 };
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   SET_ACTIVE_CITY: `SET_ACTIVE_CITY`,
-  SET_HOTELS_NEARBY: `SET_HOTELS_NEARBY`
+  SET_HOTELS_NEARBY: `SET_HOTELS_NEARBY`,
+  SET_FAVORITE: `SET_FAVORITE`
 };
 
 const ActionCreator = {
@@ -31,7 +35,27 @@ const ActionCreator = {
     payload: {
       data
     }
+  }),
+
+  setFavorite: (hotel, state) => ({
+    type: ActionType.SET_FAVORITE,
+    payload: {
+      offersData: changeFavorite(hotel, state)
+    }
   })
+};
+
+const changeFavorite = (hotel, state) => {
+  const id = parseInt(hotel.id, 10);
+  const newOffers = [...state.offersData];
+  const elIndex = newOffers.findIndex((elem) => id === parseInt(elem.id, 10));
+
+  newOffers[elIndex] = hotel;
+  return newOffers;
+};
+
+const onUnauthorized = () => {
+  history.push(AppRoute.LOGIN);
 };
 
 const Operation = {
@@ -52,7 +76,16 @@ const Operation = {
 
         dispatch(ActionCreator.setHotelsNearby(hotels));
       }).catch((err) => err);
-  }
+  },
+
+  setFavorite: (data) => (dispatch, getState) => {
+    const api = createAPI(onUnauthorized);
+    return api.post(`/favorite/${data.id}/${data.status ? `0` : `1`}`)
+      .then((response) => {
+        const hotel = Offer.parseOffer(response.data);
+        dispatch(ActionCreator.setFavorite(hotel, getState().DATA));
+      }).catch((err)=> err);
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +101,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_HOTELS_NEARBY:
       return extend(state, {
         hotelsNearby: action.payload.data
+      });
+    case ActionType.SET_FAVORITE:
+      return extend(state, {
+        offersData: action.payload.offersData
       });
     default:
       return state;

@@ -1,12 +1,22 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const Card = (props) => {
-  const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, onTitleClick, typesClass} = props;
+  const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, typesClass} = props;
   const ratingRound = Math.round(rating);
 
   const handleMouseEnter = () => props.onMouseEnter(props.apart);
   const handleMouseLeave = () => props.onMouseLeave();
+
+  const sendFavorit = () => {
+    const data = {
+      id,
+      status: isFavorite
+    };
+    props.setFavorite(data);
+  };
 
   return (
     <article className={`${typesClass[1]} place-card`} onMouseEnter={handleMouseEnter ? handleMouseEnter : null} onMouseLeave={handleMouseLeave ? handleMouseLeave : null}>
@@ -16,9 +26,9 @@ const Card = (props) => {
         </div>
       }
       <div className={`cities__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={AppRoute.offer(id)}>
           <img className="place-card__image" src={`${previewImage}`} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -26,7 +36,7 @@ const Card = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+          <button className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button" onClick={sendFavorit}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>
@@ -39,8 +49,8 @@ const Card = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onTitleClick}>
-          <a href={`/offer/${id}`}>{title}</a>
+        <h2 className="place-card__name">
+          <Link to={AppRoute.offer(id)}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -60,7 +70,7 @@ Card.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     description: PropTypes.string.isRequired,
-    amenities: PropTypes.arrayOf(PropTypes.string),
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
@@ -83,10 +93,10 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onTitleClick: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
+  setFavorite: PropTypes.func.isRequired,
 };
 
 export default Card;

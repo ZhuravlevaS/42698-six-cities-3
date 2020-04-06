@@ -1,43 +1,28 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
+import {AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 class App extends PureComponent {
-  _renderMain() {
-    return (
-      <Main/>
-    );
-  }
-
-  _renderOffer() {
-    return <Property
-      apart={this.props.apart}
-      activePin={this.props.apart.location}
-    />;
-  }
-
-  _renderLogin() {
-    return <SignIn/>;
-  }
 
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderMain()}
-          </Route>
-          <Route path={`/dev-offer`}>
-            {this._renderOffer()}
-          </Route>
-          <Route path={`/login`}>
-            {this._renderLogin()}
-          </Route>
+          <Route exact path={AppRoute.ROOT} component={Main}/>
+          <Route exact path={`/offer/:id`} component={Property}/>
+          <Route exact path={AppRoute.LOGIN} component={SignIn}/>
+          {/* <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => <Favorites/>}
+          /> */}
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -55,7 +40,7 @@ App.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        amenities: PropTypes.arrayOf(PropTypes.string),
+        goods: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,

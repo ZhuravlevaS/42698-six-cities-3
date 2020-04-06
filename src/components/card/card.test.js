@@ -4,10 +4,11 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import property from './property.js';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
+import history from '../../history.js';
 
 const handleCardMouseEnter = jest.fn((item) => item);
 const handleCardMouseLeave = jest.fn();
-const titleClick = jest.fn();
 const mockStore = configureStore([]);
 
 it(`<Card/> render`, () => {
@@ -18,11 +19,14 @@ it(`<Card/> render`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Card apart={property}
-            onMouseEnter={handleCardMouseEnter}
-            onMouseLeave={handleCardMouseLeave}
-            onTitleClick={titleClick}
-            typesClass={[`near-places__list`, `near-places__card`]} />
+          <Router
+            history={history}>
+            <Card apart={property}
+              onMouseEnter={handleCardMouseEnter}
+              onMouseLeave={handleCardMouseLeave}
+              setFavorite={jest.fn()}
+              typesClass={[`near-places__list`, `near-places__card`]} />
+          </Router>
         </Provider>)
     .toJSON();
 

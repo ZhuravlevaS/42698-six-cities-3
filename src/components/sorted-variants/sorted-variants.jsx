@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
+import {Router} from 'react-router-dom';
+import history from '../../history.js';
 
 import SortedForm from '../sorted-form/sorted-form.jsx';
 import CardList from '../card-list/card-list.jsx';
@@ -10,16 +12,19 @@ const SortedVariants = (props) => {
   const {setSortType, aparts} = props;
 
   return (
-    <React.Fragment>
-      <SortedForm
-        onSelectSortType={setSortType}
-      />
+    <Router
+      history={history}>
+      <React.Fragment>
+        <SortedForm
+          onSelectSortType={setSortType}
+        />
 
-      <CardList
-        aparts={aparts}
-        typesClass={[`cities__places-list`, `cities__place-card`]}
-      />
-    </React.Fragment>
+        <CardList
+          aparts={aparts}
+          typesClass={[`cities__places-list`, `cities__place-card`]}
+        />
+      </React.Fragment>
+    </Router>
   );
 };
 
@@ -36,7 +41,7 @@ SortedVariants.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        amenities: PropTypes.arrayOf(PropTypes.string),
+        goods: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,

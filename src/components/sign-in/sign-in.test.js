@@ -3,6 +3,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import SignIn from './sign-in.jsx';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
+import history from '../../history.js';
 
 const mockStore = configureStore([]);
 
@@ -22,7 +24,10 @@ it(`<SignIn/> render`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <SignIn/>
+          <Router
+            history={history}>
+            <SignIn/>
+          </Router>
         </Provider>)
     .toJSON();
 

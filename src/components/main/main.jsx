@@ -58,7 +58,7 @@ Main.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        amenities: PropTypes.arrayOf(PropTypes.string),
+        goods: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,

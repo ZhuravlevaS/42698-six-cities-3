@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
 
+import {Operation} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
 
 const CardList = (props) => {
-  const {aparts, typesClass, handleCardMouseEnter, handleCardMouseLeave} = props;
-  const handleTitleClick = () => {
-    return true;
-  };
+  const {aparts, typesClass, handleCardMouseEnter, handleCardMouseLeave, setFavorite} = props;
 
   return (
     <div className={`${typesClass[0]} places__list tabs__content`}>
@@ -20,8 +18,8 @@ const CardList = (props) => {
             apart={apart}
             onMouseEnter={handleCardMouseEnter}
             onMouseLeave={handleCardMouseLeave}
-            onTitleClick={handleTitleClick}
             typesClass={typesClass}
+            setFavorite={setFavorite}
           />;
         })
       }
@@ -42,7 +40,7 @@ CardList.propTypes = {
           name: PropTypes.string.isRequired,
         }),
         description: PropTypes.string.isRequired,
-        amenities: PropTypes.arrayOf(PropTypes.string),
+        goods: PropTypes.arrayOf(PropTypes.string),
         host: PropTypes.exact({
           avatarUrl: PropTypes.string.isRequired,
           id: PropTypes.number.isRequired,
@@ -69,6 +67,7 @@ CardList.propTypes = {
   typesClass: PropTypes.array.isRequired,
   handleCardMouseEnter: PropTypes.func,
   handleCardMouseLeave: PropTypes.func,
+  setFavorite: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -78,6 +77,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleCardMouseLeave() {
     dispatch(ActionCreator.cleanHoverProperty());
+  },
+
+  setFavorite(data) {
+    dispatch(Operation.setFavorite(data));
   }
 });
 

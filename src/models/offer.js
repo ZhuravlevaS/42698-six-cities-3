@@ -3,7 +3,7 @@ class Offer {
     this.bedrooms = offer[`bedrooms`];
     this.city = offer[`city`];
     this.description = offer[`description`];
-    this.amenities = offer[`amenities`];
+    this.goods = offer[`goods`];
     this.host = {
       avatarUrl: offer.host[`avatar_url`],
       id: offer.host[`id`],
@@ -28,7 +28,7 @@ class Offer {
       'bedrooms': this.bedrooms,
       'city': this.city,
       'description': this.description,
-      'amenities': this.amenities,
+      'goods': this.goods,
       'host': {
         'avatar_url': this.host.avatarUrl,
         'id': this.host.id,
