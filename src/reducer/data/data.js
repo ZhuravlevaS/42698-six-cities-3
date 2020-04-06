@@ -46,20 +46,17 @@ const ActionCreator = {
 };
 
 const changeFavorite = (hotel, state) => {
-  let elIndex = -1;
-  let newOffers = state.offersData.filter((el, index) => {
-    if(el.id == hotel.id ) {
-      elIndex = index; 
-    }
-    return el.id != hotel.id 
-  });
+  const id = parseInt(hotel.id, 10);
+  const newOffers = [...state.offersData];
+  const elIndex = newOffers.findIndex((elem) => id === parseInt(elem.id, 10));
+
   newOffers[elIndex] = hotel;
   return newOffers;
-}
+};
 
 const onUnauthorized = () => {
-  history.push(AppRoute.LOGIN)
-}
+  history.push(AppRoute.LOGIN);
+};
 
 const Operation = {
   loadOffers: () => (dispatch, getState, api) => {

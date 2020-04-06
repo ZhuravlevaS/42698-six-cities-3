@@ -30,9 +30,8 @@ class Property extends PureComponent {
   }
 
   getApart() {
-    let { id } = this.props.match.params;
-    let el = this.props.aparts.find((el) => el.id == id)
-    return el;
+    let {id} = this.props.match.params;
+    return this.props.aparts.find((el) => parseInt(el.id, 10) === parseInt(id, 10));
   }
 
   sendFavorit(data) {
@@ -48,10 +47,10 @@ class Property extends PureComponent {
     const data = {
       id,
       status: isFavorite
-    }
+    };
     const ratingRound = Math.round(rating);
     const ratingComa = rating.toString().replace(/\./g, `,`);
-    
+
     return (
       <React.Fragment>
         <div style={{display: `none`}}>
@@ -169,7 +168,8 @@ class Property extends PureComponent {
 }
 
 Property.propTypes = {
-  apart: PropTypes.shape({
+  match: PropTypes.object,
+  aparts: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
       location: PropTypes.exact({
@@ -202,7 +202,8 @@ Property.propTypes = {
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
-  }),
+  })
+  ),
   authStat: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     comment: PropTypes.string,
@@ -219,10 +220,11 @@ Property.propTypes = {
   ),
   loadHotels: PropTypes.func.isRequired,
   loadReviews: PropTypes.func.isRequired,
+  setFavorite: PropTypes.func.isRequired,
   hotelsNearby: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
-    city: PropTypes.exact({
-      location: PropTypes.exact({
+    city: PropTypes.shape({
+      location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
@@ -231,7 +233,7 @@ Property.propTypes = {
     }),
     description: PropTypes.string.isRequired,
     goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
+    host: PropTypes.shape({
       avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
       isPro: PropTypes.bool.isRequired,
@@ -241,7 +243,7 @@ Property.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    location: PropTypes.exact({
+    location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired
@@ -251,7 +253,7 @@ Property.propTypes = {
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
   })
   )
 };

@@ -56,7 +56,8 @@ Array [
         className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
-          href="#"
+          href="/offer/1"
+          onClick={[Function]}
         >
           <img
             alt="Place image"
@@ -90,6 +91,7 @@ Array [
           </div>
           <button
             className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -130,10 +132,10 @@ Array [
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/1"
+            onClick={[Function]}
           >
             Beautiful & luxurious studio at great location
           </a>
@@ -154,7 +156,8 @@ Array [
         className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
-          href="#"
+          href="/offer/2"
+          onClick={[Function]}
         >
           <img
             alt="Place image"
@@ -188,6 +191,7 @@ Array [
           </div>
           <button
             className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -228,10 +232,10 @@ Array [
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/2"
+            onClick={[Function]}
           >
             Beautiful & luxurious studio at great location
           </a>
@@ -252,7 +256,8 @@ Array [
         className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
-          href="#"
+          href="/offer/3"
+          onClick={[Function]}
         >
           <img
             alt="Place image"
@@ -286,6 +291,7 @@ Array [
           </div>
           <button
             className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -326,10 +332,10 @@ Array [
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/3"
+            onClick={[Function]}
           >
             Beautiful & luxurious studio at great location
           </a>
@@ -350,7 +356,8 @@ Array [
         className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
-          href="#"
+          href="/offer/4"
+          onClick={[Function]}
         >
           <img
             alt="Place image"
@@ -384,6 +391,7 @@ Array [
           </div>
           <button
             className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -424,10 +432,10 @@ Array [
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/4"
+            onClick={[Function]}
           >
             Beautiful & luxurious studio at great location
           </a>
@@ -448,7 +456,8 @@ Array [
         className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
-          href="#"
+          href="/offer/8"
+          onClick={[Function]}
         >
           <img
             alt="Place image"
@@ -482,6 +491,7 @@ Array [
           </div>
           <button
             className="place-card__bookmark-button button "
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -522,10 +532,10 @@ Array [
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/8"
+            onClick={[Function]}
           >
             Beautiful & luxurious studio at great location
           </a>

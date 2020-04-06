@@ -11,9 +11,9 @@ const Header = (props) => {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-          <Link className="header__logo-link" to={AppRoute.ROOT}>
-            <img className="header__logo" src={`${AppRoute.ROOT}img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
-          </Link>
+            <Link className="header__logo-link" to={AppRoute.ROOT}>
+              <img className="header__logo" src={`${AppRoute.ROOT}img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

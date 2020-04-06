@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import {Operation} from "../../reducer/user/user";
 import {AppRoute} from "../../const.js";

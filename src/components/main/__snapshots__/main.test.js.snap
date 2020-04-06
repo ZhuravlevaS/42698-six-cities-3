@@ -58,13 +58,15 @@ exports[`<Main/> render 1`] = `
             className="header__left"
           >
             <a
-              className="header__logo-link header__logo-link--active"
+              className="header__logo-link"
+              href="/"
+              onClick={[Function]}
             >
               <img
                 alt="6 cities logo"
                 className="header__logo"
                 height="41"
-                src="img/logo.svg"
+                src="/img/logo.svg"
                 width="81"
               />
             </a>
@@ -81,6 +83,7 @@ exports[`<Main/> render 1`] = `
                 <a
                   className="header__nav-link header__nav-link--profile"
                   href="/login"
+                  onClick={[Function]}
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
@@ -218,7 +221,8 @@ exports[`<Main/> render 1`] = `
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
+                    onClick={[Function]}
                   >
                     <img
                       alt="Place image"
@@ -252,6 +256,7 @@ exports[`<Main/> render 1`] = `
                     </div>
                     <button
                       className="place-card__bookmark-button button "
+                      onClick={[Function]}
                       type="button"
                     >
                       <svg
@@ -292,10 +297,10 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="/offer/1"
+                      onClick={[Function]}
                     >
                       Beautiful & luxurious studio at great location
                     </a>
@@ -316,7 +321,8 @@ exports[`<Main/> render 1`] = `
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/2"
+                    onClick={[Function]}
                   >
                     <img
                       alt="Place image"
@@ -350,6 +356,7 @@ exports[`<Main/> render 1`] = `
                     </div>
                     <button
                       className="place-card__bookmark-button button "
+                      onClick={[Function]}
                       type="button"
                     >
                       <svg
@@ -390,10 +397,10 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="/offer/2"
+                      onClick={[Function]}
                     >
                       Beautiful & luxurious studio at great location
                     </a>
@@ -414,7 +421,8 @@ exports[`<Main/> render 1`] = `
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/3"
+                    onClick={[Function]}
                   >
                     <img
                       alt="Place image"
@@ -448,6 +456,7 @@ exports[`<Main/> render 1`] = `
                     </div>
                     <button
                       className="place-card__bookmark-button button "
+                      onClick={[Function]}
                       type="button"
                     >
                       <svg
@@ -488,10 +497,10 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="/offer/3"
+                      onClick={[Function]}
                     >
                       Beautiful & luxurious studio at great location
                     </a>
@@ -512,7 +521,8 @@ exports[`<Main/> render 1`] = `
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/4"
+                    onClick={[Function]}
                   >
                     <img
                       alt="Place image"
@@ -546,6 +556,7 @@ exports[`<Main/> render 1`] = `
                     </div>
                     <button
                       className="place-card__bookmark-button button "
+                      onClick={[Function]}
                       type="button"
                     >
                       <svg
@@ -586,10 +597,10 @@ exports[`<Main/> render 1`] = `
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="/offer/4"
+                      onClick={[Function]}
                     >
                       Beautiful & luxurious studio at great location
                     </a>

@@ -10,7 +10,8 @@ exports[`<Card/> render 1`] = `
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/100"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -44,6 +45,7 @@ exports[`<Card/> render 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button "
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -84,10 +86,10 @@ exports[`<Card/> render 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[MockFunction]}
     >
       <a
         href="/offer/100"
+        onClick={[Function]}
       >
         Beautiful & luxurious studio at great location
       </a>

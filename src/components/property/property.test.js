@@ -8,6 +8,7 @@ import axios from "axios";
 
 import property from './property.js';
 import hotelsNearby from './offersNearby.js';
+
 const Error = {
   UNAUTHORIZED: 401
 };
@@ -68,6 +69,12 @@ const reviews = [
   }
 ];
 
+const match = {
+  params: {
+    id: 1
+  }
+};
+
 it(`<Property/> render`, () => {
   const store = mockStore({
     USER: {
@@ -82,14 +89,15 @@ it(`<Property/> render`, () => {
       isResetForm: false,
     },
     DATA: {
-      hotelsNearby
+      hotelsNearby,
+      offersData: hotelsNearby
     }
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Property apart={property}/>
+          <Property apart={property} match={match}/>
         </Provider>)
     .toJSON();
 

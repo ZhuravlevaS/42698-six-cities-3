@@ -2,11 +2,9 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
-import {connect} from "react-redux";
-import {Operation} from "../../reducer/data/data.js";
 
 const Card = (props) => {
-  const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, onTitleClick, typesClass} = props;
+  const {apart: {previewImage, price, rating, title, type, isFavorite, isPremium, id}, typesClass} = props;
   const ratingRound = Math.round(rating);
 
   const handleMouseEnter = () => props.onMouseEnter(props.apart);
@@ -16,9 +14,9 @@ const Card = (props) => {
     const data = {
       id,
       status: isFavorite
-    }
+    };
     props.setFavorite(data);
-  }
+  };
 
   return (
     <article className={`${typesClass[1]} place-card`} onMouseEnter={handleMouseEnter ? handleMouseEnter : null} onMouseLeave={handleMouseLeave ? handleMouseLeave : null}>
@@ -28,7 +26,7 @@ const Card = (props) => {
         </div>
       }
       <div className={`cities__image-wrapper place-card__image-wrapper`}>
-        <Link to={AppRoute.OFFER(id)}>
+        <Link to={AppRoute.offer(id)}>
           <img className="place-card__image" src={`${previewImage}`} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -51,8 +49,8 @@ const Card = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onTitleClick}>
-        <Link to={AppRoute.OFFER(id)}>{title}</Link>
+        <h2 className="place-card__name">
+          <Link to={AppRoute.offer(id)}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -95,17 +93,10 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onTitleClick: PropTypes.func.isRequired,
   typesClass: PropTypes.array.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
+  setFavorite: PropTypes.func.isRequired,
 };
 
-
-const mapDispatchToProps = (dispatch) => ({
-  setFavorite(data) {
-    dispatch(Operation.setFavorite(data));
-  }
-});
-
-export default connect(null, mapDispatchToProps)(Card);
+export default Card;
