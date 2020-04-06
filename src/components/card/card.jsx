@@ -101,10 +101,6 @@ Card.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.DATA.city,
-  authStat: state.USER.authorizationStatus
-});
 
 const mapDispatchToProps = (dispatch) => ({
   setFavorite(data) {
@@ -112,4 +108,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(null, mapDispatchToProps)(Card);

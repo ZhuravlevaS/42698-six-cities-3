@@ -1,5 +1,8 @@
 import {extend} from "../../utils.js";
 import Offer from "../../models/offer.js";
+import {createAPI} from "../../api.js";
+import {AppRoute} from "../../const.js";
+import history from '../../history.js';
 
 const initialState = {
   offersData: [],
@@ -54,6 +57,10 @@ const changeFavorite = (hotel, state) => {
   return newOffers;
 }
 
+const onUnauthorized = () => {
+  history.push(AppRoute.LOGIN)
+}
+
 const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
@@ -74,12 +81,13 @@ const Operation = {
       }).catch((err) => err);
   },
 
-  setFavorite: (data) => (dispatch, getState, api) => {
+  setFavorite: (data) => (dispatch, getState) => {
+    const api = createAPI(onUnauthorized);
     return api.post(`/favorite/${data.id}/${data.status ? `0` : `1`}`)
       .then((response) => {
         const hotel = Offer.parseOffer(response.data);
         dispatch(ActionCreator.setFavorite(hotel, getState().DATA));
-      }).catch((err) => console.log(err));
+      }).catch((err)=> err);
   },
 };
 

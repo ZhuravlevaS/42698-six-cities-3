@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
@@ -11,16 +11,18 @@ class App extends PureComponent {
 
   render() {
     return (
-      <BrowserRouter history={history}>
+      <Router history={history}>
         <Switch>
-          <Route exact path={AppRoute.ROOT} component={Main}>
-          </Route>
-          <Route exact path={`/offer/:id`} component={Property}>
-          </Route>
-          <Route exact path={AppRoute.LOGIN} component={SignIn}>
-          </Route>
+          <Route exact path={AppRoute.ROOT} component={Main}/>
+          <Route exact path={`/offer/:id`} component={Property}/>
+          <Route exact path={AppRoute.LOGIN} component={SignIn}/>
+          {/* <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => <Favorites/>}
+          /> */}
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

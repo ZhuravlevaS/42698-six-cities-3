@@ -31,7 +31,12 @@ class Property extends PureComponent {
 
   getApart() {
     let { id } = this.props.match.params;
-    return this.props.aparts.find((el) => el.id == id)
+    let el = this.props.aparts.find((el) => el.id == id)
+    return el;
+  }
+
+  sendFavorit(data) {
+    this.props.setFavorite(data);
   }
 
   render() {
@@ -40,10 +45,12 @@ class Property extends PureComponent {
       return null;
     }
     const {images, price, rating, title, type, isFavorite, isPremium, bedrooms, maxAdults, goods, host, city, description, id} = apart;
-
+    const data = {
+      id,
+      status: isFavorite
+    }
     const ratingRound = Math.round(rating);
     const ratingComa = rating.toString().replace(/\./g, `,`);
-    
     
     return (
       <React.Fragment>
@@ -69,8 +76,8 @@ class Property extends PureComponent {
                     <h1 className="property__name">
                       {title}
                     </h1>
-                    <button className={`property__bookmark-button button${isFavorite ? ` property__bookmark-button--active` : ``}`} type="button">
-                      <svg className="property__bookmark-icon" width="31" height="33">
+                    <button className={`property__bookmark-button button${isFavorite ? ` property__bookmark-button--active` : ``}`} type="button" onClick={() => this.sendFavorit(data)}>
+                      <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
@@ -262,6 +269,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadReviews(data) {
     dispatch(StateOperation.getReviews(data));
+  },
+  setFavorite(data) {
+    dispatch(DataOperation.setFavorite(data));
   }
 });
 
