@@ -94,9 +94,9 @@ Card.propTypes = {
     type: PropTypes.string.isRequired
   }),
   typesClass: PropTypes.array.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  setFavorite: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  setFavorite: PropTypes.func,
 };
 
 export default Card;

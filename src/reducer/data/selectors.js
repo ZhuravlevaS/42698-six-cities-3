@@ -13,6 +13,8 @@ const getUniqueCities = (offersData) => {
 
 export const getOffers = (state) => state[NAMESPACE].offersData;
 
+export const getFavorites = (state) => state[NAMESPACE].favorites;
+
 export const getActiveCity = (state) => state[NAMESPACE].city;
 
 export const getCities = createSelector(
@@ -24,4 +26,9 @@ export const getOffersByCity = createSelector(
     getOffers,
     getActiveCity,
     (offersData, city) => offersData.filter((offer) => offer.city.name === city)
+);
+
+export const getFavoriteCities = createSelector(
+    getFavorites,
+    (favorites) => getUniqueCities(favorites)
 );

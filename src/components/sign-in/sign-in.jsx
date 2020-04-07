@@ -35,8 +35,6 @@ class SignIn extends PureComponent {
       return <Redirect to={AppRoute.ROOT} />;
     }
     return (
-
-
       <div className="page page--gray page--login">
         <Header/>
 

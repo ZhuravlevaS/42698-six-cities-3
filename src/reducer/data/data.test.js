@@ -71,7 +71,7 @@ const offers = [
   },
 ];
 
-const newData = [
+const newOffers = [
   {
     bedrooms: 3,
     city: {
@@ -181,7 +181,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     offersData: [],
     city: ``,
-    hotelsNearby: []
+    hotelsNearby: [],
+    favorites: [],
   });
 });
 
@@ -222,7 +223,15 @@ it(`setFavorite`, () => {
   expect(reducer({
     offersData: offers,
   }, ActionCreator.setFavorite(resp, {offersData: offers}))).toEqual({
-    offersData: newData,
+    offersData: newOffers,
+  });
+});
+
+it(`getFavorite`, () => {
+  expect(reducer({
+    favorites: [],
+  }, ActionCreator.getFavorite(newOffers))).toEqual({
+    favorites: newOffers,
   });
 });
 
@@ -248,6 +257,15 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.SET_HOTELS_NEARBY,
       payload: {
         data: offers
+      }
+    });
+  });
+
+  it(`Action creator for getting favorites returns correct action`, () => {
+    expect(ActionCreator.getFavorite(offers)).toEqual({
+      type: ActionType.GET_FAVORITE,
+      payload: {
+        favorites: offers
       }
     });
   });
