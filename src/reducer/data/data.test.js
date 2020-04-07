@@ -181,7 +181,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     offersData: [],
     city: ``,
-    hotelsNearby: []
+    hotelsNearby: [],
+    favorites: [],
   });
 });
 
@@ -226,6 +227,14 @@ it(`setFavorite`, () => {
   });
 });
 
+it(`getFavorite`, () => {
+  expect(reducer({
+    favorites: [],
+  }, ActionCreator.getFavorite(newData))).toEqual({
+    favorites: newData,
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for setting city returns correct action`, () => {
     expect(ActionCreator.setActiveCity(`Paris`)).toEqual({
@@ -248,6 +257,15 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.SET_HOTELS_NEARBY,
       payload: {
         data: offers
+      }
+    });
+  });
+
+  it(`Action creator for getting favorites returns correct action`, () => {
+    expect(ActionCreator.getFavorite(offers)).toEqual({
+      type: ActionType.GET_FAVORITE,
+      payload: {
+        favorites: offers
       }
     });
   });

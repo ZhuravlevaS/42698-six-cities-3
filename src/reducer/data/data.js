@@ -7,14 +7,16 @@ import history from '../../history.js';
 const initialState = {
   offersData: [],
   city: ``,
-  hotelsNearby: []
+  hotelsNearby: [],
+  favorites: []
 };
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   SET_ACTIVE_CITY: `SET_ACTIVE_CITY`,
   SET_HOTELS_NEARBY: `SET_HOTELS_NEARBY`,
-  SET_FAVORITE: `SET_FAVORITE`
+  SET_FAVORITE: `SET_FAVORITE`,
+  GET_FAVORITE: `GET_FAVORITE`
 };
 
 const ActionCreator = {
@@ -42,7 +44,14 @@ const ActionCreator = {
     payload: {
       offersData: changeFavorite(hotel, state)
     }
-  })
+  }),
+
+  getFavorite: (data) => ({
+    type: ActionType.GET_FAVORITE,
+    payload: {
+      favorites: data
+    }
+  }),
 };
 
 const changeFavorite = (hotel, state) => {
@@ -86,6 +95,14 @@ const Operation = {
         dispatch(ActionCreator.setFavorite(hotel, getState().DATA));
       }).catch((err)=> err);
   },
+
+  getFavorite: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const hotels = Offer.parseOffers(response.data);
+        dispatch(ActionCreator.getFavorite(hotels));
+      }).catch((err)=> err);
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -105,6 +122,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FAVORITE:
       return extend(state, {
         offersData: action.payload.offersData
+      });
+    case ActionType.GET_FAVORITE:
+      return extend(state, {
+        favorites: action.payload.favorites
       });
     default:
       return state;
