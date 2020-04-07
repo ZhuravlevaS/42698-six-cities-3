@@ -71,7 +71,7 @@ const offers = [
   },
 ];
 
-const newData = [
+const newOffers = [
   {
     bedrooms: 3,
     city: {
@@ -223,15 +223,15 @@ it(`setFavorite`, () => {
   expect(reducer({
     offersData: offers,
   }, ActionCreator.setFavorite(resp, {offersData: offers}))).toEqual({
-    offersData: newData,
+    offersData: newOffers,
   });
 });
 
 it(`getFavorite`, () => {
   expect(reducer({
     favorites: [],
-  }, ActionCreator.getFavorite(newData))).toEqual({
-    favorites: newData,
+  }, ActionCreator.getFavorite(newOffers))).toEqual({
+    favorites: newOffers,
   });
 });
 
