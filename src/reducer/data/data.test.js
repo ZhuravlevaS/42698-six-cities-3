@@ -71,7 +71,7 @@ const offers = [
   },
 ];
 
-const newOffers = [
+const newOffersMock = [
   {
     bedrooms: 3,
     city: {
@@ -223,15 +223,15 @@ it(`setFavorite`, () => {
   expect(reducer({
     offersData: offers,
   }, ActionCreator.setFavorite(resp, {offersData: offers}))).toEqual({
-    offersData: newOffers,
+    offersData: newOffersMock,
   });
 });
 
 it(`getFavorite`, () => {
   expect(reducer({
     favorites: [],
-  }, ActionCreator.getFavorite(newOffers))).toEqual({
-    favorites: newOffers,
+  }, ActionCreator.getFavorite(newOffersMock))).toEqual({
+    favorites: newOffersMock,
   });
 });
 

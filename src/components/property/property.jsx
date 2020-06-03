@@ -172,7 +172,7 @@ Property.propTypes = {
   aparts: PropTypes.arrayOf(PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.exact({
-      location: PropTypes.exact({
+      location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
@@ -191,7 +191,7 @@ Property.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    location: PropTypes.exact({
+    location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired

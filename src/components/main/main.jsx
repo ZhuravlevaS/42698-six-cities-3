@@ -50,7 +50,7 @@ Main.propTypes = {
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
-          location: PropTypes.exact({
+          location: PropTypes.shape({
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired,
             zoom: PropTypes.number.isRequired,

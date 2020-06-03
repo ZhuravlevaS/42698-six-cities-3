@@ -56,7 +56,7 @@ CitiesWrap.propTypes = {
       {
         bedrooms: PropTypes.number.isRequired,
         city: PropTypes.exact({
-          location: PropTypes.exact({
+          location: PropTypes.shape({
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired,
             zoom: PropTypes.number.isRequired,
@@ -94,7 +94,7 @@ CitiesWrap.propTypes = {
       {
         bedrooms: PropTypes.number,
         city: PropTypes.exact({
-          location: PropTypes.exact({
+          location: PropTypes.shape({
             latitude: PropTypes.number,
             longitude: PropTypes.number,
             zoom: PropTypes.number,
